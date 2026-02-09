@@ -12,7 +12,7 @@ class MainScene extends Phaser.Scene {
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
-        this.cam.setBounds(-400, -400, 800 + 800, 600 + 800);
+        this.cam.setBounds(-600, -600, 800 + 1200, 1200 + 1200);
 
         this.input.on("wheel", (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
             this.cam.zoom -= deltaY * 0.001;
@@ -284,7 +284,7 @@ class MainScene extends Phaser.Scene {
         this.player_money_3 = 0;
         this.player_money_4 = 0;
         this.player_money_5 = 0;
-        this.player_money_6 = 0;
+        this.player_money_6 = 1200;
         
         this.UI_START_X = 3000;
         this.UI_START_Y = 3000;
@@ -308,7 +308,7 @@ class MainScene extends Phaser.Scene {
         this.ui_player_marker_5 = this.add.circle(this.UI_START_X+(this.UI_INDICATOR_SIZE), this.UI_START_Y+(this.UI_MONEY_SPACING*4)+(this.UI_INDICATOR_SIZE/2)+this.UI_VERTICAL_ADJUST, this.UI_INDICATOR_SIZE, this.player_colour_5);
         this.ui_player_marker_6 = this.add.circle(this.UI_START_X+(this.UI_INDICATOR_SIZE), this.UI_START_Y+(this.UI_MONEY_SPACING*5)+(this.UI_INDICATOR_SIZE/2)+this.UI_VERTICAL_ADJUST, this.UI_INDICATOR_SIZE, this.player_colour_6);
         
-        const cam2 = this.cameras.add(0, 0, 250, 800);
+        const cam2 = this.cameras.add(0, 0, 280, 800);
         cam2.setBackgroundColor(0x5d5d5d);
         cam2.setZoom(1);
         cam2.setScroll(3000, 3000);
