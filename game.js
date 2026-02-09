@@ -45,11 +45,11 @@ class MainScene extends Phaser.Scene {
 
         var green = 0x00bf00;
         var blue = 0x0000ff;
-        var red = 0xff0000;
+        var red = 0xdd1f1f;
         var purple = 0xbd0bd3;
 
-        var light_blue = 0x0aebff;
-        var brown = 0xc19540;
+        var light_blue = 0x1bdaec;
+        var brown = 0xa07520;
 
         var light_grey = 0xd1d1d1;
         var dark_grey = 0x959595;
