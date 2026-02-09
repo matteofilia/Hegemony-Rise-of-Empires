@@ -106,7 +106,7 @@ class MainScene extends Phaser.Scene {
         const rect0_6 = this.add.rectangle(650, 87, 100, 25, blue);
         
         const text0_1 = this.add.text(150, 87, 'New York', text_style).setOrigin(0.5); 
-        const text0_2 = this.add.text(250, 87, 'Los Angeles', text_style_tiny).setOrigin(0.5); 
+        const text0_2 = this.add.text(250, 87, 'Houston', text_style).setOrigin(0.5); 
         const text0_3 = this.add.text(350, 87, 'Chicago', text_style).setOrigin(0.5);
         const text0_5 = this.add.text(550, 87, 'Tokyo', text_style).setOrigin(0.5);
         const text0_6 = this.add.text(650, 87, 'Sydney', text_style).setOrigin(0.5);
@@ -121,7 +121,7 @@ class MainScene extends Phaser.Scene {
         const rect1_6 = this.add.rectangle(650, 513, 100, 25, red);
         
         const text1_1 = this.add.text(150, 513, 'Moscow', text_style).setOrigin(0.5); 
-        const text1_2 = this.add.text(250, 513, 'St. Petersburg', text_style_tiny).setOrigin(0.5); 
+        const text1_2 = this.add.text(250, 513, 'Kyiv', text_style).setOrigin(0.5); 
         const text1_4 = this.add.text(450, 513, 'Montreal', text_style).setOrigin(0.5);
         const text1_5 = this.add.text(550, 513, 'Toronto', text_style).setOrigin(0.5);
         const text1_6 = this.add.text(650, 513, 'Ottawa', text_style).setOrigin(0.5);
