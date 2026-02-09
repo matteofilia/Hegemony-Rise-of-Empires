@@ -9,6 +9,32 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
+        this.cam = this.cameras.main;
+        this.zoomDirection = 1;
+        this.cam.setZoom(2);
+        
+        this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+            this.cam.zoom -= deltaY * 0.001;
+            this.cam.zoom = Phaser.Math.Clamp(this.cam.zoom, 0.5, 2);
+        });
+        
+        // Enable dragging
+        this.input.on('pointerdown', (pointer) => {
+            this.dragStartX = pointer.x + this.cam.scrollX;
+            this.dragStartY = pointer.y + this.cam.scrollY;
+            this.isDragging = true;
+        });
+
+        this.input.on('pointerup', () => {
+            this.isDragging = false;
+        });
+
+        this.input.on('pointermove', (pointer) => {
+            if (!this.isDragging) return;
+            this.cam.scrollX = this.dragStartX - pointer.x;
+            this.cam.scrollY = this.dragStartY - pointer.y;
+        });
+        
         this.add.text(400, 300, 'Hello World', {
             fontSize: '32px',
             color: '#ffffff'
@@ -28,17 +54,20 @@ class MainScene extends Phaser.Scene {
         
         const text_style = {
             fontSize: '16px',
-            color: '#ffffff'
+            color: '#ffffff',
+            fontFamily: 'monospace'
         };
         
         const text_style_tiny = {
-            fontSize: '10px',
-            color: 'ffffff'
+            fontSize: '11px',
+            color: 'ffffff',
+            fontFamily: 'monospace'
         };
         
         const text_style_black = {
             fontSize: '16px',
-            color: '000000'
+            color: '000000',
+            fontFamily: 'monospace'
         };
         
         const square0_1 = this.add.rectangle(50, 50, 100, 100, light_grey);
@@ -76,11 +105,11 @@ class MainScene extends Phaser.Scene {
         const rect0_5 = this.add.rectangle(550, 87, 100, 25, blue);
         const rect0_6 = this.add.rectangle(650, 87, 100, 25, blue);
         
-        const text0_1 = this.add.text(150, 87, 'Moscow', text_style).setOrigin(0.5); 
-        const text0_2 = this.add.text(250, 87, 'St. Petersburg', text_style_tiny).setOrigin(0.5); 
-        const text0_3 = this.add.text(350, 87, 'Montreal', text_style).setOrigin(0.5);
-        const text0_5 = this.add.text(550, 87, 'Toronto', text_style).setOrigin(0.5);
-        const text0_6 = this.add.text(650, 87, 'Ottawa', text_style).setOrigin(0.5);
+        const text0_1 = this.add.text(150, 87, 'New York', text_style).setOrigin(0.5); 
+        const text0_2 = this.add.text(250, 87, 'Los Angeles', text_style_tiny).setOrigin(0.5); 
+        const text0_3 = this.add.text(350, 87, 'Chicago', text_style).setOrigin(0.5);
+        const text0_5 = this.add.text(550, 87, 'Tokyo', text_style).setOrigin(0.5);
+        const text0_6 = this.add.text(650, 87, 'Sydney', text_style).setOrigin(0.5);
         
         const text0_4 = this.add.text(450, 87, '???', text_style_black).setOrigin(0.5);
         
@@ -104,9 +133,9 @@ class MainScene extends Phaser.Scene {
         const rect2_3 = this.add.rectangle(87, 350, 25, 100, brown);
         const rect2_4 = this.add.rectangle(87, 450, 25, 100, white);
         
-        const text2_1 = this.add.text(87, 150, 'Moscow', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90); 
-        const text2_2 = this.add.text(87, 250, 'St. Petersburg', text_style_tiny).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90); 
-        const text2_3 = this.add.text(87, 350, 'Montreal', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90);
+        const text2_1 = this.add.text(87, 150, 'Shanghai', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90); 
+        const text2_2 = this.add.text(87, 250, 'Shenzhen', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90); 
+        const text2_3 = this.add.text(87, 350, 'Hong Kong', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90);
         
         const text2_4 = this.add.text(87, 450, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90);
         
@@ -115,9 +144,9 @@ class MainScene extends Phaser.Scene {
         const rect3_3 = this.add.rectangle(713, 350, 25, 100, light_blue);
         const rect3_4 = this.add.rectangle(713, 450, 25, 100, light_blue);
         
-        const text3_2 = this.add.text(713, 250, 'Moscow', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270); 
-        const text3_3 = this.add.text(713, 350, 'St. Petersburg', text_style_tiny).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270); 
-        const text3_4 = this.add.text(713, 450, 'Montreal', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270);
+        const text3_2 = this.add.text(713, 250, 'London', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270); 
+        const text3_3 = this.add.text(713, 350, 'Paris', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270); 
+        const text3_4 = this.add.text(713, 450, 'Rome', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270);
         
         const text3_1 = this.add.text(713, 150, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270);
 
