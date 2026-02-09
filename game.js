@@ -155,11 +155,6 @@ class MainScene extends Phaser.Scene {
         const text5_1 = this.add.text(50, 50, 'Free Parking', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45-90);
         const text6_1 = this.add.text(50, 550, 'Cool', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45);
         const text7_1 = this.add.text(750, 550, 'GO', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45+270);
-
-
-
-
-
         
         const risk_map = this.add.image(400, 300, 'risk_map');
         risk_map.setOrigin(0.5);
@@ -170,6 +165,16 @@ class MainScene extends Phaser.Scene {
         const player_marker_4 = this.add.circle(50, 450+Phaser.Math.Between(-20, 20), 20, red);
         const player_marker_5 = this.add.circle(150+Phaser.Math.Between(-20, 20), 50, 20, purple);
         const player_marker_6 = this.add.circle(450+Phaser.Math.Between(-20, 20), 50, 20, brown);
+    
+        const ui_rect_1 = this.add.rectangle(3100, 3100, 50, 50, green);
+        ui_rect_1.setScrollFactor(1);
+        ui_rect_1.setDepth(2);
+        const ui_rect_2 = this.add.rectangle(3000, 3000, 50, 50, red);
+        
+        const cam2 = this.cameras.add(0, 0, 200, 800);
+        cam2.setBackgroundColor(0x5d5d5d);
+        cam2.setZoom(1);
+        cam2.setScroll(3000, 3000);
     }
 
     update(time, delta) {
