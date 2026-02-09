@@ -95,7 +95,8 @@ class MainScene extends Phaser.Scene {
             up: "W",
             down: "S",
             left: "A",
-            right: "D"
+            right: "D",
+            space: Phaser.Input.Keyboard.KeyCodes.SPACE
         });
 
         const square0_1 = this.add.rectangle(50, 50, 100, 100, light_grey);
@@ -220,13 +221,51 @@ class MainScene extends Phaser.Scene {
 
         this.convert_board_index_to_x_y(this.player_marker_1, 1);
         this.convert_board_index_to_x_y(this.player_marker_2, 0);
+        
+        this.player_index_1 = 0;
+        this.player_index_2 = 0;
+        this.player_index_3 = 0;
+        this.player_index_4 = 0;
+        this.player_index_5 = 0;
+        this.player_index_6 = 0;
+        
+        this.player_roll_1 = 0;
+        this.player_roll_2 = 0;
+        this.player_roll_3 = 0;
+        this.player_roll_4 = 0;
+        this.player_roll_5 = 0;
+        this.player_roll_6 = 0;
+        
+        this.player_cooldown_1 = 0;
+        this.player_cooldown_2 = 0;
+        this.player_cooldown_3 = 0;
+        this.player_cooldown_4 = 0;
+        this.player_cooldown_5 = 0;
+        this.player_cooldown_6 = 0;
+        
+        this.MOVE_DELAY = 500;
     }
 
     update(time, delta) {
         this.convert_board_index_to_x_y(this.player_marker_1, this.board_game_index);
-
+        
         if (Phaser.Input.Keyboard.JustDown(this.keys.up)) this.board_game_index += 1;
         if (Phaser.Input.Keyboard.JustDown(this.keys.down)) this.board_game_index -= 1;
+
+        if (Phaser.Input.Keyboard.JustDown(this.keys.space)) {
+            // Simulate random dice roll   
+            this.player_roll_2 = Phaser.Math.Between(1, 6) + Phaser.Math.Between(1, 6);
+        }
+        
+
+        this.player_cooldown_2 += delta;
+        if (this.player_cooldown_2 >= this.MOVE_DELAY && this.player_roll_2 > 0) {
+            this.player_cooldown_2 = 0;
+            this.player_roll_2 -= 1;
+            this.player_index_2 += 1;
+
+            this.convert_board_index_to_x_y(this.player_marker_2, this.player_index_2);
+        }
     }
 }
 
