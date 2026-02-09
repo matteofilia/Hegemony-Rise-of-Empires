@@ -150,6 +150,16 @@ class MainScene extends Phaser.Scene {
         
         const text3_1 = this.add.text(713, 150, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270);
 
+        const text4_1 = this.add.text(750, 50, 'Cool', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45);
+        const text5_1 = this.add.text(50, 50, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45-90);
+        const text6_1 = this.add.text(50, 550, 'Cool', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45);
+        const text7_1 = this.add.text(750, 550, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45+270);
+
+
+
+
+
+        
         const risk_map = this.add.image(400, 300, 'risk_map');
         risk_map.setOrigin(0.5);
         
