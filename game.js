@@ -12,6 +12,7 @@ class MainScene extends Phaser.Scene {
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
+        this.cam.setBounds(-200, -200, 800+400, 600+400);
         
         this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
             this.cam.zoom -= deltaY * 0.001;
@@ -151,9 +152,9 @@ class MainScene extends Phaser.Scene {
         const text3_1 = this.add.text(713, 150, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270);
 
         const text4_1 = this.add.text(750, 50, 'Cool', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45);
-        const text5_1 = this.add.text(50, 50, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45-90);
+        const text5_1 = this.add.text(50, 50, 'Free Parking', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45-90);
         const text6_1 = this.add.text(50, 550, 'Cool', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45);
-        const text7_1 = this.add.text(750, 550, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45+270);
+        const text7_1 = this.add.text(750, 550, 'GO', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(45+270);
 
 
 
