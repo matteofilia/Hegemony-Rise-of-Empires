@@ -5,7 +5,7 @@ class MainScene extends Phaser.Scene {
 
     preload() {
         // Load assets here
-        // this.load.image('logo', 'assets/logo.png');
+        this.load.image('risk_map', 'risk.png');
     }
 
     create() {
@@ -77,6 +77,9 @@ class MainScene extends Phaser.Scene {
         const rect3_2 = this.add.rectangle(713, 250, 25, 100, light_blue);
         const rect3_3 = this.add.rectangle(713, 350, 25, 100, light_blue);
         const rect3_4 = this.add.rectangle(713, 450, 25, 100, light_blue);
+
+        const risk_map = this.add.image(400, 300, 'risk_map');
+        risk_map.setOrigin(0.5);
 
     }
 
