@@ -268,8 +268,8 @@ class MainScene extends Phaser.Scene {
             45 + 270
         ));
 
-        const risk_map = this.add.image(400, 300, "risk_map");
-        risk_map.setOrigin(0.5);
+        // const risk_map = this.add.image(400, 300, "risk_map");
+        // risk_map.setOrigin(0.5);
 
         // Player Markers
         this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colour_1);
@@ -339,8 +339,71 @@ class MainScene extends Phaser.Scene {
         this.player_cooldown_5 = 0;
         this.player_cooldown_6 = 0;
         
-        
         this.MOVE_DELAY = 500;
+        
+        class Country {
+            constructor(name, points) {
+                this.name = name;
+                this.points = points;
+                this.poly = new Phaser.Geom.Polygon(points);
+            }
+        }
+        
+        this.countries = [];
+        
+        var context = this;
+        function add_country(country) {
+            context.countries.push(country);
+        }
+        
+        function get_simple_polygon_centre(points) {
+            let x_max = -Infinity;
+            let y_max = -Infinity;
+            let x_min = Infinity;
+            let y_min = Infinity;
+            
+            for (let i = 0; i < points.length; i++) {
+                x_max = Math.max(x_max, points[i][0]);
+                y_max = Math.max(y_max, points[i][1]);
+                
+                x_min = Math.min(x_min, points[i][0]);
+                y_min = Math.min(y_min, points[i][1]);
+            }
+            
+            return [(x_max+x_min)/2, (y_max+y_min)/2];
+        }
+        
+        
+        var alberta = new Country("Alberta", [
+            [200, 200],
+            [200, 200],
+            [275, 150],
+            [350, 200],
+            [350, 300], 
+        ]);
+        add_country(alberta);
+         
+        const graphics = this.add.graphics(text_style_black);
+        for (let c = 0; c < this.countries.length; c++){
+            var country = this.countries[c];
+            
+            graphics.beginPath();
+            graphics.moveTo(this.countries[c].points[0][0], this.countries[c].points[0][1]);
+            for (let i = 0; i < country.points.length; i++) {
+                graphics.lineTo(country.points[i][0], country.points[i][1]);
+            }
+            graphics.closePath();
+            graphics.fillPath();
+            graphics.lineStyle(2, 0x000000);
+            graphics.strokePath();
+            
+            var centre = get_simple_polygon_centre(country.points);
+            
+            // console.log(centre[0], centre[1]);
+            this.add.text(centre[0], centre[1], country.name, text_style_black);
+        } 
+        
+        
     }
 
     update(time, delta) {
