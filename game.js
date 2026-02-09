@@ -90,6 +90,36 @@ class MainScene extends Phaser.Scene {
             entity.x = coords[0];
             entity.y = coords[1];
         };
+        
+        this.PROPERTY_COSTS = [
+            null,
+            400,
+            400,
+            400,
+            null,
+            350,
+            350,
+            null,
+            null,
+            250,
+            250,
+            250,
+            null,
+            500,
+            500,
+            500,
+            null,
+            300,
+            300,
+            null,
+            600,
+            600,
+            600
+        ];
+        
+        this.get_property_cost = function(board_index) {
+            return this.PROPERTY_COSTS[board_index];
+        };
 
         this.keys = this.input.keyboard.addKeys({
             up: "W",
@@ -144,11 +174,11 @@ class MainScene extends Phaser.Scene {
 
         const text0_4 = this.add.text(450, 87, "???", text_style_black).setOrigin(0.5);
 
-        const subtext0_1 = this.add.text(150, this.SUBTEXT_SPACING, "$350", text_style).setOrigin(0.5);
-        const subtext0_2 = this.add.text(250, this.SUBTEXT_SPACING, "$300", text_style).setOrigin(0.5);
-        const subtext0_3 = this.add.text(350, this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
-        const subtext0_5 = this.add.text(550, this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
-        const subtext0_6 = this.add.text(650, this.SUBTEXT_SPACING, "$250", text_style).setOrigin(0.5);
+        const subtext0_1 = this.add.text(150, this.SUBTEXT_SPACING, "$" + this.get_property_cost(13), text_style).setOrigin(0.5);
+        const subtext0_2 = this.add.text(250, this.SUBTEXT_SPACING, "$" + this.get_property_cost(14), text_style).setOrigin(0.5);
+        const subtext0_3 = this.add.text(350, this.SUBTEXT_SPACING, "$" + this.get_property_cost(15), text_style).setOrigin(0.5);
+        const subtext0_5 = this.add.text(550, this.SUBTEXT_SPACING, "$" + this.get_property_cost(17), text_style).setOrigin(0.5);
+        const subtext0_6 = this.add.text(650, this.SUBTEXT_SPACING, "$" + this.get_property_cost(18), text_style).setOrigin(0.5);
         
         const rect1_1 = this.add.rectangle(150, 513, 100, 25, purple);
         const rect1_2 = this.add.rectangle(250, 513, 100, 25, purple);
@@ -163,11 +193,11 @@ class MainScene extends Phaser.Scene {
         const text1_5 = this.add.text(550, 513, "Toronto", text_style).setOrigin(0.5);
         const text1_6 = this.add.text(650, 513, "Ottawa", text_style).setOrigin(0.5);
         
-        const subtext1_1 = this.add.text(150, 600-this.SUBTEXT_SPACING, "$350", text_style).setOrigin(0.5);
-        const subtext1_2 = this.add.text(250, 600-this.SUBTEXT_SPACING, "$300", text_style).setOrigin(0.5);
-        const subtext1_4 = this.add.text(450, 600-this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
-        const subtext1_5 = this.add.text(550, 600-this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
-        const subtext1_6 = this.add.text(650, 600-this.SUBTEXT_SPACING, "$250", text_style).setOrigin(0.5);
+        const subtext1_1 = this.add.text(150, 600-this.SUBTEXT_SPACING, "$" + this.get_property_cost(6), text_style).setOrigin(0.5);
+        const subtext1_2 = this.add.text(250, 600-this.SUBTEXT_SPACING, "$" + this.get_property_cost(5), text_style).setOrigin(0.5);
+        const subtext1_4 = this.add.text(450, 600-this.SUBTEXT_SPACING, "$" + this.get_property_cost(3), text_style).setOrigin(0.5);
+        const subtext1_5 = this.add.text(550, 600-this.SUBTEXT_SPACING, "$" + this.get_property_cost(2), text_style).setOrigin(0.5);
+        const subtext1_6 = this.add.text(650, 600-this.SUBTEXT_SPACING, "$" + this.get_property_cost(1), text_style).setOrigin(0.5);
 
         const text1_3 = this.add.text(350, 513, "???", text_style_black).setOrigin(0.5);
 
@@ -183,11 +213,11 @@ class MainScene extends Phaser.Scene {
         const text2_3 = (this.add.text(87, 350, "Hong Kong", text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(90));
         
-        const subtext2_1 = this.add.text(this.SUBTEXT_SPACING, 150, "$300", text_style).setOrigin(0.5).rotation =
+        const subtext2_1 = this.add.text(this.SUBTEXT_SPACING, 150, "$" + this.get_property_cost(11), text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(90);
-        const subtext2_2 = this.add.text(this.SUBTEXT_SPACING, 250, "$200", text_style).setOrigin(0.5).rotation =
+        const subtext2_2 = this.add.text(this.SUBTEXT_SPACING, 250, "$" + this.get_property_cost(10), text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(90);
-        const subtext2_3 = this.add.text(this.SUBTEXT_SPACING, 350, "$200", text_style).setOrigin(0.5).rotation =
+        const subtext2_3 = this.add.text(this.SUBTEXT_SPACING, 350, "$" + this.get_property_cost(9), text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(90);
 
         const text2_4 = (this.add.text(87, 450, "???", text_style_black).setOrigin(0.5).rotation =
@@ -205,11 +235,11 @@ class MainScene extends Phaser.Scene {
         const text3_4 = (this.add.text(713, 450, "Rome", text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(270));
         
-        const subtext3_2 = this.add.text(800-this.SUBTEXT_SPACING, 250, "$300", text_style).setOrigin(0.5).rotation =
+        const subtext3_2 = this.add.text(800-this.SUBTEXT_SPACING, 250, "$" + this.get_property_cost(20), text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(270);
-        const subtext3_3 = this.add.text(800-this.SUBTEXT_SPACING, 350, "$200", text_style).setOrigin(0.5).rotation =
+        const subtext3_3 = this.add.text(800-this.SUBTEXT_SPACING, 350, "$" + this.get_property_cost(21), text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(270);
-        const subtext3_4 = this.add.text(800-this.SUBTEXT_SPACING, 450, "$200", text_style).setOrigin(0.5).rotation =
+        const subtext3_4 = this.add.text(800-this.SUBTEXT_SPACING, 450, "$" + this.get_property_cost(22), text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(270);
 
         const text3_1 = (this.add.text(713, 150, "???", text_style_black).setOrigin(0.5).rotation =
