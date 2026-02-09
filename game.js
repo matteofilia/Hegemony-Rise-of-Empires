@@ -43,10 +43,13 @@ class MainScene extends Phaser.Scene {
             })
             .setOrigin(0.5);
 
+        
+        // Colours
         var green = 0x00bf00;
         var blue = 0x0000ff;
         var red = 0xdd1f1f;
         var purple = 0xbd0bd3;
+        var black = 0x000000;
 
         var light_blue = 0x1bdaec;
         var brown = 0xa07520;
@@ -512,9 +515,23 @@ class MainScene extends Phaser.Scene {
             [192, 22],
             [168, 39]
         ]);
+        
+        var ontario = new Country("Ontario", [
+            [109, 108],
+            [124, 108],
+            [138, 127],
+            [141, 130],
+            [154, 123],
+            [147, 120],
+            [147, 103],
+            [124, 80],
+            [126, 69],
+            [111, 69]
+        ]);
 
         add_country(alberta);
         add_country(greenland);
+        add_country(ontario);
 
         this.MAP_START_X = 100;
         this.MAP_START_Y = 100;
@@ -524,6 +541,7 @@ class MainScene extends Phaser.Scene {
             var country = this.countries[c];
 
             graphics.beginPath();
+            graphics.lineStyle(1, black);
             for (let i = 0; i < country.points.length; i++) {
                 let x = country.points[i][0] + this.MAP_START_X;
                 let y = country.points[i][1] + this.MAP_START_Y;
@@ -536,9 +554,12 @@ class MainScene extends Phaser.Scene {
             }
             graphics.closePath();
             graphics.fillPath();
-            graphics.lineStyle(2, 0x000000);
             graphics.strokePath();
+            
+            graphics.setInteractive(country.poly, Phaser.Geom.Polygon.Contains);
 
+            const graphics2 = graphics;
+            
             var centre = get_simple_polygon_centre(country.points);
 
             // console.log(centre[0], centre[1]);
@@ -546,6 +567,12 @@ class MainScene extends Phaser.Scene {
                 .text(centre[0] + this.MAP_START_X, centre[1] + this.MAP_START_Y, country.name, text_style_black_tiny)
                 .setOrigin(0.5)
                 .setResolution(3);
+            
+            graphics2.on('pointerover', function(value1234) {
+                graphics2.clear();
+                graphics2.fillStyle(red, 1);
+                graphics2.fillPoints(country.poly.points, true);
+            });
         }
     }
 
