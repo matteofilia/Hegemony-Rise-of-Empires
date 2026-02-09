@@ -12,7 +12,7 @@ class MainScene extends Phaser.Scene {
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
-        this.cam.setBounds(-200, -200, 800+400, 600+400);
+        this.cam.setBounds(-400, -400, 800+800, 600+800);
         
         this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
             this.cam.zoom -= deltaY * 0.001;
@@ -70,6 +70,31 @@ class MainScene extends Phaser.Scene {
             color: '000000',
             fontFamily: 'monospace'
         };
+        
+        this.convert_board_index_to_x_y = function(entity, board_index){
+            board_index = board_index % 24;
+            var coords = [];
+            
+            if (board_index >= 0 && board_index <= 7){
+                coords = [750-(board_index*100), 550];
+            } else if (board_index >= 8 && board_index <= 12){
+                coords = [50, 550-((board_index-8)*100)];
+            } else if (board_index >= 12 && board_index <= 19){
+                coords = [50, 550-((board_index-12)*100)];
+            } else if (board_index >= 19 && board_index <= 24){
+                coords = [50, 550-((board_index-19)*100)];
+            }
+            
+            entity.x = coords[0];
+            entity.y = coords[1];
+        };
+        
+        this.keys = this.input.keyboard.addKeys({
+            up: 'W',
+            down: 'S',
+            left: 'A',
+            right: 'D'
+        });
         
         const square0_1 = this.add.rectangle(50, 50, 100, 100, light_grey);
         const square0_2 = this.add.rectangle(150, 50, 100, 100, dark_grey);
@@ -159,7 +184,7 @@ class MainScene extends Phaser.Scene {
         const risk_map = this.add.image(400, 300, 'risk_map');
         risk_map.setOrigin(0.5);
         
-        const player_marker_1 = this.add.circle(750, 150+Phaser.Math.Between(-20, 20), 20, green);
+        this.player_marker_1 = this.add.circle(750, 150+Phaser.Math.Between(-20, 20), 20, green);
         const player_marker_2 = this.add.circle(750, 150+Phaser.Math.Between(-20, 20), 20, blue);
         const player_marker_3 = this.add.circle(50, 350+Phaser.Math.Between(-20, 20), 20, light_blue);
         const player_marker_4 = this.add.circle(50, 450+Phaser.Math.Between(-20, 20), 20, red);
@@ -175,10 +200,17 @@ class MainScene extends Phaser.Scene {
         cam2.setBackgroundColor(0x5d5d5d);
         cam2.setZoom(1);
         cam2.setScroll(3000, 3000);
+
+        this.board_game_index = 0;
+        
+        this.convert_board_index_to_x_y(player_marker_2, 0);
     }
 
     update(time, delta) {
-        // Game loop
+        this.convert_board_index_to_x_y(this.player_marker_1, this.board_game_index);
+        
+        if (Phaser.Input.Keyboard.JustDown(this.keys.up)) this.board_game_index += 1;
+        if (Phaser.Input.Keyboard.JustDown(this.keys.down)) this.board_game_index -= 1;
     }
 }
 
