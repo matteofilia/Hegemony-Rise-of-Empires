@@ -98,6 +98,8 @@ class MainScene extends Phaser.Scene {
             right: "D",
             space: Phaser.Input.Keyboard.KeyCodes.SPACE
         });
+        
+        this.SUBTEXT_SPACING = 20;
 
         const square0_1 = this.add.rectangle(50, 50, 100, 100, light_grey);
         const square0_2 = this.add.rectangle(150, 50, 100, 100, dark_grey);
@@ -142,6 +144,12 @@ class MainScene extends Phaser.Scene {
 
         const text0_4 = this.add.text(450, 87, "???", text_style_black).setOrigin(0.5);
 
+        const subtext0_1 = this.add.text(150, this.SUBTEXT_SPACING, "$350", text_style).setOrigin(0.5);
+        const subtext0_2 = this.add.text(250, this.SUBTEXT_SPACING, "$300", text_style).setOrigin(0.5);
+        const subtext0_3 = this.add.text(350, this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
+        const subtext0_5 = this.add.text(550, this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
+        const subtext0_6 = this.add.text(650, this.SUBTEXT_SPACING, "$250", text_style).setOrigin(0.5);
+        
         const rect1_1 = this.add.rectangle(150, 513, 100, 25, purple);
         const rect1_2 = this.add.rectangle(250, 513, 100, 25, purple);
         const rect1_3 = this.add.rectangle(350, 513, 100, 25, white);
@@ -154,6 +162,12 @@ class MainScene extends Phaser.Scene {
         const text1_4 = this.add.text(450, 513, "Montreal", text_style).setOrigin(0.5);
         const text1_5 = this.add.text(550, 513, "Toronto", text_style).setOrigin(0.5);
         const text1_6 = this.add.text(650, 513, "Ottawa", text_style).setOrigin(0.5);
+        
+        const subtext1_1 = this.add.text(150, 600-this.SUBTEXT_SPACING, "$350", text_style).setOrigin(0.5);
+        const subtext1_2 = this.add.text(250, 600-this.SUBTEXT_SPACING, "$300", text_style).setOrigin(0.5);
+        const subtext1_4 = this.add.text(450, 600-this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
+        const subtext1_5 = this.add.text(550, 600-this.SUBTEXT_SPACING, "$200", text_style).setOrigin(0.5);
+        const subtext1_6 = this.add.text(650, 600-this.SUBTEXT_SPACING, "$250", text_style).setOrigin(0.5);
 
         const text1_3 = this.add.text(350, 513, "???", text_style_black).setOrigin(0.5);
 
@@ -168,6 +182,13 @@ class MainScene extends Phaser.Scene {
             Phaser.Math.DegToRad(90));
         const text2_3 = (this.add.text(87, 350, "Hong Kong", text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(90));
+        
+        const subtext2_1 = this.add.text(this.SUBTEXT_SPACING, 150, "$300", text_style).setOrigin(0.5).rotation =
+            Phaser.Math.DegToRad(90);
+        const subtext2_2 = this.add.text(this.SUBTEXT_SPACING, 250, "$200", text_style).setOrigin(0.5).rotation =
+            Phaser.Math.DegToRad(90);
+        const subtext2_3 = this.add.text(this.SUBTEXT_SPACING, 350, "$200", text_style).setOrigin(0.5).rotation =
+            Phaser.Math.DegToRad(90);
 
         const text2_4 = (this.add.text(87, 450, "???", text_style_black).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(90));
@@ -183,6 +204,13 @@ class MainScene extends Phaser.Scene {
             Phaser.Math.DegToRad(270));
         const text3_4 = (this.add.text(713, 450, "Rome", text_style).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(270));
+        
+        const subtext3_2 = this.add.text(800-this.SUBTEXT_SPACING, 250, "$300", text_style).setOrigin(0.5).rotation =
+            Phaser.Math.DegToRad(270);
+        const subtext3_3 = this.add.text(800-this.SUBTEXT_SPACING, 350, "$200", text_style).setOrigin(0.5).rotation =
+            Phaser.Math.DegToRad(270);
+        const subtext3_4 = this.add.text(800-this.SUBTEXT_SPACING, 450, "$200", text_style).setOrigin(0.5).rotation =
+            Phaser.Math.DegToRad(270);
 
         const text3_1 = (this.add.text(713, 150, "???", text_style_black).setOrigin(0.5).rotation =
             Phaser.Math.DegToRad(270));
@@ -200,12 +228,12 @@ class MainScene extends Phaser.Scene {
         const risk_map = this.add.image(400, 300, "risk_map");
         risk_map.setOrigin(0.5);
 
-        this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 20, green);
-        this.player_marker_2 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 20, blue);
-        this.player_marker_3 = this.add.circle(50, 350 + Phaser.Math.Between(-20, 20), 20, light_blue);
-        this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 20, red);
-        this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 20, purple);
-        this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 20, brown);
+        this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, green);
+        this.player_marker_2 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, blue);
+        this.player_marker_3 = this.add.circle(50, 350 + Phaser.Math.Between(-20, 20), 16, light_blue);
+        this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, red);
+        this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, purple);
+        this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, brown);
 
         const ui_rect_1 = this.add.rectangle(3100, 3100, 50, 50, green);
         ui_rect_1.setScrollFactor(1);
