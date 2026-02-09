@@ -14,7 +14,7 @@ class MainScene extends Phaser.Scene {
             color: '#ffffff'
         }).setOrigin(0.5);
         
-        var green = 0x00ff00;
+        var green = 0x00bf00;
         var blue = 0x0000ff;
         var red = 0xff0000;
         var purple = 0xbd0bd3;
@@ -25,6 +25,21 @@ class MainScene extends Phaser.Scene {
         var light_grey = 0xd1d1d1;
         var dark_grey = 0x959595;
         var white = 0xffffff;
+        
+        const text_style = {
+            fontSize: '16px',
+            color: '#ffffff'
+        };
+        
+        const text_style_tiny = {
+            fontSize: '10px',
+            color: 'ffffff'
+        };
+        
+        const text_style_black = {
+            fontSize: '16px',
+            color: '000000'
+        };
         
         const square0_1 = this.add.rectangle(50, 50, 100, 100, light_grey);
         const square0_2 = this.add.rectangle(150, 50, 100, 100, dark_grey);
@@ -61,6 +76,14 @@ class MainScene extends Phaser.Scene {
         const rect0_5 = this.add.rectangle(550, 87, 100, 25, blue);
         const rect0_6 = this.add.rectangle(650, 87, 100, 25, blue);
         
+        const text0_1 = this.add.text(150, 87, 'Moscow', text_style).setOrigin(0.5); 
+        const text0_2 = this.add.text(250, 87, 'St. Petersburg', text_style_tiny).setOrigin(0.5); 
+        const text0_3 = this.add.text(350, 87, 'Montreal', text_style).setOrigin(0.5);
+        const text0_5 = this.add.text(550, 87, 'Toronto', text_style).setOrigin(0.5);
+        const text0_6 = this.add.text(650, 87, 'Ottawa', text_style).setOrigin(0.5);
+        
+        const text0_4 = this.add.text(450, 87, '???', text_style_black).setOrigin(0.5);
+        
         const rect1_1 = this.add.rectangle(150, 513, 100, 25, purple);
         const rect1_2 = this.add.rectangle(250, 513, 100, 25, purple);
         const rect1_3 = this.add.rectangle(350, 513, 100, 25, white);
@@ -68,15 +91,35 @@ class MainScene extends Phaser.Scene {
         const rect1_5 = this.add.rectangle(550, 513, 100, 25, red);
         const rect1_6 = this.add.rectangle(650, 513, 100, 25, red);
         
+        const text1_1 = this.add.text(150, 513, 'Moscow', text_style).setOrigin(0.5); 
+        const text1_2 = this.add.text(250, 513, 'St. Petersburg', text_style_tiny).setOrigin(0.5); 
+        const text1_4 = this.add.text(450, 513, 'Montreal', text_style).setOrigin(0.5);
+        const text1_5 = this.add.text(550, 513, 'Toronto', text_style).setOrigin(0.5);
+        const text1_6 = this.add.text(650, 513, 'Ottawa', text_style).setOrigin(0.5);
+        
+        const text1_3 = this.add.text(350, 513, '???', text_style_black).setOrigin(0.5);
+        
         const rect2_1 = this.add.rectangle(87, 150, 25, 100, brown);
         const rect2_2 = this.add.rectangle(87, 250, 25, 100, brown);
         const rect2_3 = this.add.rectangle(87, 350, 25, 100, brown);
         const rect2_4 = this.add.rectangle(87, 450, 25, 100, white);
         
+        const text2_1 = this.add.text(87, 150, 'Moscow', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90); 
+        const text2_2 = this.add.text(87, 250, 'St. Petersburg', text_style_tiny).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90); 
+        const text2_3 = this.add.text(87, 350, 'Montreal', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90);
+        
+        const text2_4 = this.add.text(87, 450, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90);
+        
         const rect3_1 = this.add.rectangle(713, 150, 25, 100, white);
         const rect3_2 = this.add.rectangle(713, 250, 25, 100, light_blue);
         const rect3_3 = this.add.rectangle(713, 350, 25, 100, light_blue);
         const rect3_4 = this.add.rectangle(713, 450, 25, 100, light_blue);
+        
+        const text3_2 = this.add.text(713, 250, 'Moscow', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270); 
+        const text3_3 = this.add.text(713, 350, 'St. Petersburg', text_style_tiny).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270); 
+        const text3_4 = this.add.text(713, 450, 'Montreal', text_style).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270);
+        
+        const text3_1 = this.add.text(713, 150, '???', text_style_black).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270);
 
         const risk_map = this.add.image(400, 300, 'risk_map');
         risk_map.setOrigin(0.5);
