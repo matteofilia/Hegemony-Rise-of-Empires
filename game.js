@@ -11,7 +11,7 @@ class MainScene extends Phaser.Scene {
     create() {
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
-        this.cam.setZoom(2);
+        this.cam.setZoom(1);
         
         this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
             this.cam.zoom -= deltaY * 0.001;
@@ -152,7 +152,13 @@ class MainScene extends Phaser.Scene {
 
         const risk_map = this.add.image(400, 300, 'risk_map');
         risk_map.setOrigin(0.5);
-
+        
+        const player_marker_1 = this.add.circle(750, 150+Phaser.Math.Between(-20, 20), 20, green);
+        const player_marker_2 = this.add.circle(750, 150+Phaser.Math.Between(-20, 20), 20, blue);
+        const player_marker_3 = this.add.circle(50, 350+Phaser.Math.Between(-20, 20), 20, light_blue);
+        const player_marker_4 = this.add.circle(50, 450+Phaser.Math.Between(-20, 20), 20, red);
+        const player_marker_5 = this.add.circle(150+Phaser.Math.Between(-20, 20), 50, 20, purple);
+        const player_marker_6 = this.add.circle(450+Phaser.Math.Between(-20, 20), 50, 20, brown);
     }
 
     update(time, delta) {
