@@ -549,13 +549,34 @@ class MainScene extends Phaser.Scene {
             [52, 69]
         ]);
         
-        this.seleceted_country = ontario;
+        var west_us = new Country("West US", [
+            [124, 109],
+            [69, 108],
+            [61, 142],
+            [68, 157],
+            [98, 167],
+            [119, 140]
+        ]);
+        
+        var east_us = new Country("East US", [
+            [120, 110],
+            [124, 108],
+            [141, 132],
+            [165, 167],
+            [140, 167],
+            [99, 176],
+            [100, 166]
+        ]);
+        
+        this.selected_country = ontario;
 
         add_country(alberta);
         add_country(greenland);
         add_country(ontario);
         add_country(quebec);
         add_country(northwest_territories);
+        add_country(west_us);
+        add_country(east_us);
 
         this.MAP_START_X = 100;
         this.MAP_START_Y = 100;
@@ -573,7 +594,7 @@ class MainScene extends Phaser.Scene {
             graphics.fillPoints(country.points, true);
             
             graphics.beginPath();
-            if (this.seleceted_country == country) {    
+            if (this.selected_country == country) {    
                 graphics.lineStyle(this.COUNTRY_STROKE_WIDTH, red);
             } else {
                 graphics.lineStyle(this.COUNTRY_STROKE_WIDTH, black);
@@ -603,12 +624,17 @@ class MainScene extends Phaser.Scene {
                 .setOrigin(0.5)
                 .setResolution(3);
             
-            graphics.on('pointerdown', function() {
-                graphics.clear();
-                graphics.fillStyle(0x00ff00, 1);
-                graphics.lineStyle(2, red, 1);
-                graphics.fillPoints(points, true);
-                graphics.strokePoints(points, true);
+            this.input.on('pointerdown', (pointer) => {
+                console.log(pointer.worldX, pointer.worldY);
+                
+                for (var i = 0; i < this.countries.length; i++) {
+                    var country = this.countries[i];
+                    
+                    if (Phaser.Geom.Polygon.Contains(country.poly, pointer.worldX-this.MAP_START_X, pointer.worldY-this.MAP_START_Y)) {
+                        this.selected_country = country;
+                        console.log(country.name);
+                    }
+                }
             });
         }
     }
