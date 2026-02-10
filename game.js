@@ -500,7 +500,7 @@ class MainScene extends Phaser.Scene {
         var alberta = new Country("Alberta", [
             [108, 109],
             [111, 69],
-            [60, 68],
+            [60, 69],
             [65, 84],
             [60, 91],
             [68, 108]
@@ -517,7 +517,7 @@ class MainScene extends Phaser.Scene {
         ]);
         
         var ontario = new Country("Ontario", [
-            [109, 108],
+            [108, 109],
             [124, 108],
             [138, 127],
             [141, 130],
@@ -536,9 +536,9 @@ class MainScene extends Phaser.Scene {
         this.MAP_START_X = 100;
         this.MAP_START_Y = 100;
 
-        const graphics = this.add.graphics(text_style_black_tiny);
+        let graphics = this.add.graphics(text_style_black_tiny);
         for (let c = 0; c < this.countries.length; c++) {
-            var country = this.countries[c];
+            let country = this.countries[c];
 
             graphics.beginPath();
             graphics.lineStyle(1, black);
@@ -557,8 +557,6 @@ class MainScene extends Phaser.Scene {
             graphics.strokePath();
             
             graphics.setInteractive(country.poly, Phaser.Geom.Polygon.Contains);
-
-            const graphics2 = graphics;
             
             var centre = get_simple_polygon_centre(country.points);
 
@@ -568,11 +566,7 @@ class MainScene extends Phaser.Scene {
                 .setOrigin(0.5)
                 .setResolution(3);
             
-            graphics2.on('pointerover', function(value1234) {
-                graphics2.clear();
-                graphics2.fillStyle(red, 1);
-                graphics2.fillPoints(country.poly.points, true);
-            });
+            graphics.on('pointerdown', on_click);
         }
     }
 

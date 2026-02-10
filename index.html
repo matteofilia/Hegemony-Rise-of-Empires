@@ -13,5 +13,27 @@
 </head>
 <body>
     <script src="game.js"></script>
+    <script>
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onopen = () => {
+            console.log('Connected to server');
+
+            // Send a message
+            ws.send('Hello server!');
+        };
+
+        ws.onmessage = (event) => {
+            alert('Received from server:', event.data);
+        };
+
+        ws.onclose = () => {
+            console.log('Connection closed');
+        };
+
+        ws.onerror = (err) => {
+            console.error('WebSocket error:', err);
+        };
+    </script>
 </body>
 </html>
