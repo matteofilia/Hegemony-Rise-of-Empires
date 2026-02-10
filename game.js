@@ -467,22 +467,7 @@ class MainScene extends Phaser.Scene {
         this.player_cooldown_6 = 0;
 
         this.MOVE_DELAY = 500;
-
-        class Country {
-            constructor(name, points) {
-                this.name = name;
-                this.points = points;
-                this.poly = new Phaser.Geom.Polygon(points);
-            }
-        }
-
-        this.countries = [];
-
-        var context = this;
-        function add_country(country) {
-            context.countries.push(country);
-        }
-
+        
         function get_simple_polygon_centre(points) {
             let x_max = -Infinity;
             let y_max = -Infinity;
@@ -498,6 +483,59 @@ class MainScene extends Phaser.Scene {
             }
 
             return [(x_max + x_min) / 2, (y_max + y_min) / 2];
+        }
+
+        class Country {
+            constructor(name, points) {
+                this.name = name;
+                this.points = points;
+                this.poly = new Phaser.Geom.Polygon(points);
+                this.graphics = null;
+            }
+            
+            draw(context) {
+                let graphics = context.add.graphics(text_style_black_tiny);
+            
+                this.graphics = graphics;
+
+                graphics.fillStyle(land_colour, 2);
+                graphics.fillPoints(this.points, true);
+
+                graphics.beginPath();
+                if (context.selected_country == this) {    
+                    graphics.lineStyle(context.COUNTRY_STROKE_WIDTH, red);
+                } else {
+                    graphics.lineStyle(context.COUNTRY_STROKE_WIDTH, black);
+                }
+
+                for (let i = 0; i < this.points.length; i++) {
+                    let x = this.points[i][0] + context.MAP_START_X;
+                    let y = this.points[i][1] + context.MAP_START_Y;
+
+                    if (i == 0) {
+                        graphics.moveTo(x, y);
+                    } else {
+                        graphics.lineTo(x, y);
+                    }
+                }
+                graphics.closePath();
+                graphics.fillPath();
+                graphics.strokePath();
+
+                var centre = get_simple_polygon_centre(this.points);
+
+                context.add
+                    .text(centre[0] + context.MAP_START_X, centre[1] + context.MAP_START_Y, this.name, text_style_black_tiny)
+                    .setOrigin(0.5)
+                    .setResolution(3);
+            }
+        }
+
+        this.countries = [];
+
+        var context = this;
+        function add_country(country) {
+            context.countries.push(country);
         }
 
         var alberta = new Country("Alberta", [
@@ -586,57 +624,32 @@ class MainScene extends Phaser.Scene {
         // Add Water
         this.add.rectangle(400, 300, 600, 400, water_colour);
 
-        let graphics = this.add.graphics(text_style_black_tiny);
+        // Add Countries
         for (let c = 0; c < this.countries.length; c++) {
             let country = this.countries[c];
-
-            graphics.fillStyle(land_colour, 2);
-            graphics.fillPoints(country.points, true);
-            
-            graphics.beginPath();
-            if (this.selected_country == country) {    
-                graphics.lineStyle(this.COUNTRY_STROKE_WIDTH, red);
-            } else {
-                graphics.lineStyle(this.COUNTRY_STROKE_WIDTH, black);
-            }
-            
-            for (let i = 0; i < country.points.length; i++) {
-                let x = country.points[i][0] + this.MAP_START_X;
-                let y = country.points[i][1] + this.MAP_START_Y;
-
-                if (i == 0) {
-                    graphics.moveTo(x, y);
-                } else {
-                    graphics.lineTo(x, y);
-                }
-            }
-            graphics.closePath();
-            graphics.fillPath();
-            graphics.strokePath();
-            
-            graphics.setInteractive(country.poly, Phaser.Geom.Polygon.Contains);
-            
-            var centre = get_simple_polygon_centre(country.points);
-
-            // console.log(centre[0], centre[1]);
-            this.add
-                .text(centre[0] + this.MAP_START_X, centre[1] + this.MAP_START_Y, country.name, text_style_black_tiny)
-                .setOrigin(0.5)
-                .setResolution(3);
-            
-            this.input.on('pointerdown', (pointer) => {
-                console.log(pointer.worldX, pointer.worldY);
-                
-                for (var i = 0; i < this.countries.length; i++) {
-                    var country = this.countries[i];
-                    
-                    if (Phaser.Geom.Polygon.Contains(country.poly, pointer.worldX-this.MAP_START_X, pointer.worldY-this.MAP_START_Y)) {
-                        this.selected_country = country;
-                        console.log(country.name);
-                    }
-                }
-            });
+            country.draw(this);
         }
+        
+        this.input.on('pointerdown', (pointer) => {
+            console.log(pointer.worldX, pointer.worldY);
+
+            for (var i = 0; i < this.countries.length; i++) {
+                var country = this.countries[i];
+
+                if (Phaser.Geom.Polygon.Contains(country.poly, pointer.worldX-this.MAP_START_X, pointer.worldY-this.MAP_START_Y)) {
+                    let old_selected_country = this.selected_country;
+                    this.selected_country = country;
+                    
+                    this.selected_country.graphics.clear();
+                    this.selected_country.draw(this);
+                    
+                    old_selected_country.graphics.clear();
+                    old_selected_country.draw(this);
+                    
+                    console.log(this.selected_country.name);
+                }
+            }
+        });
     }
 
     update(time, delta) {
