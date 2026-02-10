@@ -50,6 +50,9 @@ class MainScene extends Phaser.Scene {
         var red = 0xdd1f1f;
         var purple = 0xbd0bd3;
         var black = 0x000000;
+        
+        var water_colour = 0x14a3fd;
+        var land_colour = 0x1cff63;
 
         var light_blue = 0x1bdaec;
         var brown = 0xa07520;
@@ -533,15 +536,22 @@ class MainScene extends Phaser.Scene {
         add_country(greenland);
         add_country(ontario);
 
+
         this.MAP_START_X = 100;
         this.MAP_START_Y = 100;
+        
+        // Add Water
+        this.add.rectangle(400, 300, 600, 400, water_colour);
 
         let graphics = this.add.graphics(text_style_black_tiny);
         for (let c = 0; c < this.countries.length; c++) {
             let country = this.countries[c];
 
+            graphics.fillStyle(land_colour, 2);
+            graphics.fillPoints(country.points, true);
+            
             graphics.beginPath();
-            graphics.lineStyle(1, black);
+            graphics.lineStyle(2, black);
             for (let i = 0; i < country.points.length; i++) {
                 let x = country.points[i][0] + this.MAP_START_X;
                 let y = country.points[i][1] + this.MAP_START_Y;
@@ -556,7 +566,7 @@ class MainScene extends Phaser.Scene {
             graphics.fillPath();
             graphics.strokePath();
             
-            graphics.setInteractive(country.poly, Phaser.Geom.Polygon.Contains);
+            // graphics.setInteractive(country.poly, Phaser.Geom.Polygon.Contains);
             
             var centre = get_simple_polygon_centre(country.points);
 
@@ -566,7 +576,7 @@ class MainScene extends Phaser.Scene {
                 .setOrigin(0.5)
                 .setResolution(3);
             
-            graphics.on('pointerdown', on_click);
+            // graphics.on('pointerdown', on_click);
         }
     }
 
