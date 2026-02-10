@@ -532,11 +532,30 @@ class MainScene extends Phaser.Scene {
             [111, 69]
         ]);
         
+        var quebec = new Country("Quebec", [
+            [147, 120],
+            [147, 101],
+            [160, 68],
+            [180, 73],
+            [194, 95],
+            [168, 116],
+            [155, 122]
+        ]);
+        
+        var northwest_territories = new Country("Northwest Territories", [
+            [126, 69],
+            [149, 42],
+            [54, 39],
+            [52, 69]
+        ]);
+        
         this.seleceted_country = ontario;
 
         add_country(alberta);
         add_country(greenland);
         add_country(ontario);
+        add_country(quebec);
+        add_country(northwest_territories);
 
         this.MAP_START_X = 100;
         this.MAP_START_Y = 100;
