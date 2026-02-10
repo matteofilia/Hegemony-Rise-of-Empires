@@ -531,14 +531,17 @@ class MainScene extends Phaser.Scene {
             [126, 69],
             [111, 69]
         ]);
+        
+        this.seleceted_country = ontario;
 
         add_country(alberta);
         add_country(greenland);
         add_country(ontario);
 
-
         this.MAP_START_X = 100;
         this.MAP_START_Y = 100;
+        
+        this.COUNTRY_STROKE_WIDTH = 2;
         
         // Add Water
         this.add.rectangle(400, 300, 600, 400, water_colour);
@@ -551,7 +554,12 @@ class MainScene extends Phaser.Scene {
             graphics.fillPoints(country.points, true);
             
             graphics.beginPath();
-            graphics.lineStyle(2, black);
+            if (this.seleceted_country == country) {    
+                graphics.lineStyle(this.COUNTRY_STROKE_WIDTH, red);
+            } else {
+                graphics.lineStyle(this.COUNTRY_STROKE_WIDTH, black);
+            }
+            
             for (let i = 0; i < country.points.length; i++) {
                 let x = country.points[i][0] + this.MAP_START_X;
                 let y = country.points[i][1] + this.MAP_START_Y;
@@ -566,7 +574,7 @@ class MainScene extends Phaser.Scene {
             graphics.fillPath();
             graphics.strokePath();
             
-            // graphics.setInteractive(country.poly, Phaser.Geom.Polygon.Contains);
+            graphics.setInteractive(country.poly, Phaser.Geom.Polygon.Contains);
             
             var centre = get_simple_polygon_centre(country.points);
 
@@ -576,7 +584,13 @@ class MainScene extends Phaser.Scene {
                 .setOrigin(0.5)
                 .setResolution(3);
             
-            // graphics.on('pointerdown', on_click);
+            graphics.on('pointerdown', function() {
+                graphics.clear();
+                graphics.fillStyle(0x00ff00, 1);
+                graphics.lineStyle(2, red, 1);
+                graphics.fillPoints(points, true);
+                graphics.strokePoints(points, true);
+            });
         }
     }
 
