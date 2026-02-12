@@ -169,13 +169,13 @@ function load_game_board(that) {
     var text4_1 = (that.add.text(750, 50, "Collect\n$500", text_style_black)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(45));
-    var text5_1 = (that.add.text(50, 50, "Free Parking", text_style_black)
+    var text5_1 = (that.add.text(50, 50, "Free\nParking", text_style_black)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(45 - 90));
     var text6_1 = (that.add.text(50, 550, "Collect\n$500", text_style_black)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(45));
-    var text7_1 = (that.add.text(750, 550, "GO", text_style_black)
+    var text7_1 = (that.add.text(750, 550, "GO", text_style_black_large)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = 
         Phaser.Math.DegToRad(45 + 270));
 }

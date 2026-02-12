@@ -34,7 +34,15 @@ const text_style_tiny = {
 const text_style_black = {
     fontSize: "16px",
     color: "000000",
-    fontFamily: "monospace"
+    fontFamily: "monospace",
+    align: "center"
+};
+
+const text_style_black_large = {
+    fontSize: "32px",
+    color: "000000",
+    fontFamily: "monospace",
+    align: "center"
 };
 
 const text_style_black_tiny = {
