@@ -27,32 +27,39 @@ const text_style = {
 
 const text_style_tiny = {
     fontSize: "11px",
-    color: "ffffff",
+    color: "#ffffff",
     fontFamily: "monospace"
 };
 
 const text_style_black = {
     fontSize: "16px",
-    color: "000000",
+    color: "#000000",
     fontFamily: "monospace",
     align: "center"
 };
 
 const text_style_black_large = {
     fontSize: "32px",
-    color: "000000",
+    color: "#000000",
+    fontFamily: "monospace",
+    align: "center"
+};
+
+const text_style_white_large = {
+    fontSize: "24px",
+    color: "#ffffff",
     fontFamily: "monospace",
     align: "center"
 };
 
 const text_style_black_tiny = {
     fontSize: "8px",
-    color: "000000",
+    color: "#000000",
     fontFamily: "monospace"
 };
 
 const text_style_white = {
     fontSize: "16px",
-    color: "ffffff",
+    color: "#ffffff",
     fontFamily: "monospace"
 };
