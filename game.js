@@ -294,10 +294,10 @@ class MainScene extends Phaser.Scene {
         this.ui_1_container.add(ui_text_player_money_5);
         this.ui_1_container.add(ui_text_player_money_6);
 
-        const cam2 = this.cameras.add(0, 0, this.UI_WIDTH, this.UI_HEIGHT);
-        cam2.setBackgroundColor(0x5d5d5d);
-        cam2.setZoom(1);
-        cam2.setScroll(3000, 3000);
+        this.cam2 = this.cameras.add(0, 0, this.UI_WIDTH, this.UI_HEIGHT);
+        this.cam2.setBackgroundColor(0x5d5d5d);
+        this.cam2.setZoom(1);
+        this.cam2.setScroll(3000, 3000);
 
         this.board_game_index = 0;
 
@@ -395,8 +395,10 @@ class MainScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.keys.one)) {
             if (this.ui_1_container.visible) {
                 this.ui_1_container.setVisible(false);
+                this.cam2.setVisible(false);
             } else {
                 this.ui_1_container.setVisible(true);
+                this.cam2.setVisible(true);
             }   
         }
         
