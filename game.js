@@ -169,12 +169,14 @@ class MainScene extends Phaser.Scene {
         this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4]);
         this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5]);
 
-        this.player_money_1 = 0;
-        this.player_money_2 = 0;
-        this.player_money_3 = 0;
-        this.player_money_4 = 0;
-        this.player_money_5 = 0;
-        this.player_money_6 = 1200;
+        this.player_money = [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+        ];
 
         this.UI_START_X = 3000;
         this.UI_START_Y = 3000;
@@ -187,37 +189,37 @@ class MainScene extends Phaser.Scene {
         const ui_text_player_money_1 = this.add.text(
             this.UI_START_X + this.UI_INDICATOR_SPACING,
             this.UI_START_Y + this.UI_MONEY_SPACING * 0 + this.UI_VERTICAL_ADJUST,
-            "Player 1 Money: $" + this.player_money_1,
+            "Player 1 Money: $" + this.player_money[0],
             text_style_white
         );
         const ui_text_player_money_2 = this.add.text(
             this.UI_START_X + this.UI_INDICATOR_SPACING,
             this.UI_START_Y + this.UI_MONEY_SPACING * 1 + this.UI_VERTICAL_ADJUST,
-            "Player 2 Money: $" + this.player_money_2,
+            "Player 2 Money: $" +  this.player_money[1],
             text_style_white
         );
         const ui_text_player_money_3 = this.add.text(
             this.UI_START_X + this.UI_INDICATOR_SPACING,
             this.UI_START_Y + this.UI_MONEY_SPACING * 2 + this.UI_VERTICAL_ADJUST,
-            "Player 3 Money: $" + this.player_money_3,
+            "Player 3 Money: $" + this.player_money[2],
             text_style_white
         );
         const ui_text_player_money_4 = this.add.text(
             this.UI_START_X + this.UI_INDICATOR_SPACING,
             this.UI_START_Y + this.UI_MONEY_SPACING * 3 + this.UI_VERTICAL_ADJUST,
-            "Player 4 Money: $" + this.player_money_4,
+            "Player 4 Money: $" + this.player_money[3],
             text_style_white
         );
         const ui_text_player_money_5 = this.add.text(
             this.UI_START_X + this.UI_INDICATOR_SPACING,
             this.UI_START_Y + this.UI_MONEY_SPACING * 4 + this.UI_VERTICAL_ADJUST,
-            "Player 5 Money: $" + this.player_money_5,
+            "Player 5 Money: $" +  this.player_money[4],
             text_style_white
         );
         const ui_text_player_money_6 = this.add.text(
             this.UI_START_X + this.UI_INDICATOR_SPACING,
             this.UI_START_Y + this.UI_MONEY_SPACING * 5 + this.UI_VERTICAL_ADJUST,
-            "Player 6 Money: $" + this.player_money_6,
+            "Player 6 Money: $" +  this.player_money[5],
             text_style_white
         );
 

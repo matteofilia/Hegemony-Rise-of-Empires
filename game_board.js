@@ -93,7 +93,7 @@ function load_game_board(that) {
         .setResolution(that.RESOLUTION)
         .setOrigin(0.5);
     const subtext1_3 = that.add
-        .text(350, 600 - that.SUBTEXT_SPACING, "$" + that.get_property_cost(5), text_style)
+        .text(350, 600 - that.SUBTEXT_SPACING, "$" + that.get_property_cost(4), text_style)
         .setResolution(that.RESOLUTION)
         .setOrigin(0.5);
     const subtext1_4 = that.add
