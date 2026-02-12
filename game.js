@@ -173,6 +173,9 @@ class MainScene extends Phaser.Scene {
 
         this.UI_START_X = 3000;
         this.UI_START_Y = 3000;
+        
+        this.UI_2_START_X = 6000;
+        this.UI_2_START_Y = 6000;
 
         this.UI_MONEY_SPACING = 84;
         this.UI_INDICATOR_SPACING = 48;
@@ -272,6 +275,9 @@ class MainScene extends Phaser.Scene {
         
         this.UI_WIDTH = 280;
         this.UI_HEIGHT = 600;
+        
+        this.UI_2_WIDTH = 280;
+        this.UI_2_HEIGHT = 600;
 
         const ui_text_player_turn = this.add.text(
             this.UI_START_X + (this.UI_WIDTH / 2),
@@ -295,9 +301,14 @@ class MainScene extends Phaser.Scene {
         this.ui_1_container.add(ui_text_player_money_6);
 
         this.cam2 = this.cameras.add(0, 0, this.UI_WIDTH, this.UI_HEIGHT);
-        this.cam2.setBackgroundColor(0x5d5d5d);
+        this.cam2.setBackgroundColor(darker_grey);
         this.cam2.setZoom(1);
-        this.cam2.setScroll(3000, 3000);
+        this.cam2.setScroll(this.UI_START_X, this.UI_START_Y);
+
+        this.cam3 = this.cameras.add(800-this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
+        this.cam3.setBackgroundColor(darker_grey);
+        this.cam3.setZoom(1);
+        this.cam3.setScroll(this.UI_2_START_X, this.UI_2_START_Y);
 
         this.board_game_index = 0;
 
@@ -403,7 +414,11 @@ class MainScene extends Phaser.Scene {
         }
         
         if (Phaser.Input.Keyboard.JustDown(this.keys.two)) {
-            // TODO
+            if (this.cam3.visible) {
+                this.cam3.setVisible(false);
+            } else {
+                this.cam3.setVisible(true);
+            }   
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.keys.space)) {

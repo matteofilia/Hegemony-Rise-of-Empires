@@ -17,6 +17,7 @@ var brown = 0xa07520;
 var white = 0xffffff;
 var light_grey = 0xd1d1d1;
 var dark_grey = 0x959595;
+var darker_grey = 0x676767;
 var white = 0xffffff;
 
 const text_style = {
