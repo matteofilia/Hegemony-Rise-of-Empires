@@ -67,7 +67,7 @@ class MainScene extends Phaser.Scene {
             400,
             400,
             400,
-            null,
+            400,
             350,
             350,
             null,
@@ -87,6 +87,49 @@ class MainScene extends Phaser.Scene {
             600,
             600
         ];
+        
+        this.NO_OWNER = -1;
+        
+        this.TOTAL_PROPERTIES = 16;
+        
+        this.properties = [
+            null,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            null,
+            null,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            null,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            null,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            null,
+            this.NO_OWNER,
+            this.NO_OWNER,
+            this.NO_OWNER
+        ];
+        
+        function get_properties_ownership_percentage(context, properties, player) {
+            var count = 0;
+            
+            for (let i = 0; i < properties.length; i++) {
+                
+                if (properties[i] != null && properties[i] == colour) {
+                    count += 1;
+                }
+            }
+            
+            return count / context.TOTAL_PROPERTIES;
+        }
 
         this.RESOLUTION = 3;
         

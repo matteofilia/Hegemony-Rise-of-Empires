@@ -66,7 +66,7 @@ function load_game_board(that) {
 
     const rect1_1 = that.add.rectangle(150, 513, 100, 25, purple);
     const rect1_2 = that.add.rectangle(250, 513, 100, 25, purple);
-    const rect1_3 = that.add.rectangle(350, 513, 100, 25, white);
+    const rect1_3 = that.add.rectangle(350, 513, 100, 25, red);
     const rect1_4 = that.add.rectangle(450, 513, 100, 25, red);
     const rect1_5 = that.add.rectangle(550, 513, 100, 25, red);
     const rect1_6 = that.add.rectangle(650, 513, 100, 25, red);
@@ -74,6 +74,8 @@ function load_game_board(that) {
     const text1_1 = that.add.text(150, 513, "Moscow", text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
     const text1_2 = that.add.text(250, 513, "Kyiv", text_style)
+    .setResolution(that.RESOLUTION).setOrigin(0.5);
+    const text1_3 = that.add.text(350, 513, "Calgary", text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
     const text1_4 = that.add.text(450, 513, "Montreal", text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
@@ -90,6 +92,10 @@ function load_game_board(that) {
         .text(250, 600 - that.SUBTEXT_SPACING, "$" + that.get_property_cost(5), text_style)
         .setResolution(that.RESOLUTION)
         .setOrigin(0.5);
+    const subtext1_3 = that.add
+        .text(350, 600 - that.SUBTEXT_SPACING, "$" + that.get_property_cost(5), text_style)
+        .setResolution(that.RESOLUTION)
+        .setOrigin(0.5);
     const subtext1_4 = that.add
         .text(450, 600 - that.SUBTEXT_SPACING, "$" + that.get_property_cost(3), text_style)
         .setResolution(that.RESOLUTION)
@@ -102,9 +108,6 @@ function load_game_board(that) {
         .text(650, 600 - that.SUBTEXT_SPACING, "$" + that.get_property_cost(1), text_style)
         .setResolution(that.RESOLUTION)
         .setOrigin(0.5);
-
-    const text1_3 = that.add.text(350, 513, "???", text_style_black)
-        .setResolution(that.RESOLUTION).setOrigin(0.5);
 
     const rect2_1 = that.add.rectangle(87, 150, 25, 100, brown);
     const rect2_2 = that.add.rectangle(87, 250, 25, 100, brown);
