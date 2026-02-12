@@ -6,9 +6,9 @@ function load_game_board(that) {
     const square0_5 = that.add.rectangle(450, 50, 100, 100, light_grey);
     const square0_6 = that.add.rectangle(550, 50, 100, 100, dark_grey);
     const square0_7 = that.add.rectangle(650, 50, 100, 100, light_grey);
-    const square0_8 = that.add.rectangle(750, 50, 100, 100, green);
+    const square0_8 = that.add.rectangle(750, 50, 100, 100, light_green);
 
-    const square1_1 = that.add.rectangle(50, 550, 100, 100, green);
+    const square1_1 = that.add.rectangle(50, 550, 100, 100, light_green);
     const square1_2 = that.add.rectangle(150, 550, 100, 100, light_grey);
     const square1_3 = that.add.rectangle(250, 550, 100, 100, dark_grey);
     const square1_4 = that.add.rectangle(350, 550, 100, 100, light_grey);

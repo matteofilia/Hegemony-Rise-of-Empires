@@ -1,5 +1,6 @@
 // Colours
 var green = 0x00bf00;
+var light_green = 0xa9eaa9;
 var blue = 0x0000ff;
 var red = 0xdd1f1f;
 var purple = 0xbd0bd3;
