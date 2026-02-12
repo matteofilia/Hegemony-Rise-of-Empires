@@ -5,7 +5,7 @@ A Risk x Monopoly like game
 
 This game combines elements of both Risk and Monopoly into a NEW game
 
-![Game Screenshot](game_screenshot_01.png)
+![Game Screenshot](game_screenshot_02.png)
 
 ## Game Design
 
