@@ -211,7 +211,7 @@ class MainScene extends Phaser.Scene {
             let countries = that.player_countries[player];
             
             let properties_percentage = properties / that.TOTAL_PROPERTIES;
-            let countries_percentage = properties / that.TOTAL_COUNTRIES;
+            let countries_percentage = countries / that.TOTAL_COUNTRIES;
             
             let text = 
                 `Player ${player+1}\nMoney: \$${money}\nProperties: ${properties} (${(properties_percentage*100).toFixed(1)}%)\nCountries: ${countries} (${(countries_percentage*100).toFixed(1)}%)`;
