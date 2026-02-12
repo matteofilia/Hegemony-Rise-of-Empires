@@ -21,6 +21,7 @@ class Country {
         this.points = points;
         this.poly = new Phaser.Geom.Polygon(points);
         this.graphics = null;
+        this.owner = null;
     }
 
     draw(context) {
@@ -28,7 +29,12 @@ class Country {
 
         this.graphics = graphics;
 
-        graphics.fillStyle(land_colour, 2);
+        if (this.owner == null) {
+            graphics.fillStyle(white, 2);
+        } else {
+            graphics.fillStyle(context.player_colours[this.owner]);
+        }
+       
         graphics.fillPoints(this.points, true);
 
         graphics.beginPath();

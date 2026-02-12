@@ -104,12 +104,14 @@ class MainScene extends Phaser.Scene {
 
         this.SUBTEXT_SPACING = 20;
 
-        this.player_colour_1 = green;
-        this.player_colour_2 = blue;
-        this.player_colour_3 = light_blue;
-        this.player_colour_4 = red;
-        this.player_colour_5 = purple;
-        this.player_colour_6 = brown;
+        this.player_colours = [
+            green,
+            orange,
+            pink,
+            red,
+            purple,
+            brown
+        ];
 
         load_game_board(this);
         
@@ -117,12 +119,12 @@ class MainScene extends Phaser.Scene {
         // risk_map.setOrigin(0.5);
 
         // Player Markers
-        this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colour_1);
-        this.player_marker_2 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colour_2);
-        this.player_marker_3 = this.add.circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colour_3);
-        this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colour_4);
-        this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colour_5);
-        this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colour_6);
+        this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[0]);
+        this.player_marker_2 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[1]);
+        this.player_marker_3 = this.add.circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colours[2]);
+        this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3]);
+        this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4]);
+        this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5]);
 
         this.player_money_1 = 0;
         this.player_money_2 = 0;
@@ -180,37 +182,37 @@ class MainScene extends Phaser.Scene {
             this.UI_START_X + this.UI_INDICATOR_SIZE,
             this.UI_START_Y + this.UI_MONEY_SPACING * 0 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
-            this.player_colour_1
+            this.player_colours[0]
         );
         this.ui_player_marker_2 = this.add.circle(
             this.UI_START_X + this.UI_INDICATOR_SIZE,
             this.UI_START_Y + this.UI_MONEY_SPACING * 1 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
-            this.player_colour_2
+            this.player_colours[1]
         );
         this.ui_player_marker_3 = this.add.circle(
             this.UI_START_X + this.UI_INDICATOR_SIZE,
             this.UI_START_Y + this.UI_MONEY_SPACING * 2 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
-            this.player_colour_3
+            this.player_colours[2]
         );
         this.ui_player_marker_4 = this.add.circle(
             this.UI_START_X + this.UI_INDICATOR_SIZE,
             this.UI_START_Y + this.UI_MONEY_SPACING * 3 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
-            this.player_colour_4
+            this.player_colours[3]
         );
         this.ui_player_marker_5 = this.add.circle(
             this.UI_START_X + this.UI_INDICATOR_SIZE,
             this.UI_START_Y + this.UI_MONEY_SPACING * 4 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
-            this.player_colour_5
+            this.player_colours[4]
         );
         this.ui_player_marker_6 = this.add.circle(
             this.UI_START_X + this.UI_INDICATOR_SIZE,
             this.UI_START_Y + this.UI_MONEY_SPACING * 5 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
-            this.player_colour_6
+            this.player_colours[5]
         );
 
         const cam2 = this.cameras.add(0, 0, 280, 800);
@@ -263,6 +265,10 @@ class MainScene extends Phaser.Scene {
         add_country(northwest_territories);
         add_country(west_us);
         add_country(east_us);
+        
+        // TODO: remove debug information
+        alberta.owner = 1;
+        quebec.owner = 3;
 
         this.MAP_START_X = 100;
         this.MAP_START_Y = 100;
