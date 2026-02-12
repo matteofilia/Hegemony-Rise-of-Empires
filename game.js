@@ -6,9 +6,14 @@ class MainScene extends Phaser.Scene {
     preload() {
         // Load assets here
         this.load.image("risk_map", "risk.png");
+        
+        this.load.html('modal-yes-or-no', 'modal-yes-or-no.html');
     }
 
-    create() {
+    create() {     
+        // TODO: figure out why cam2 and cam3 cause html to hide from view
+        this.add.dom(400, 300).createFromCache("modal-yes-or-no");
+        
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
@@ -309,7 +314,7 @@ class MainScene extends Phaser.Scene {
         this.cam3.setBackgroundColor(darker_grey);
         this.cam3.setZoom(1);
         this.cam3.setScroll(this.UI_2_START_X, this.UI_2_START_Y);
-
+        
         this.board_game_index = 0;
 
         this.convert_board_index_to_x_y(this.player_marker_1, 1);
@@ -444,6 +449,10 @@ const config = {
     backgroundColor: "#e3e3e3",
     mode: Phaser.Scale.FIT,
     scene: MainScene,
+    dom: {
+        createContainer: true
+    },
+    parent: "game-container",
     physics: {
         default: "arcade",
         arcade: {
