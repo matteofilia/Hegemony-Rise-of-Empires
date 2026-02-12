@@ -141,7 +141,9 @@ class MainScene extends Phaser.Scene {
             down: "S",
             left: "A",
             right: "D",
-            space: Phaser.Input.Keyboard.KeyCodes.SPACE
+            space: Phaser.Input.Keyboard.KeyCodes.SPACE,
+            one: Phaser.Input.Keyboard.KeyCodes.ONE,
+            two: Phaser.Input.Keyboard.KeyCodes.TWO,
         });
 
         this.SUBTEXT_SPACING = 20;
@@ -267,15 +269,32 @@ class MainScene extends Phaser.Scene {
             this.UI_INDICATOR_SIZE,
             this.player_colours[5]
         );
+        
+        this.UI_WIDTH = 280;
+        this.UI_HEIGHT = 600;
 
         const ui_text_player_turn = this.add.text(
-            this.UI_START_X + 0,
-            this.UI_START_Y + 600 - 64,
+            this.UI_START_X + (this.UI_WIDTH / 2),
+            this.UI_START_Y + (this.UI_HEIGHT - 32),
             player_turn_text(this, this.player_turn),
             text_style_white_large
-        );
+        ).setOrigin(0.5);
+        
+        this.ui_1_container = this.add.container(0, 0);
+        this.ui_1_container.add(this.ui_player_marker_1);
+        this.ui_1_container.add(this.ui_player_marker_2);
+        this.ui_1_container.add(this.ui_player_marker_3);
+        this.ui_1_container.add(this.ui_player_marker_4);
+        this.ui_1_container.add(this.ui_player_marker_5);
+        this.ui_1_container.add(this.ui_player_marker_6);
+        this.ui_1_container.add(ui_text_player_money_1);
+        this.ui_1_container.add(ui_text_player_money_2);
+        this.ui_1_container.add(ui_text_player_money_3);
+        this.ui_1_container.add(ui_text_player_money_4);
+        this.ui_1_container.add(ui_text_player_money_5);
+        this.ui_1_container.add(ui_text_player_money_6);
 
-        const cam2 = this.cameras.add(0, 0, 280, 800);
+        const cam2 = this.cameras.add(0, 0, this.UI_WIDTH, this.UI_HEIGHT);
         cam2.setBackgroundColor(0x5d5d5d);
         cam2.setZoom(1);
         cam2.setScroll(3000, 3000);
@@ -372,12 +391,24 @@ class MainScene extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(this.keys.up)) this.board_game_index += 1;
         if (Phaser.Input.Keyboard.JustDown(this.keys.down)) this.board_game_index -= 1;
+        
+        if (Phaser.Input.Keyboard.JustDown(this.keys.one)) {
+            if (this.ui_1_container.visible) {
+                this.ui_1_container.setVisible(false);
+            } else {
+                this.ui_1_container.setVisible(true);
+            }   
+        }
+        
+        if (Phaser.Input.Keyboard.JustDown(this.keys.two)) {
+            // TODO
+        }
 
         if (Phaser.Input.Keyboard.JustDown(this.keys.space)) {
             // Simulate random dice roll
             this.player_roll_2 = Phaser.Math.Between(1, 6) + Phaser.Math.Between(1, 6);
         }
-
+            
         this.player_cooldown_2 += delta;
         if (this.player_cooldown_2 >= this.MOVE_DELAY && this.player_roll_2 > 0) {
             this.player_cooldown_2 = 0;
