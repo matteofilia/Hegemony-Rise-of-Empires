@@ -65,6 +65,54 @@ class MainScene extends Phaser.Scene {
             entity.x = coords[0];
             entity.y = coords[1];
         };
+        
+        this.cities = [
+            "Vancover",
+            "Ottawa",
+            "Toronto",
+            "Montreal",
+            "Halifax",
+            "Edmonton",
+            "Calgary",
+            "Regina",
+            "Winnipeg",
+            "Kyiv",
+            "Moscow",
+            "Hong Kong",
+            "Singapore",
+            "Shenzhen",
+            "Shanghai",
+            "New York",
+            "LA",
+            "Houston",
+            "Chicago",
+            "Dallas",
+            "Tokyo",
+            "Sydney",
+            "London",
+            "Paris",
+            "Rome"
+        ];
+        
+        this.selected_cities = [];
+        
+        function get_random_city(that) {
+            while (true) {
+                let city = that.cities[Phaser.Math.Between(0, that.cities.length-1)];
+                let city_already_exists = false;
+                
+                for (let i = 0; i < that.selected_cities.length; i++) {
+                    if (that.selected_cities[i] == city) {
+                        city_already_exists = true;
+                    }
+                }
+                
+                if (!city_already_exists) {
+                    that.selected_cities.push(city);
+                    return city;
+                }
+            }
+        }
 
         this.PROPERTY_COSTS = [
             null,
@@ -90,6 +138,32 @@ class MainScene extends Phaser.Scene {
             600,
             600,
             600
+        ];
+        
+        this.property_names = [
+            null,
+            get_random_city(this),
+            get_random_city(this),
+            get_random_city(this),
+            get_random_city(this),
+            get_random_city(this),
+            get_random_city(this),
+            null,
+            null,
+            get_random_city(this),
+            get_random_city(this),
+            get_random_city(this),
+            null,
+            get_random_city(this),
+            get_random_city(this),
+            get_random_city(this),
+            null,
+            get_random_city(this),
+            get_random_city(this),
+            null,
+            get_random_city(this),
+            get_random_city(this),
+            get_random_city(this)
         ];
 
         this.NO_OWNER = -1;
