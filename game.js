@@ -642,15 +642,15 @@ class MainScene extends Phaser.Scene {
             this.dice_image(
                 this,
                 roll_1,
-                this.UI_3_START_X + this.UI_3_WIDTH / 2 - 48,
-                this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+                this.UI_3_WIDTH / 2 - 48,
+                this.UI_3_HEIGHT / 2,
                 this.ui_3_container
             );
             this.dice_image(
                 this,
                 roll_2,
-                this.UI_3_START_X + this.UI_3_WIDTH / 2 + 48,
-                this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+                this.UI_3_WIDTH / 2 + 48,
+                this.UI_3_HEIGHT / 2,
                 this.ui_3_container
             );
             this.player_rolls[1] = roll_1 + roll_2;
