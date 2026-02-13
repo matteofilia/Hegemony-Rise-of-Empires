@@ -12,10 +12,6 @@
     </style>
 </head>
 <body>
-    <script src="colours-and-styles.js"></script>
-    <script src="countries.js"></script>
-    <script src="game_board.js"></script>
-    <script src="game.js"></script>
     <script>
         const ws = new WebSocket('ws://localhost:8080');
 
@@ -26,10 +22,6 @@
             ws.send('Hello server!');
         };
 
-        ws.onmessage = (event) => {
-            alert('Received from server:', event.data);
-        };
-
         ws.onclose = () => {
             console.log('Connection closed');
         };
@@ -38,5 +30,9 @@
             console.error('WebSocket error:', err);
         };
     </script>
+    <script src="colours-and-styles.js"></script>
+    <script src="countries.js"></script>
+    <script src="game_board.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>

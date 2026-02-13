@@ -261,6 +261,8 @@ class MainScene extends Phaser.Scene {
 
         this.player_colours = [green, orange, pink, red, purple, brown];
 
+        this.player_turn = 0;
+        
         load_game_board(this);
 
         // const risk_map = this.add.image(400, 300, "risk_map");
@@ -273,8 +275,6 @@ class MainScene extends Phaser.Scene {
         this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3]);
         this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4]);
         this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5]);
-
-        this.player_turn = 0;
 
         this.player_money = [500, 200, 0, 700, 750, 0];
 
@@ -390,7 +390,7 @@ class MainScene extends Phaser.Scene {
         this.UI_2_WIDTH = 280;
         this.UI_2_HEIGHT = 600;
 
-        const ui_text_player_turn = this.add.text(
+        this.ui_text_player_turn = this.add.text(
             this.UI_START_X + (this.UI_WIDTH / 2),
             this.UI_START_Y + (this.UI_HEIGHT - 32),
             player_turn_text(this, this.player_turn),
@@ -451,7 +451,7 @@ class MainScene extends Phaser.Scene {
 
         this.countries = [];
 
-        var context = this;
+        let context = this;
         function add_country(country) {
             context.countries.push(country);
         }
@@ -506,6 +506,19 @@ class MainScene extends Phaser.Scene {
                 }
             }
         });
+        
+        let that = this;
+        ws.onmessage = (event) => {
+            console.log('Received something from server:', event.data);    
+            var parsed_data = JSON.parse(event.data);
+            
+            if (parsed_data.type ==  "next_turn") {
+                console.log(`Player ${parsed_data.player_turn}'s Turn`);
+                that.player_turn = parsed_data.player_turn;
+            }
+            
+            that.ui_text_player_turn.setText(player_turn_text(that, that .player_turn));
+        };
     }
 
     update(time, delta) {
@@ -534,7 +547,11 @@ class MainScene extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(this.keys.space)) {
             // Simulate random dice roll
-            this.player_roll_2 = Phaser.Math.Between(1, 6) + Phaser.Math.Between(1, 6);
+            // this.player_roll_2 = Phaser.Math.Between(1, 6) + Phaser.Math.Between(1, 6);
+        
+            // Next turn
+            console.log("Client: sending next turn");
+            ws.send("next turn");
         }
             
         this.player_cooldown_2 += delta;
