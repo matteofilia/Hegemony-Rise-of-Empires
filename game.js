@@ -440,6 +440,43 @@ class MainScene extends Phaser.Scene {
         this.cam2.setZoom(1);
         this.cam2.setScroll(this.UI_START_X, this.UI_START_Y);
 
+        
+        class Card {
+            constructor(name, effect_description) {
+                this.name = name;
+                this.effect_description = effect_description;
+            }
+        }
+        
+        this.cards = [
+            new Card("Tax Return", "Gain $500")
+        ];
+        
+        this.MAX_CARDS = 5;
+        
+        this.CARD_CONTAINER_PADDING = 8;
+        this.CARD_WIDTH = 250;
+        this.CARD_HEIGHT = 100;
+        
+        function create_card_container(that, card, index) {
+            var card_container = that.add.container((that.UI_2_WIDTH-that.CARD_WIDTH)/2, (that.CARD_CONTAINER_PADDING+that.CARD_HEIGHT)*index);
+            var bg = that.add.rectangle(0, 0, that.CARD_WIDTH, that.CARD_HEIGHT, white);
+            bg.setOrigin(0);
+            
+            card_container.add(bg);
+            card_container.add(that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING, card.name, text_style_black_large));
+            card_container.add(that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING+32, card.effect_description, text_style_black_word_wrap));
+            
+            return card_container;
+        }
+        
+        this.ui_2_container = this.add.container(this.UI_2_START_X, this.UI_2_START_Y);
+        this.ui_2_container.add(create_card_container(this, this.cards[0], 0));
+        this.ui_2_container.add(create_card_container(this, this.cards[0], 1));
+        this.ui_2_container.add(create_card_container(this, this.cards[0], 2));
+        this.ui_2_container.add(create_card_container(this, this.cards[0], 3));
+        this.ui_2_container.add(create_card_container(this, this.cards[0], 4));
+        
         this.cam3 = this.cameras.add(this.VIEWPORT_WIDTH - this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
         this.cam3.setBackgroundColor(darker_grey);
         this.cam3.setZoom(1);

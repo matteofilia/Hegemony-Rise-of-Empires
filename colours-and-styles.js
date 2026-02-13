@@ -53,6 +53,13 @@ const text_style_white_large = {
     align: "center"
 };
 
+const text_style_black_word_wrap = {
+    fontSize: "16px",
+    color: "#000000",
+    fontFamily: "monospace",
+    wordWrap: "200px"
+};
+
 const text_style_black_tiny = {
     fontSize: "8px",
     color: "#000000",
