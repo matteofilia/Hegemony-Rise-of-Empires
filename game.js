@@ -6,14 +6,26 @@ class MainScene extends Phaser.Scene {
     preload() {
         // Load assets here
         this.load.image("risk_map", "risk.png");
-        
-        this.load.html('modal-yes-or-no', 'modal-yes-or-no.html');
+
+        this.load.image("dice_1", "dice_1.png");
+        this.load.image("dice_2", "dice_2.png");
+        this.load.image("dice_3", "dice_3.png");
+        this.load.image("dice_4", "dice_4.png");
+        this.load.image("dice_5", "dice_5.png");
+        this.load.image("dice_6", "dice_6.png");
+
+        this.load.html("modal-yes-or-no", "modal-yes-or-no.html");
     }
 
-    create() {     
+    dice_image(that, roll, x, y, container) {
+        var dice = that.add.image(x, y, `dice_${roll}`).setOrigin(0.5);
+        container.add(dice);
+    }
+
+    create() {
         // TODO: figure out why cam2 and cam3 cause html to hide from view
         this.add.dom(400, 300).createFromCache("modal-yes-or-no");
-        
+
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
@@ -65,7 +77,7 @@ class MainScene extends Phaser.Scene {
             entity.x = coords[0];
             entity.y = coords[1];
         };
-        
+
         this.cities = [
             "Vancover",
             "Ottawa",
@@ -125,20 +137,20 @@ class MainScene extends Phaser.Scene {
             "Hanoi",
             "Perth"
         ];
-        
+
         this.selected_cities = [];
-        
+
         function get_random_city(that) {
             while (true) {
-                let city = that.cities[Phaser.Math.Between(0, that.cities.length-1)];
+                let city = that.cities[Phaser.Math.Between(0, that.cities.length - 1)];
                 let city_already_exists = false;
-                
+
                 for (let i = 0; i < that.selected_cities.length; i++) {
                     if (that.selected_cities[i] == city) {
                         city_already_exists = true;
                     }
                 }
-                
+
                 if (!city_already_exists) {
                     that.selected_cities.push(city);
                     return city;
@@ -171,7 +183,7 @@ class MainScene extends Phaser.Scene {
             600,
             600
         ];
-        
+
         this.property_names = [
             null,
             get_random_city(this),
@@ -229,6 +241,9 @@ class MainScene extends Phaser.Scene {
             this.NO_OWNER
         ];
 
+        this.VIEWPORT_WIDTH = 800;
+        this.VIEWPORT_HEIGHT = 600;
+
         function get_properties_ownership_percentage(context, properties, player) {
             var count = 0;
 
@@ -254,7 +269,7 @@ class MainScene extends Phaser.Scene {
             right: "D",
             space: Phaser.Input.Keyboard.KeyCodes.SPACE,
             one: Phaser.Input.Keyboard.KeyCodes.ONE,
-            two: Phaser.Input.Keyboard.KeyCodes.TWO,
+            two: Phaser.Input.Keyboard.KeyCodes.TWO
         });
 
         this.SUBTEXT_SPACING = 20;
@@ -262,7 +277,7 @@ class MainScene extends Phaser.Scene {
         this.player_colours = [green, orange, pink, red, purple, brown];
 
         this.player_turn = 0;
-        
+
         load_game_board(this);
 
         // const risk_map = this.add.image(400, 300, "risk_map");
@@ -284,9 +299,12 @@ class MainScene extends Phaser.Scene {
 
         this.UI_START_X = 3000;
         this.UI_START_Y = 3000;
-        
+
         this.UI_2_START_X = 6000;
         this.UI_2_START_Y = 6000;
+
+        this.UI_3_START_X = 8000;
+        this.UI_3_START_Y = 8000;
 
         this.UI_MONEY_SPACING = 84;
         this.UI_INDICATOR_SPACING = 48;
@@ -383,20 +401,25 @@ class MainScene extends Phaser.Scene {
             this.UI_INDICATOR_SIZE,
             this.player_colours[5]
         );
-        
+
         this.UI_WIDTH = 280;
         this.UI_HEIGHT = 600;
-        
+
         this.UI_2_WIDTH = 280;
         this.UI_2_HEIGHT = 600;
 
-        this.ui_text_player_turn = this.add.text(
-            this.UI_START_X + (this.UI_WIDTH / 2),
-            this.UI_START_Y + (this.UI_HEIGHT - 32),
-            player_turn_text(this, this.player_turn),
-            text_style_white_large
-        ).setOrigin(0.5);
-        
+        this.UI_3_WIDTH = 200;
+        this.UI_3_HEIGHT = 150;
+
+        this.ui_text_player_turn = this.add
+            .text(
+                this.UI_START_X + this.UI_WIDTH / 2,
+                this.UI_START_Y + (this.UI_HEIGHT - 32),
+                player_turn_text(this, this.player_turn),
+                text_style_white_large
+            )
+            .setOrigin(0.5);
+
         this.ui_1_container = this.add.container(0, 0);
         this.ui_1_container.add(this.ui_player_marker_1);
         this.ui_1_container.add(this.ui_player_marker_2);
@@ -416,29 +439,44 @@ class MainScene extends Phaser.Scene {
         this.cam2.setZoom(1);
         this.cam2.setScroll(this.UI_START_X, this.UI_START_Y);
 
-        this.cam3 = this.cameras.add(800-this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
+        this.cam3 = this.cameras.add(this.VIEWPORT_WIDTH - this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
         this.cam3.setBackgroundColor(darker_grey);
         this.cam3.setZoom(1);
         this.cam3.setScroll(this.UI_2_START_X, this.UI_2_START_Y);
-        
+
+        this.cam4 = this.cameras.add(
+            this.VIEWPORT_WIDTH / 2 - this.UI_3_WIDTH / 2,
+            this.VIEWPORT_HEIGHT / 2 - this.UI_3_HEIGHT / 2,
+            this.UI_3_WIDTH,
+            this.UI_3_HEIGHT
+        );
+        this.cam4.setBackgroundColor(light_grey);
+        this.cam4.setZoom(1);
+        this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
+
+        this.ui_3_container = this.add.container(0, 0);
+        this.dice_image(
+            this,
+            Phaser.Math.Between(1, 6),
+            this.UI_3_START_X + this.UI_3_WIDTH / 2 - 48,
+            this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+            this.ui_3_container
+        );
+        this.dice_image(
+            this,
+            Phaser.Math.Between(1, 6),
+            this.UI_3_START_X + this.UI_3_WIDTH / 2 + 48,
+            this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+            this.ui_3_container
+        );
+
         this.board_game_index = 0;
 
         this.convert_board_index_to_x_y(this.player_marker_1, 1);
-        this.convert_board_index_to_x_y(this.player_marker_2, 0);
+        this.convert_board_index_to_x_y(this.player_marker_2, 3);
 
-        this.player_index_1 = 0;
-        this.player_index_2 = 0;
-        this.player_index_3 = 0;
-        this.player_index_4 = 0;
-        this.player_index_5 = 0;
-        this.player_index_6 = 0;
-
-        this.player_roll_1 = 0;
-        this.player_roll_2 = 0;
-        this.player_roll_3 = 0;
-        this.player_roll_4 = 0;
-        this.player_roll_5 = 0;
-        this.player_roll_6 = 0;
+        this.player_indices = [0, 0, 0, 0, 0, 0];
+        this.player_rolls = [0, 0, 0, 0, 0, 0];
 
         this.player_cooldown_1 = 0;
         this.player_cooldown_2 = 0;
@@ -506,18 +544,30 @@ class MainScene extends Phaser.Scene {
                 }
             }
         });
-        
+
+        function update_game_state(context, game_state) {
+            context.player_turn = game_state.player_turn;
+
+            context.player_indices = game_state.player_indices;
+            context.player_rolls = game_state.player_rolls;
+
+            context.player_money = game_state.player_money;
+        }
+
         let that = this;
         ws.onmessage = (event) => {
-            console.log('Received something from server:', event.data);    
+            console.log("Received something from server:", event.data);
             var parsed_data = JSON.parse(event.data);
-            
-            if (parsed_data.type ==  "next_turn") {
+
+            if (parsed_data.type == "next_turn") {
                 console.log(`Player ${parsed_data.player_turn}'s Turn`);
                 that.player_turn = parsed_data.player_turn;
+
+                console.log("Updating game state...");
+                update_game_state(that, parsed_data.game_state);
             }
-            
-            that.ui_text_player_turn.setText(player_turn_text(that, that .player_turn));
+
+            that.ui_text_player_turn.setText(player_turn_text(that, that.player_turn));
         };
     }
 
@@ -526,7 +576,7 @@ class MainScene extends Phaser.Scene {
 
         if (Phaser.Input.Keyboard.JustDown(this.keys.up)) this.board_game_index += 1;
         if (Phaser.Input.Keyboard.JustDown(this.keys.down)) this.board_game_index -= 1;
-        
+
         if (Phaser.Input.Keyboard.JustDown(this.keys.one)) {
             if (this.ui_1_container.visible) {
                 this.ui_1_container.setVisible(false);
@@ -534,33 +584,55 @@ class MainScene extends Phaser.Scene {
             } else {
                 this.ui_1_container.setVisible(true);
                 this.cam2.setVisible(true);
-            }   
+            }
         }
-        
+
         if (Phaser.Input.Keyboard.JustDown(this.keys.two)) {
             if (this.cam3.visible) {
                 this.cam3.setVisible(false);
             } else {
                 this.cam3.setVisible(true);
-            }   
+            }
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.keys.space)) {
             // Simulate random dice roll
-            // this.player_roll_2 = Phaser.Math.Between(1, 6) + Phaser.Math.Between(1, 6);
-        
-            // Next turn
-            console.log("Client: sending next turn");
-            ws.send("next turn");
-        }
-            
-        this.player_cooldown_2 += delta;
-        if (this.player_cooldown_2 >= this.MOVE_DELAY && this.player_roll_2 > 0) {
-            this.player_cooldown_2 = 0;
-            this.player_roll_2 -= 1;
-            this.player_index_2 += 1;
+            this.ui_3_container.removeAll(true);
+            let roll_1 = Phaser.Math.Between(1, 6);
+            let roll_2 = Phaser.Math.Between(1, 6);
+            this.dice_image(
+                this,
+                roll_1,
+                this.UI_3_START_X + this.UI_3_WIDTH / 2 - 48,
+                this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+                this.ui_3_container
+            );
+            this.dice_image(
+                this,
+                roll_2,
+                this.UI_3_START_X + this.UI_3_WIDTH / 2 + 48,
+                this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+                this.ui_3_container
+            );
+            this.player_rolls[1] = roll_1 + roll_2;
 
-            this.convert_board_index_to_x_y(this.player_marker_2, this.player_index_2);
+            // Next turn
+            try {
+                console.log("Client: sending next turn");
+                ws.send("next turn");
+            } catch (error) {
+                console.log("WebSocket error"); 
+            }
+        }
+
+        this.player_cooldown_2 += delta;
+        if (this.player_cooldown_2 >= this.MOVE_DELAY && this.player_rolls[1] > 0) {
+            this.player_cooldown_2 = 0;
+            this.player_rolls[1] -= 1;
+            this.player_indices[1] += 1;
+
+
+            this.convert_board_index_to_x_y(this.player_marker_2, this.player_indices[1]);
         }
     }
 }

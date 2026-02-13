@@ -10,6 +10,10 @@ const wss = new WebSocket.Server({ port: PORT }, () => {
 var player_turn = 0;
 var num_players = 6;
 
+this.player_indices = [0, 0, 0, 0, 0, 0];
+this.player_rolls = [0, 0, 0, 0, 0, 0];
+this.player_money = [0, 0, 0, 0, 0, 0];
+
 // Connection event
 wss.on('connection', (ws) => {
     console.log('New client connected');
