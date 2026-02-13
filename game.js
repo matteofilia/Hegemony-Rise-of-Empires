@@ -21,6 +21,12 @@ class MainScene extends Phaser.Scene {
         var dice = that.add.image(x, y, `dice_${roll}`).setOrigin(0.5);
         container.add(dice);
     }
+    
+    dice_text(that, container) {
+        let ui_3_container_text = this.add.text((that.UI_3_WIDTH/2), 4+14, "Press SPACE to roll dice", text_style_black_word_wrap);
+        container.add(ui_3_container_text);
+        ui_3_container_text.setOrigin(0.5);
+    }
 
     create() {
         // TODO: figure out why cam2 and cam3 cause html to hide from view
@@ -296,6 +302,14 @@ class MainScene extends Phaser.Scene {
         this.player_properties = [0, 4, 0, 3, 1, 0];
 
         this.player_countries = [5, 0, 7, 3, 1, 0];
+        
+        class GameState {
+            costructor(num_players) {
+                this.money = new Array(num_players);
+                this.num_properties = new Array(num_players);
+                this.num_countries = new Array(num_players);
+            }
+        }
 
         this.UI_START_X = 3000;
         this.UI_START_Y = 3000;
@@ -408,7 +422,7 @@ class MainScene extends Phaser.Scene {
         this.UI_2_WIDTH = 280;
         this.UI_2_HEIGHT = 600;
 
-        this.UI_3_WIDTH = 200;
+        this.UI_3_WIDTH = 250;
         this.UI_3_HEIGHT = 150;
 
         this.ui_text_player_turn = this.add
@@ -451,6 +465,12 @@ class MainScene extends Phaser.Scene {
         this.cards = [
             new Card("Tax Return", "Gain $500"),
             new Card("Reinforcements", "Gain 5 units that can be added to any territory"),
+            new Card("Blitzkrieg", "Gain a random territory from a player of your choosing"),
+            new Card("Sacrifice", "Sacrifice your weakest territory but gain $1000"),
+            new Card("War Reparations", "Steal $1200 from the last player that attacked you"),
+            new Card("Arms Race", "All players gain 3 units, except the player with the most territories"),
+            new Card("Last Stand", "All territories with one unit gain an additional unit"),
+            new Card("Ceasefire", "No attacking for the next turn"),
         ];
         
         this.MAX_CARDS = 5;
@@ -474,9 +494,9 @@ class MainScene extends Phaser.Scene {
         this.ui_2_container = this.add.container(this.UI_2_START_X, this.UI_2_START_Y);
         this.ui_2_container.add(create_card_container(this, this.cards[0], 0));
         this.ui_2_container.add(create_card_container(this, this.cards[1], 1));
-        this.ui_2_container.add(create_card_container(this, this.cards[0], 2));
-        this.ui_2_container.add(create_card_container(this, this.cards[0], 3));
-        this.ui_2_container.add(create_card_container(this, this.cards[0], 4));
+        this.ui_2_container.add(create_card_container(this, this.cards[2], 2));
+        this.ui_2_container.add(create_card_container(this, this.cards[3], 3));
+        this.ui_2_container.add(create_card_container(this, this.cards[5], 4));
         
         this.cam3 = this.cameras.add(this.VIEWPORT_WIDTH - this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
         this.cam3.setBackgroundColor(darker_grey);
@@ -509,6 +529,8 @@ class MainScene extends Phaser.Scene {
             this.UI_3_HEIGHT / 2,
             this.ui_3_container
         );
+        
+        this.dice_text(this, this.ui_3_container);
 
         this.board_game_index = 0;
 
@@ -654,6 +676,7 @@ class MainScene extends Phaser.Scene {
                 this.UI_3_HEIGHT / 2,
                 this.ui_3_container
             );
+            this.dice_text(this, this.ui_3_container);
             this.player_rolls[1] = roll_1 + roll_2;
 
             // Next turn

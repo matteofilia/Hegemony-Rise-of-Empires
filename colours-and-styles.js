@@ -54,11 +54,11 @@ const text_style_white_large = {
 };
 
 const text_style_black_word_wrap = {
-    fontSize: "16px",
+    fontSize: "14px",
     color: "#000000",
     fontFamily: "monospace",
     wordWrap: {
-        width: 200
+        width: 230
     }
 };
 
