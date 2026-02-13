@@ -329,75 +329,75 @@ class MainScene extends Phaser.Scene {
         }
 
         const ui_text_player_money_1 = this.add.text(
-            this.UI_START_X + this.UI_INDICATOR_SPACING,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 0 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SPACING,
+            this.UI_MONEY_SPACING * 0 + this.UI_VERTICAL_ADJUST,
             player_text(this, 0),
             text_style_white
         );
         const ui_text_player_money_2 = this.add.text(
-            this.UI_START_X + this.UI_INDICATOR_SPACING,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 1 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SPACING,
+            this.UI_MONEY_SPACING * 1 + this.UI_VERTICAL_ADJUST,
             player_text(this, 1),
             text_style_white
         );
         const ui_text_player_money_3 = this.add.text(
-            this.UI_START_X + this.UI_INDICATOR_SPACING,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 2 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SPACING,
+            this.UI_MONEY_SPACING * 2 + this.UI_VERTICAL_ADJUST,
             player_text(this, 2),
             text_style_white
         );
         const ui_text_player_money_4 = this.add.text(
-            this.UI_START_X + this.UI_INDICATOR_SPACING,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 3 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SPACING,
+            this.UI_MONEY_SPACING * 3 + this.UI_VERTICAL_ADJUST,
             player_text(this, 3),
             text_style_white
         );
         const ui_text_player_money_5 = this.add.text(
-            this.UI_START_X + this.UI_INDICATOR_SPACING,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 4 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SPACING,
+            this.UI_MONEY_SPACING * 4 + this.UI_VERTICAL_ADJUST,
             player_text(this, 4),
             text_style_white
         );
         const ui_text_player_money_6 = this.add.text(
-            this.UI_START_X + this.UI_INDICATOR_SPACING,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 5 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SPACING,
+            this.UI_MONEY_SPACING * 5 + this.UI_VERTICAL_ADJUST,
             player_text(this, 5),
             text_style_white
         );
 
         this.ui_player_marker_1 = this.add.circle(
-            this.UI_START_X + this.UI_INDICATOR_SIZE,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 0 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SIZE,
+            this.UI_MONEY_SPACING * 0 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
             this.player_colours[0]
         );
         this.ui_player_marker_2 = this.add.circle(
-            this.UI_START_X + this.UI_INDICATOR_SIZE,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 1 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SIZE,
+            this.UI_MONEY_SPACING * 1 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
             this.player_colours[1]
         );
         this.ui_player_marker_3 = this.add.circle(
-            this.UI_START_X + this.UI_INDICATOR_SIZE,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 2 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SIZE,
+            this.UI_MONEY_SPACING * 2 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
             this.player_colours[2]
         );
         this.ui_player_marker_4 = this.add.circle(
-            this.UI_START_X + this.UI_INDICATOR_SIZE,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 3 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SIZE,
+            this.UI_MONEY_SPACING * 3 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
             this.player_colours[3]
         );
         this.ui_player_marker_5 = this.add.circle(
-            this.UI_START_X + this.UI_INDICATOR_SIZE,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 4 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SIZE,
+            this.UI_MONEY_SPACING * 4 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
             this.player_colours[4]
         );
         this.ui_player_marker_6 = this.add.circle(
-            this.UI_START_X + this.UI_INDICATOR_SIZE,
-            this.UI_START_Y + this.UI_MONEY_SPACING * 5 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
+            this.UI_INDICATOR_SIZE,
+            this.UI_MONEY_SPACING * 5 + this.UI_INDICATOR_SIZE / 2 + this.UI_VERTICAL_ADJUST,
             this.UI_INDICATOR_SIZE,
             this.player_colours[5]
         );
@@ -413,14 +413,14 @@ class MainScene extends Phaser.Scene {
 
         this.ui_text_player_turn = this.add
             .text(
-                this.UI_START_X + this.UI_WIDTH / 2,
-                this.UI_START_Y + (this.UI_HEIGHT - 32),
+                 this.UI_WIDTH / 2,
+                 (this.UI_HEIGHT - 32),
                 player_turn_text(this, this.player_turn),
                 text_style_white_large
             )
             .setOrigin(0.5);
 
-        this.ui_1_container = this.add.container(0, 0);
+        this.ui_1_container = this.add.container(this.UI_START_X, this.UI_START_Y);
         this.ui_1_container.add(this.ui_player_marker_1);
         this.ui_1_container.add(this.ui_player_marker_2);
         this.ui_1_container.add(this.ui_player_marker_3);
@@ -433,7 +433,8 @@ class MainScene extends Phaser.Scene {
         this.ui_1_container.add(ui_text_player_money_4);
         this.ui_1_container.add(ui_text_player_money_5);
         this.ui_1_container.add(ui_text_player_money_6);
-
+        this.ui_1_container.add(this.ui_text_player_turn);
+        
         this.cam2 = this.cameras.add(0, 0, this.UI_WIDTH, this.UI_HEIGHT);
         this.cam2.setBackgroundColor(darker_grey);
         this.cam2.setZoom(1);
@@ -443,7 +444,8 @@ class MainScene extends Phaser.Scene {
         this.cam3.setBackgroundColor(darker_grey);
         this.cam3.setZoom(1);
         this.cam3.setScroll(this.UI_2_START_X, this.UI_2_START_Y);
-
+        
+        
         this.cam4 = this.cameras.add(
             this.VIEWPORT_WIDTH / 2 - this.UI_3_WIDTH / 2,
             this.VIEWPORT_HEIGHT / 2 - this.UI_3_HEIGHT / 2,
@@ -454,19 +456,19 @@ class MainScene extends Phaser.Scene {
         this.cam4.setZoom(1);
         this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
 
-        this.ui_3_container = this.add.container(0, 0);
+        this.ui_3_container = this.add.container(this.UI_3_START_X,  this.UI_3_START_Y);
         this.dice_image(
             this,
             Phaser.Math.Between(1, 6),
-            this.UI_3_START_X + this.UI_3_WIDTH / 2 - 48,
-            this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+            this.UI_3_WIDTH / 2 - 48,
+            this.UI_3_HEIGHT / 2,
             this.ui_3_container
         );
         this.dice_image(
             this,
             Phaser.Math.Between(1, 6),
-            this.UI_3_START_X + this.UI_3_WIDTH / 2 + 48,
-            this.UI_3_START_Y + this.UI_3_HEIGHT / 2,
+            this.UI_3_WIDTH / 2 + 48,
+            this.UI_3_HEIGHT / 2,
             this.ui_3_container
         );
 
