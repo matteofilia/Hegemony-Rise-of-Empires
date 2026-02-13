@@ -1,4 +1,4 @@
-function load_game_board(that) {
+function load_game_board(that, property_names) {
     const square0_1 = that.add.rectangle(50, 50, 100, 100, light_grey);
     const square0_2 = that.add.rectangle(150, 50, 100, 100, dark_grey);
     const square0_3 = that.add.rectangle(250, 50, 100, 100, light_grey);
@@ -34,15 +34,15 @@ function load_game_board(that) {
     const rect0_5 = that.add.rectangle(550, 87, 100, 25, blue);
     const rect0_6 = that.add.rectangle(650, 87, 100, 25, blue);
 
-    const text0_1 = that.add.text(150, 87, that.property_names[13], text_style)
+    const text0_1 = that.add.text(150, 87, property_names[13], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text0_2 = that.add.text(250, 87, that.property_names[14], text_style)
+    const text0_2 = that.add.text(250, 87, property_names[14], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text0_3 = that.add.text(350, 87, that.property_names[15], text_style)
+    const text0_3 = that.add.text(350, 87, property_names[15], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text0_5 = that.add.text(550, 87, that.property_names[17], text_style)
+    const text0_5 = that.add.text(550, 87, property_names[17], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text0_6 = that.add.text(650, 87, that.property_names[18], text_style)
+    const text0_6 = that.add.text(650, 87, property_names[18], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
 
     const text0_4 = that.add.text(450, 87, "???", text_style_black)
@@ -71,17 +71,17 @@ function load_game_board(that) {
     const rect1_5 = that.add.rectangle(550, 513, 100, 25, red);
     const rect1_6 = that.add.rectangle(650, 513, 100, 25, red);
 
-    const text1_1 = that.add.text(150, 513, that.property_names[6], text_style)
+    const text1_1 = that.add.text(150, 513, property_names[6], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text1_2 = that.add.text(250, 513, that.property_names[5], text_style)
+    const text1_2 = that.add.text(250, 513, property_names[5], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text1_3 = that.add.text(350, 513, that.property_names[4], text_style)
+    const text1_3 = that.add.text(350, 513, property_names[4], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text1_4 = that.add.text(450, 513, that.property_names[3], text_style)
+    const text1_4 = that.add.text(450, 513, property_names[3], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text1_5 = that.add.text(550, 513, that.property_names[2], text_style)
+    const text1_5 = that.add.text(550, 513, property_names[2], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
-    const text1_6 = that.add.text(650, 513, that.property_names[1], text_style)
+    const text1_6 = that.add.text(650, 513, property_names[1], text_style)
     .setResolution(that.RESOLUTION).setOrigin(0.5);
 
     const subtext1_1 = that.add
@@ -114,13 +114,13 @@ function load_game_board(that) {
     const rect2_3 = that.add.rectangle(87, 350, 25, 100, brown);
     const rect2_4 = that.add.rectangle(87, 450, 25, 100, white);
 
-    const text2_1 = (that.add.text(87, 150, that.property_names[11], text_style)
+    const text2_1 = (that.add.text(87, 150, property_names[11], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(90));
-    const text2_2 = (that.add.text(87, 250, that.property_names[10], text_style)
+    const text2_2 = (that.add.text(87, 250, property_names[10], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(90));
-    const text2_3 = (that.add.text(87, 350, that.property_names[9], text_style)
+    const text2_3 = (that.add.text(87, 350, property_names[9], text_style)
          .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(90));
 
@@ -143,13 +143,13 @@ function load_game_board(that) {
     const rect3_3 = that.add.rectangle(713, 350, 25, 100, light_blue);
     const rect3_4 = that.add.rectangle(713, 450, 25, 100, light_blue);
 
-    const text3_2 = (that.add.text(713, 250, that.property_names[20], text_style)
+    const text3_2 = (that.add.text(713, 250, property_names[20], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
-    const text3_3 = (that.add.text(713, 350, that.property_names[21], text_style)
+    const text3_3 = (that.add.text(713, 350, property_names[21], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
-    const text3_4 = (that.add.text(713, 450, that.property_names[22], text_style)
+    const text3_4 = (that.add.text(713, 450, property_names[22], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
 

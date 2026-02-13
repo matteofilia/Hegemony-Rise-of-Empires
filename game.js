@@ -84,86 +84,6 @@ class MainScene extends Phaser.Scene {
             entity.y = coords[1];
         };
 
-        this.cities = [
-            "Vancover",
-            "Ottawa",
-            "Toronto",
-            "Montreal",
-            "Halifax",
-            "Edmonton",
-            "Calgary",
-            "Regina",
-            "Winnipeg",
-            "Kyiv",
-            "Moscow",
-            "Hong Kong",
-            "Singapore",
-            "Shenzhen",
-            "Shanghai",
-            "New York",
-            "LA",
-            "Houston",
-            "Chicago",
-            "Dallas",
-            "Tokyo",
-            "Sydney",
-            "London",
-            "Paris",
-            "Rome",
-            "Sao Paulo",
-            "Lima",
-            "Berlin",
-            "Mumbai",
-            "Cairo",
-            "Lagos",
-            "Nairobi",
-            "Cape Town",
-            "Melbourne",
-            "Aukland",
-            "Wellington",
-            "Miami",
-            "Havana",
-            "Santiago",
-            "Madrid",
-            "Milan",
-            "Amsterdam",
-            "Brussels",
-            "Vienna",
-            "Prague",
-            "Lisbon",
-            "Dublin",
-            "Stockholm",
-            "Oslo",
-            "Helsinki",
-            "Zurich",
-            "Osaka",
-            "Seoul",
-            "Taipei",
-            "Jakarta",
-            "Hanoi",
-            "Perth"
-        ];
-
-        this.selected_cities = [];
-
-        function get_random_city(that) {
-            while (true) {
-                let city = that.cities[Phaser.Math.Between(0, that.cities.length - 1)];
-                let city_already_exists = false;
-
-                for (let i = 0; i < that.selected_cities.length; i++) {
-                    if (that.selected_cities[i] == city) {
-                        city_already_exists = true;
-                    }
-                }
-
-                if (!city_already_exists) {
-                    that.selected_cities.push(city);
-                    return city;
-                }
-            }
-        }
-
         this.PROPERTY_COSTS = [
             null,
             400,
@@ -188,32 +108,6 @@ class MainScene extends Phaser.Scene {
             600,
             600,
             600
-        ];
-
-        this.property_names = [
-            null,
-            get_random_city(this),
-            get_random_city(this),
-            get_random_city(this),
-            get_random_city(this),
-            get_random_city(this),
-            get_random_city(this),
-            null,
-            null,
-            get_random_city(this),
-            get_random_city(this),
-            get_random_city(this),
-            null,
-            get_random_city(this),
-            get_random_city(this),
-            get_random_city(this),
-            null,
-            get_random_city(this),
-            get_random_city(this),
-            null,
-            get_random_city(this),
-            get_random_city(this),
-            get_random_city(this)
         ];
 
         this.NO_OWNER = -1;
@@ -283,8 +177,6 @@ class MainScene extends Phaser.Scene {
         this.player_colours = [green, orange, pink, red, purple, brown];
 
         this.player_turn = 0;
-
-        load_game_board(this);
 
         // const risk_map = this.add.image(400, 300, "risk_map");
         // risk_map.setOrigin(0.5);
@@ -453,7 +345,6 @@ class MainScene extends Phaser.Scene {
         this.cam2.setBackgroundColor(darker_grey);
         this.cam2.setZoom(1);
         this.cam2.setScroll(this.UI_START_X, this.UI_START_Y);
-
         
         class Card {
             constructor(name, effect_description) {
@@ -620,17 +511,22 @@ class MainScene extends Phaser.Scene {
         ws.onmessage = (event) => {
             console.log("Received something from server:", event.data);
             var parsed_data = JSON.parse(event.data);
-
+            
             if (parsed_data.type == "next_turn") {
                 console.log(`Player ${parsed_data.player_turn}'s Turn`);
                 that.player_turn = parsed_data.player_turn;
 
                 console.log("Updating game state...");
                 update_game_state(that, parsed_data.game_state);
+            } else if (parsed_data.type == "properties_setup") {
+                let property_names = parsed_data.data;
+                load_game_board(that, property_names);
             }
 
             that.ui_text_player_turn.setText(player_turn_text(that, that.player_turn));
         };
+        
+        ws.send("setup");
     }
 
     update(time, delta) {
@@ -693,7 +589,6 @@ class MainScene extends Phaser.Scene {
             this.player_cooldown_2 = 0;
             this.player_rolls[1] -= 1;
             this.player_indices[1] += 1;
-
 
             this.convert_board_index_to_x_y(this.player_marker_2, this.player_indices[1]);
         }

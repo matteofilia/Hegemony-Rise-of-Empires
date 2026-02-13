@@ -14,6 +14,116 @@ this.player_indices = [0, 0, 0, 0, 0, 0];
 this.player_rolls = [0, 0, 0, 0, 0, 0];
 this.player_money = [0, 0, 0, 0, 0, 0];
 
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+this.cities = [
+    "Vancover",
+    "Ottawa",
+    "Toronto",
+    "Montreal",
+    "Halifax",
+    "Edmonton",
+    "Calgary",
+    "Regina",
+    "Winnipeg",
+    "Kyiv",
+    "Moscow",
+    "Hong Kong",
+    "Singapore",
+    "Shenzhen",
+    "Shanghai",
+    "New York",
+    "LA",
+    "Houston",
+    "Chicago",
+    "Dallas",
+    "Tokyo",
+    "Sydney",
+    "London",
+    "Paris",
+    "Rome",
+    "Sao Paulo",
+    "Lima",
+    "Berlin",
+    "Mumbai",
+    "Cairo",
+    "Lagos",
+    "Nairobi",
+    "Cape Town",
+    "Melbourne",
+    "Aukland",
+    "Wellington",
+    "Miami",
+    "Havana",
+    "Santiago",
+    "Madrid",
+    "Milan",
+    "Amsterdam",
+    "Brussels",
+    "Vienna",
+    "Prague",
+    "Lisbon",
+    "Dublin",
+    "Stockholm",
+    "Oslo",
+    "Helsinki",
+    "Zurich",
+    "Osaka",
+    "Seoul",
+    "Taipei",
+    "Jakarta",
+    "Hanoi",
+    "Perth"
+];
+
+this.selected_cities = [];
+
+this.property_names = [
+    null,
+    get_random_city(this),
+    get_random_city(this),
+    get_random_city(this),
+    get_random_city(this),
+    get_random_city(this),
+    get_random_city(this),
+    null,
+    null,
+    get_random_city(this),
+    get_random_city(this),
+    get_random_city(this),
+    null,
+    get_random_city(this),
+    get_random_city(this),
+    get_random_city(this),
+    null,
+    get_random_city(this),
+    get_random_city(this),
+    null,
+    get_random_city(this),
+    get_random_city(this),
+    get_random_city(this)
+];
+
+function get_random_city(that) {
+    while (true) {
+        let city = that.cities[randomInt(0, that.cities.length-1)];
+        let city_already_exists = false;
+
+        for (let i = 0; i < that.selected_cities.length; i++) {
+            if (that.selected_cities[i] == city) {
+                city_already_exists = true;
+            }
+        }
+
+        if (!city_already_exists) {
+            that.selected_cities.push(city);
+            return city;
+        }
+    }
+}
+
 // Connection event
 wss.on('connection', (ws) => {
     console.log('New client connected');
@@ -23,6 +133,15 @@ wss.on('connection', (ws) => {
 
     // Receive messages
     ws.on("message", (data) => {
+        if (data == "setup") {
+            console.log("Data ="+data);
+        
+            var send_data = {};
+            send_data.type = "properties_setup";
+            send_data.data = this.property_names;
+            ws.send(JSON.stringify(send_data));
+        }
+        
         console.log('Received:', data.toString());
         
         var next_data = {};
