@@ -182,12 +182,12 @@ class MainScene extends Phaser.Scene {
         // risk_map.setOrigin(0.5);
 
         // Player Markers
-        this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[0]);
-        this.player_marker_2 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[1]);
-        this.player_marker_3 = this.add.circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colours[2]);
-        this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3]);
-        this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4]);
-        this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5]);
+        this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[0]).setDepth(13);
+        this.player_marker_2 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[1]).setDepth(13);
+        this.player_marker_3 = this.add.circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colours[2]).setDepth(13);
+        this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3]).setDepth(13);
+        this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4]).setDepth(13);
+        this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5]).setDepth(13);
 
         this.player_money = [500, 200, 0, 700, 750, 0];
 
