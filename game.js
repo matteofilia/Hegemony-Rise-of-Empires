@@ -449,7 +449,8 @@ class MainScene extends Phaser.Scene {
         }
         
         this.cards = [
-            new Card("Tax Return", "Gain $500")
+            new Card("Tax Return", "Gain $500"),
+            new Card("Reinforcements", "Gain 5 units that can be added to any territory"),
         ];
         
         this.MAX_CARDS = 5;
@@ -464,7 +465,7 @@ class MainScene extends Phaser.Scene {
             bg.setOrigin(0);
             
             card_container.add(bg);
-            card_container.add(that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING, card.name, text_style_black_large));
+            card_container.add(that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING, card.name, text_style_black));
             card_container.add(that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING+32, card.effect_description, text_style_black_word_wrap));
             
             return card_container;
@@ -472,7 +473,7 @@ class MainScene extends Phaser.Scene {
         
         this.ui_2_container = this.add.container(this.UI_2_START_X, this.UI_2_START_Y);
         this.ui_2_container.add(create_card_container(this, this.cards[0], 0));
-        this.ui_2_container.add(create_card_container(this, this.cards[0], 1));
+        this.ui_2_container.add(create_card_container(this, this.cards[1], 1));
         this.ui_2_container.add(create_card_container(this, this.cards[0], 2));
         this.ui_2_container.add(create_card_container(this, this.cards[0], 3));
         this.ui_2_container.add(create_card_container(this, this.cards[0], 4));

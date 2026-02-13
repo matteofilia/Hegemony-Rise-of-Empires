@@ -57,7 +57,9 @@ const text_style_black_word_wrap = {
     fontSize: "16px",
     color: "#000000",
     fontFamily: "monospace",
-    wordWrap: "200px"
+    wordWrap: {
+        width: 200
+    }
 };
 
 const text_style_black_tiny = {
