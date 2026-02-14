@@ -1,5 +1,7 @@
 const WebSocket = require('ws');
 
+import GameState from "../game_state.js";
+
 const PORT = 8080;
 
 // Create a WebSocket server
@@ -75,7 +77,13 @@ this.cities = [
     "Taipei",
     "Jakarta",
     "Hanoi",
-    "Perth"
+    "Perth",
+    "Boston",
+    "Detroit",
+    "Atlanta",
+    "Charlotte",
+    "Seattle",
+    "Las Vegas"
 ];
 
 this.selected_cities = [];
