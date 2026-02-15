@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 
-import GameState from "../game_state.js";
+// import GameState from "../game_state.js";
 
 const PORT = 8080;
 
@@ -145,8 +145,9 @@ wss.on('connection', (ws) => {
             console.log("Data ="+data);
         
             var send_data = {};
-            send_data.type = "properties_setup";
-            send_data.data = this.property_names;
+            send_data.type = "setup";
+            send_data.data = {};
+            send_data.data.property_names = this.property_names;
             ws.send(JSON.stringify(send_data));
         }
         

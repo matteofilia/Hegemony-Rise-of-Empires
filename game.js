@@ -176,7 +176,7 @@ class MainScene extends Phaser.Scene {
 
         this.player_colours = [green, orange, pink, red, purple, brown];
 
-        this.player_turn = 0;
+        this.game_state = new GameState(6);
 
         // const risk_map = this.add.image(400, 300, "risk_map");
         // risk_map.setOrigin(0.5);
@@ -188,20 +188,11 @@ class MainScene extends Phaser.Scene {
         this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3]).setDepth(13);
         this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4]).setDepth(13);
         this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5]).setDepth(13);
-
-        this.player_money = [500, 200, 0, 700, 750, 0];
-
-        this.player_properties = [0, 4, 0, 3, 1, 0];
-
-        this.player_countries = [5, 0, 7, 3, 1, 0];
-        
-        class GameState {
-            costructor(num_players) {
-                this.money = new Array(num_players);
-                this.num_properties = new Array(num_players);
-                this.num_countries = new Array(num_players);
-            }
-        }
+ 
+        // Initialize Game
+        this.game_state.money = [500, 200, 0, 700, 750, 0];
+        this.game_state.num_properties = [0, 4, 0, 3, 1, 0];
+        this.game_state.num_countries = [5, 0, 7, 3, 1, 0];
 
         this.UI_START_X = 3000;
         this.UI_START_Y = 3000;
@@ -218,9 +209,9 @@ class MainScene extends Phaser.Scene {
         this.UI_VERTICAL_ADJUST = 16;
 
         function player_text(that, player) {
-            let money = that.player_money[player];
-            let properties = that.player_properties[player];
-            let countries = that.player_countries[player];
+            let money = that.game_state.money[player];
+            let properties = that.game_state.num_properties[player];
+            let countries = that.game_state.num_countries[player];
 
             let properties_percentage = properties / that.TOTAL_PROPERTIES;
             let countries_percentage = countries / that.TOTAL_COUNTRIES;
@@ -231,7 +222,7 @@ class MainScene extends Phaser.Scene {
         }
 
         function player_turn_text(that, player) {
-            return `Player ${player + 1}\'s Turn `;
+            return `Player ${that.game_state.player_turn + 1}\'s Turn `;
         }
 
         const ui_text_player_money_1 = this.add.text(
@@ -518,8 +509,8 @@ class MainScene extends Phaser.Scene {
 
                 console.log("Updating game state...");
                 update_game_state(that, parsed_data.game_state);
-            } else if (parsed_data.type == "properties_setup") {
-                let property_names = parsed_data.data;
+            } else if (parsed_data.type == "setup") {
+                let property_names = parsed_data.data.property_names;
                 load_game_board(that, property_names);
             }
 
