@@ -21,9 +21,14 @@ class MainScene extends Phaser.Scene {
         var dice = that.add.image(x, y, `dice_${roll}`).setOrigin(0.5);
         container.add(dice);
     }
-    
+
     dice_text(that, container) {
-        let ui_3_container_text = this.add.text((that.UI_3_WIDTH/2), 4+14, "Press SPACE to roll dice", text_style_black_word_wrap);
+        let ui_3_container_text = this.add.text(
+            that.UI_3_WIDTH / 2,
+            4 + 14,
+            "Press SPACE to roll dice",
+            text_style_black_word_wrap
+        );
         container.add(ui_3_container_text);
         ui_3_container_text.setOrigin(0.5);
     }
@@ -182,13 +187,25 @@ class MainScene extends Phaser.Scene {
         // risk_map.setOrigin(0.5);
 
         // Player Markers
-        this.player_marker_1 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[0]).setDepth(13);
-        this.player_marker_2 = this.add.circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[1]).setDepth(13);
-        this.player_marker_3 = this.add.circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colours[2]).setDepth(13);
-        this.player_marker_4 = this.add.circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3]).setDepth(13);
-        this.player_marker_5 = this.add.circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4]).setDepth(13);
-        this.player_marker_6 = this.add.circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5]).setDepth(13);
- 
+        this.player_marker_1 = this.add
+            .circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[0])
+            .setDepth(13);
+        this.player_marker_2 = this.add
+            .circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[1])
+            .setDepth(13);
+        this.player_marker_3 = this.add
+            .circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colours[2])
+            .setDepth(13);
+        this.player_marker_4 = this.add
+            .circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3])
+            .setDepth(13);
+        this.player_marker_5 = this.add
+            .circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4])
+            .setDepth(13);
+        this.player_marker_6 = this.add
+            .circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5])
+            .setDepth(13);
+
         // Initialize Game
         this.game_state.money = [500, 200, 0, 700, 750, 0];
         this.game_state.num_properties = [0, 4, 0, 3, 1, 0];
@@ -310,9 +327,9 @@ class MainScene extends Phaser.Scene {
 
         this.ui_text_player_turn = this.add
             .text(
-                 this.UI_WIDTH / 2,
-                 (this.UI_HEIGHT - 32),
-                player_turn_text(this, this.player_turn),
+                this.UI_WIDTH / 2,
+                this.UI_HEIGHT - 32,
+                player_turn_text(this, this.game_state.player_turn),
                 text_style_white_large
             )
             .setOrigin(0.5);
@@ -331,19 +348,19 @@ class MainScene extends Phaser.Scene {
         this.ui_1_container.add(ui_text_player_money_5);
         this.ui_1_container.add(ui_text_player_money_6);
         this.ui_1_container.add(this.ui_text_player_turn);
-        
+
         this.cam2 = this.cameras.add(0, 0, this.UI_WIDTH, this.UI_HEIGHT);
         this.cam2.setBackgroundColor(darker_grey);
         this.cam2.setZoom(1);
         this.cam2.setScroll(this.UI_START_X, this.UI_START_Y);
-        
+
         class Card {
             constructor(name, effect_description) {
                 this.name = name;
                 this.effect_description = effect_description;
             }
         }
-        
+
         this.cards = [
             new Card("Tax Return", "Gain $500"),
             new Card("Reinforcements", "Gain 5 units that can be added to any territory"),
@@ -352,40 +369,51 @@ class MainScene extends Phaser.Scene {
             new Card("War Reparations", "Steal $1200 from the last player that attacked you"),
             new Card("Arms Race", "All players gain 3 units, except the player with the most territories"),
             new Card("Last Stand", "All territories with one unit gain an additional unit"),
-            new Card("Ceasefire", "No attacking for the next turn"),
+            new Card("Ceasefire", "No attacking for the next turn")
         ];
-        
+
         this.MAX_CARDS = 5;
-        
+
         this.CARD_CONTAINER_PADDING = 8;
         this.CARD_WIDTH = 250;
         this.CARD_HEIGHT = 100;
-        
+
         function create_card_container(that, card, index) {
-            var card_container = that.add.container((that.UI_2_WIDTH-that.CARD_WIDTH)/2, (that.CARD_CONTAINER_PADDING+that.CARD_HEIGHT)*index);
+            var card_container = that.add.container(
+                (that.UI_2_WIDTH - that.CARD_WIDTH) / 2,
+                (that.CARD_CONTAINER_PADDING + that.CARD_HEIGHT) * index
+            );
             var bg = that.add.rectangle(0, 0, that.CARD_WIDTH, that.CARD_HEIGHT, white);
             bg.setOrigin(0);
-            
+
             card_container.add(bg);
-            card_container.add(that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING, card.name, text_style_black));
-            card_container.add(that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING+32, card.effect_description, text_style_black_word_wrap));
-            
+            card_container.add(
+                that.add.text(that.CARD_CONTAINER_PADDING, that.CARD_CONTAINER_PADDING, card.name, text_style_black)
+            );
+            card_container.add(
+                that.add.text(
+                    that.CARD_CONTAINER_PADDING,
+                    that.CARD_CONTAINER_PADDING + 32,
+                    card.effect_description,
+                    text_style_black_word_wrap
+                )
+            );
+
             return card_container;
         }
-        
+
         this.ui_2_container = this.add.container(this.UI_2_START_X, this.UI_2_START_Y);
         this.ui_2_container.add(create_card_container(this, this.cards[0], 0));
         this.ui_2_container.add(create_card_container(this, this.cards[1], 1));
         this.ui_2_container.add(create_card_container(this, this.cards[2], 2));
         this.ui_2_container.add(create_card_container(this, this.cards[3], 3));
         this.ui_2_container.add(create_card_container(this, this.cards[5], 4));
-        
+
         this.cam3 = this.cameras.add(this.VIEWPORT_WIDTH - this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
         this.cam3.setBackgroundColor(darker_grey);
         this.cam3.setZoom(1);
         this.cam3.setScroll(this.UI_2_START_X, this.UI_2_START_Y);
-        
-        
+
         this.cam4 = this.cameras.add(
             this.VIEWPORT_WIDTH / 2 - this.UI_3_WIDTH / 2,
             this.VIEWPORT_HEIGHT / 2 - this.UI_3_HEIGHT / 2,
@@ -396,7 +424,7 @@ class MainScene extends Phaser.Scene {
         this.cam4.setZoom(1);
         this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
 
-        this.ui_3_container = this.add.container(this.UI_3_START_X,  this.UI_3_START_Y);
+        this.ui_3_container = this.add.container(this.UI_3_START_X, this.UI_3_START_Y);
         this.dice_image(
             this,
             Phaser.Math.Between(1, 6),
@@ -411,7 +439,7 @@ class MainScene extends Phaser.Scene {
             this.UI_3_HEIGHT / 2,
             this.ui_3_container
         );
-        
+
         this.dice_text(this, this.ui_3_container);
 
         this.board_game_index = 0;
@@ -490,11 +518,8 @@ class MainScene extends Phaser.Scene {
         });
 
         function update_game_state(context, game_state) {
-            context.player_turn = game_state.player_turn;
-            context.player_indices = game_state.player_indices;
-            context.player_rolls = game_state.player_rolls;
-            context.player_money = game_state.player_money;
-            
+            context.game_state = game_state;
+
             context.convert_board_index_to_x_y(context.player_marker_1, game_state.player_indices[0]);
             context.convert_board_index_to_x_y(context.player_marker_2, game_state.player_indices[1]);
             context.convert_board_index_to_x_y(context.player_marker_3, game_state.player_indices[2]);
@@ -507,7 +532,7 @@ class MainScene extends Phaser.Scene {
         ws.onmessage = (event) => {
             console.log("Received something from server:", event.data);
             var parsed_data = JSON.parse(event.data);
-            
+
             if (parsed_data.type == "next_turn") {
                 // console.log(`Player ${parsed_data.player_turn}'s Turn`);
                 // that.player_turn = parsed_data.player_turn;
@@ -518,13 +543,35 @@ class MainScene extends Phaser.Scene {
                 let property_names = parsed_data.data.property_names;
                 load_game_board(that, property_names);
             } else if (parsed_data.type == "update") {
-                console.log("[UPDATE] Updating game state... "+parsed_data.data.game_state);
-                update_game_state(that, parsed_data.data.game_state);
-            }
+                let game_state = parsed_data.data.game_state;
 
-            that.ui_text_player_turn.setText(player_turn_text(that, that.player_turn));
+                console.log("[UPDATE] Updating game state... " + game_state);
+                update_game_state(that, game_state);
+
+                // Update dice roll UI
+                this.ui_3_container.removeAll(true);
+                this.dice_image(
+                    this,
+                    game_state.current_dice_roll_1,
+                    this.UI_3_WIDTH / 2 - 48,
+                    this.UI_3_HEIGHT / 2,
+                    this.ui_3_container
+                );
+
+                this.dice_image(
+                    this,
+                    game_state.current_dice_roll_2,
+                    this.UI_3_WIDTH / 2 + 48,
+                    this.UI_3_HEIGHT / 2,
+                    this.ui_3_container
+                );
+
+                this.dice_text(this, this.ui_3_container);
+
+                this.ui_text_player_turn.setText(player_turn_text(that, game_state.player_turn));
+            }
         };
-        
+
         ws.send("setup");
     }
 
@@ -553,44 +600,40 @@ class MainScene extends Phaser.Scene {
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.keys.space)) {
-            // Simulate random dice roll
-            this.ui_3_container.removeAll(true);
-            let roll_1 = Phaser.Math.Between(1, 6);
-            let roll_2 = Phaser.Math.Between(1, 6);
-            this.dice_image(
-                this,
-                roll_1,
-                this.UI_3_WIDTH / 2 - 48,
-                this.UI_3_HEIGHT / 2,
-                this.ui_3_container
-            );
-            this.dice_image(
-                this,
-                roll_2,
-                this.UI_3_WIDTH / 2 + 48,
-                this.UI_3_HEIGHT / 2,
-                this.ui_3_container
-            );
-            this.dice_text(this, this.ui_3_container);
-            this.player_rolls[1] = roll_1 + roll_2;
-
             // Next turn
             try {
                 console.log("Client: sending next turn");
                 ws.send("next turn");
-                ws.send("update");
             } catch (error) {
-                console.log("WebSocket error"); 
+                console.log("WebSocket error");
             }
         }
 
         this.player_cooldown_2 += delta;
-        if (this.player_cooldown_2 >= this.MOVE_DELAY && this.player_rolls[1] > 0) {
+        if (this.player_cooldown_2 >= this.MOVE_DELAY && this.game_state.player_rolls[1] > 0) {
             this.player_cooldown_2 = 0;
-            this.player_rolls[1] -= 1;
-            this.player_indices[1] += 1;
+            this.game_state.player_rolls[1] -= 1;
+            this.game_state.player_indices[1] += 1;
 
-            this.convert_board_index_to_x_y(this.player_marker_2, this.player_indices[1]);
+            this.convert_board_index_to_x_y(this.player_marker_2, this.game_state.player_indices[1]);
+        }
+
+        this.player_cooldown_1 += delta;
+        if (this.player_cooldown_1 >= this.MOVE_DELAY && this.game_state.player_rolls[0] > 0) {
+            this.player_cooldown_1 = 0;
+            this.game_state.player_rolls[0] -= 1;
+            this.game_state.player_indices[0] += 1;
+
+            this.convert_board_index_to_x_y(this.player_marker_1, this.game_state.player_indices[0]);
+        }
+
+        this.player_cooldown_3 += delta;
+        if (this.player_cooldown_3 >= this.MOVE_DELAY && this.game_state.player_rolls[2] > 0) {
+            this.player_cooldown_3 = 0;
+            this.game_state.player_rolls[2] -= 1;
+            this.game_state.player_indices[2] += 1;
+
+            this.convert_board_index_to_x_y(this.player_marker_3, this.game_state.player_indices[2]);
         }
     }
 }

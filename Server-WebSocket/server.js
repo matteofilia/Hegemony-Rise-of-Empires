@@ -8,8 +8,8 @@ const wss = new WebSocket.Server({ port: PORT }, () => {
     console.log(`WebSocket server started on ws://localhost:${PORT}`);
 });
 
-var num_players = 6;
-var game_state = new GameState.GameState(num_players);
+this.num_players = 6;
+this.game_state = new GameState.GameState(this.num_players);
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -145,12 +145,23 @@ wss.on('connection', (ws) => {
             send_data.data = {};
             send_data.data.property_names = this.property_names;
             ws.send(JSON.stringify(send_data));
-        } else if (data == "update") {
+        } else if (data == "next turn") {
+            this.game_state.current_dice_roll_1 = randomInt(1, 6); 
+            this.game_state.current_dice_roll_2 = randomInt(1, 6);
+            console.log(`Player ${this.game_state.player_turn+1} rolled ${this.game_state.current_dice_roll_1} and ${this.game_state.current_dice_roll_2}`);
+            
+            this.game_state.player_indices[this.game_state.player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
+            
+            this.game_state.player_turn += 1;
+            if (this.game_state.player_turn >= this.game_state.num_players) {
+                this.game_state.player_turn = 0;
+            }
+            
             let send_data = {};
             send_data.type = "update";
             send_data.data = {};
-            send_data.data.game_state = new GameState.GameState(6);
-            console.log(send_data);
+            send_data.data.game_state = this.game_state;
+            console.log(JSON.stringify(send_data, null, 2));
             
             ws.send(JSON.stringify(send_data));
         } 
