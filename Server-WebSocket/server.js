@@ -152,6 +152,7 @@ wss.on('connection', (ws) => {
             ws.send(JSON.stringify(send_data));
         } else if (data == "next turn") {
             this.game_state.player_indices[this.game_state.player_turn] = this.game_state.player_rolls[this.game_state.player_turn];
+            this.game_state.player_rolls[this.game_state.player_turn] = 0;
             
             this.game_state.player_turn += 1;
             if (this.game_state.player_turn >= this.game_state.num_players) {
