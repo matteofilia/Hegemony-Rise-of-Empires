@@ -109,6 +109,11 @@ this.property_names = [
     get_random_city(this)
 ];
 
+// Initialize random offset
+for (let i = 0; i < this.game_state.num_players; i++) {
+    this.game_state.random_offset[i] = randomInt(-32, 32);
+}
+
 function get_random_city(that) {
     while (true) {
         let city = that.cities[randomInt(0, that.cities.length-1)];
@@ -146,16 +151,17 @@ wss.on('connection', (ws) => {
             send_data.data.property_names = this.property_names;
             ws.send(JSON.stringify(send_data));
         } else if (data == "next turn") {
-            this.game_state.current_dice_roll_1 = randomInt(1, 6); 
-            this.game_state.current_dice_roll_2 = randomInt(1, 6);
-            console.log(`Player ${this.game_state.player_turn+1} rolled ${this.game_state.current_dice_roll_1} and ${this.game_state.current_dice_roll_2}`);
-            
-            this.game_state.player_indices[this.game_state.player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
-            
             this.game_state.player_turn += 1;
             if (this.game_state.player_turn >= this.game_state.num_players) {
                 this.game_state.player_turn = 0;
             }
+            
+            this.game_state.current_dice_roll_1 = randomInt(1, 6); 
+            this.game_state.current_dice_roll_2 = randomInt(1, 6);
+            console.log(`Player ${this.game_state.player_turn+1} rolled ${this.game_state.current_dice_roll_1} and ${this.game_state.current_dice_roll_2}`);
+            this.game_state.random_offset[this.game_state.player_turn] = randomInt(-32, 32);
+            
+            this.game_state.player_indices[this.game_state.player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
             
             let send_data = {};
             send_data.type = "update";

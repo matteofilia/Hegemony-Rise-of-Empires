@@ -71,12 +71,9 @@ class MainScene extends Phaser.Scene {
             })
             .setOrigin(0.5);
 
-        this.convert_board_index_to_x_y = function (entity, board_index) {
+        this.convert_board_index_to_x_y = function (entity, board_index, random_offset) {
             board_index = board_index % 24;
             var coords = [];
-            
-            // Todo: make this better
-            let random_offset = Phaser.Math.Between(-32, 32);
 
             if (board_index >= 0 && board_index <= 7) {
                 coords = [750 - (board_index * 100) + random_offset, 550];
@@ -447,8 +444,8 @@ class MainScene extends Phaser.Scene {
 
         this.board_game_index = 0;
 
-        this.convert_board_index_to_x_y(this.player_marker_1, 1);
-        this.convert_board_index_to_x_y(this.player_marker_2, 3);
+        this.convert_board_index_to_x_y(this.player_marker_1, 1, 0);
+        this.convert_board_index_to_x_y(this.player_marker_2, 3, 0);
 
         this.player_indices = [0, 0, 0, 0, 0, 0];
         this.player_rolls = [0, 0, 0, 0, 0, 0];
@@ -523,12 +520,12 @@ class MainScene extends Phaser.Scene {
         function update_game_state(context, game_state) {
             context.game_state = game_state;
 
-            context.convert_board_index_to_x_y(context.player_marker_1, game_state.player_indices[0]);
-            context.convert_board_index_to_x_y(context.player_marker_2, game_state.player_indices[1]);
-            context.convert_board_index_to_x_y(context.player_marker_3, game_state.player_indices[2]);
-            context.convert_board_index_to_x_y(context.player_marker_4, game_state.player_indices[3]);
-            context.convert_board_index_to_x_y(context.player_marker_5, game_state.player_indices[4]);
-            context.convert_board_index_to_x_y(context.player_marker_6, game_state.player_indices[5]);
+            context.convert_board_index_to_x_y(context.player_marker_1, game_state.player_indices[0], game_state.random_offset[0]);
+            context.convert_board_index_to_x_y(context.player_marker_2, game_state.player_indices[1], game_state.random_offset[1]);
+            context.convert_board_index_to_x_y(context.player_marker_3, game_state.player_indices[2], game_state.random_offset[2]);
+            context.convert_board_index_to_x_y(context.player_marker_4, game_state.player_indices[3], game_state.random_offset[3]);
+            context.convert_board_index_to_x_y(context.player_marker_5, game_state.player_indices[4], game_state.random_offset[4]);
+            context.convert_board_index_to_x_y(context.player_marker_6, game_state.player_indices[5], game_state.random_offset[5]);
         }
 
         let that = this;
@@ -616,7 +613,7 @@ class MainScene extends Phaser.Scene {
             this.game_state.player_rolls[1] -= 1;
             this.game_state.player_indices[1] += 1;
 
-            this.convert_board_index_to_x_y(this.player_marker_2, this.game_state.player_indices[1]);
+            this.convert_board_index_to_x_y(this.player_marker_2, this.game_state.player_indices[1], this.game_state.random_offset[1]);
         }
 
         this.player_cooldown_1 += delta;
@@ -625,7 +622,7 @@ class MainScene extends Phaser.Scene {
             this.game_state.player_rolls[0] -= 1;
             this.game_state.player_indices[0] += 1;
 
-            this.convert_board_index_to_x_y(this.player_marker_1, this.game_state.player_indices[0]);
+            this.convert_board_index_to_x_y(this.player_marker_1, this.game_state.player_indices[0], this.game_state.random_offset[0]);
         }
 
         this.player_cooldown_3 += delta;
@@ -634,7 +631,7 @@ class MainScene extends Phaser.Scene {
             this.game_state.player_rolls[2] -= 1;
             this.game_state.player_indices[2] += 1;
 
-            this.convert_board_index_to_x_y(this.player_marker_3, this.game_state.player_indices[2]);
+            this.convert_board_index_to_x_y(this.player_marker_3, this.game_state.player_indices[2], this.game_state.random_offset[2]);
         }
     }
 }
