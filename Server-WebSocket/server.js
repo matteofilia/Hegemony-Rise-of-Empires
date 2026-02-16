@@ -151,6 +151,8 @@ wss.on('connection', (ws) => {
             send_data.data.property_names = this.property_names;
             ws.send(JSON.stringify(send_data));
         } else if (data == "next turn") {
+            this.game_state.player_indices[this.game_state.player_turn] = this.game_state.player_rolls[this.game_state.player_turn];
+            
             this.game_state.player_turn += 1;
             if (this.game_state.player_turn >= this.game_state.num_players) {
                 this.game_state.player_turn = 0;
@@ -161,7 +163,7 @@ wss.on('connection', (ws) => {
             console.log(`Player ${this.game_state.player_turn+1} rolled ${this.game_state.current_dice_roll_1} and ${this.game_state.current_dice_roll_2}`);
             this.game_state.random_offset[this.game_state.player_turn] = randomInt(-32, 32);
             
-            this.game_state.player_indices[this.game_state.player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
+            this.game_state.player_rolls[this.game_state.player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
             
             let send_data = {};
             send_data.type = "update";

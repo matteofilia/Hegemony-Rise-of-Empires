@@ -450,12 +450,10 @@ class MainScene extends Phaser.Scene {
         this.player_indices = [0, 0, 0, 0, 0, 0];
         this.player_rolls = [0, 0, 0, 0, 0, 0];
 
-        this.player_cooldown_1 = 0;
-        this.player_cooldown_2 = 0;
-        this.player_cooldown_3 = 0;
-        this.player_cooldown_4 = 0;
-        this.player_cooldown_5 = 0;
-        this.player_cooldown_6 = 0;
+        this.player_cooldown = Array(6);
+        for (let i = 0; i < this.player_cooldown.length; i++) {
+            this.player_cooldown[i] = 0;
+        }
 
         this.MOVE_DELAY = 500;
 
@@ -607,31 +605,16 @@ class MainScene extends Phaser.Scene {
             }
         }
 
-        this.player_cooldown_2 += delta;
-        if (this.player_cooldown_2 >= this.MOVE_DELAY && this.game_state.player_rolls[1] > 0) {
-            this.player_cooldown_2 = 0;
-            this.game_state.player_rolls[1] -= 1;
-            this.game_state.player_indices[1] += 1;
+        for (let i = 0; i < this.game_state.num_players; i++) {
+            this.player_cooldown[i] += delta;
+            if (this.player_cooldown[i] >= this.MOVE_DELAY && this.game_state.player_rolls[i] > 0) {
+                console.log("Updating player marker position...");
+                this.player_cooldown[i] = 0;
+                this.game_state.player_rolls[i] -= 1;
+                this.game_state.player_indices[i] += 1;
 
-            this.convert_board_index_to_x_y(this.player_marker_2, this.game_state.player_indices[1], this.game_state.random_offset[1]);
-        }
-
-        this.player_cooldown_1 += delta;
-        if (this.player_cooldown_1 >= this.MOVE_DELAY && this.game_state.player_rolls[0] > 0) {
-            this.player_cooldown_1 = 0;
-            this.game_state.player_rolls[0] -= 1;
-            this.game_state.player_indices[0] += 1;
-
-            this.convert_board_index_to_x_y(this.player_marker_1, this.game_state.player_indices[0], this.game_state.random_offset[0]);
-        }
-
-        this.player_cooldown_3 += delta;
-        if (this.player_cooldown_3 >= this.MOVE_DELAY && this.game_state.player_rolls[2] > 0) {
-            this.player_cooldown_3 = 0;
-            this.game_state.player_rolls[2] -= 1;
-            this.game_state.player_indices[2] += 1;
-
-            this.convert_board_index_to_x_y(this.player_marker_3, this.game_state.player_indices[2], this.game_state.random_offset[2]);
+                this.convert_board_index_to_x_y(this[`player_marker_${this.game_state.player_turn+1}`], this.game_state.player_indices[i], this.game_state.random_offset[i]);
+            }
         }
     }
 }
