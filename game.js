@@ -74,15 +74,18 @@ class MainScene extends Phaser.Scene {
         this.convert_board_index_to_x_y = function (entity, board_index) {
             board_index = board_index % 24;
             var coords = [];
+            
+            // Todo: make this better
+            let random_offset = Phaser.Math.Between(-32, 32);
 
             if (board_index >= 0 && board_index <= 7) {
-                coords = [750 - board_index * 100, 550];
+                coords = [750 - (board_index * 100) + random_offset, 550];
             } else if (board_index >= 7 && board_index <= 12) {
-                coords = [50, 550 - (board_index - 7) * 100];
+                coords = [50, 550 - ((board_index - 7) * 100) + random_offset];
             } else if (board_index >= 12 && board_index <= 19) {
-                coords = [50 + (board_index - 12) * 100, 50];
+                coords = [50 + ((board_index - 12) * 100) + random_offset, 50];
             } else if (board_index >= 19 && board_index <= 24) {
-                coords = [750, 50 + (board_index - 19) * 100];
+                coords = [750, 50 + ((board_index - 19) * 100) + random_offset];
             }
 
             entity.x = coords[0];
@@ -576,8 +579,6 @@ class MainScene extends Phaser.Scene {
     }
 
     update(time, delta) {
-        this.convert_board_index_to_x_y(this.player_marker_1, this.board_game_index);
-
         if (Phaser.Input.Keyboard.JustDown(this.keys.up)) this.board_game_index += 1;
         if (Phaser.Input.Keyboard.JustDown(this.keys.down)) this.board_game_index -= 1;
 
