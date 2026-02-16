@@ -491,11 +491,16 @@ class MainScene extends Phaser.Scene {
 
         function update_game_state(context, game_state) {
             context.player_turn = game_state.player_turn;
-
             context.player_indices = game_state.player_indices;
             context.player_rolls = game_state.player_rolls;
-
             context.player_money = game_state.player_money;
+            
+            context.convert_board_index_to_x_y(context.player_marker_1, game_state.player_indices[0]);
+            context.convert_board_index_to_x_y(context.player_marker_2, game_state.player_indices[1]);
+            context.convert_board_index_to_x_y(context.player_marker_3, game_state.player_indices[2]);
+            context.convert_board_index_to_x_y(context.player_marker_4, game_state.player_indices[3]);
+            context.convert_board_index_to_x_y(context.player_marker_5, game_state.player_indices[4]);
+            context.convert_board_index_to_x_y(context.player_marker_6, game_state.player_indices[5]);
         }
 
         let that = this;
@@ -504,14 +509,17 @@ class MainScene extends Phaser.Scene {
             var parsed_data = JSON.parse(event.data);
             
             if (parsed_data.type == "next_turn") {
-                console.log(`Player ${parsed_data.player_turn}'s Turn`);
-                that.player_turn = parsed_data.player_turn;
+                // console.log(`Player ${parsed_data.player_turn}'s Turn`);
+                // that.player_turn = parsed_data.player_turn;
 
-                console.log("Updating game state...");
+                console.log("[NEXT_TURN] Updating game state...");
                 update_game_state(that, parsed_data.game_state);
             } else if (parsed_data.type == "setup") {
                 let property_names = parsed_data.data.property_names;
                 load_game_board(that, property_names);
+            } else if (parsed_data.type == "update") {
+                console.log("[UPDATE] Updating game state... "+parsed_data.data.game_state);
+                update_game_state(that, parsed_data.data.game_state);
             }
 
             that.ui_text_player_turn.setText(player_turn_text(that, that.player_turn));
@@ -570,6 +578,7 @@ class MainScene extends Phaser.Scene {
             try {
                 console.log("Client: sending next turn");
                 ws.send("next turn");
+                ws.send("update");
             } catch (error) {
                 console.log("WebSocket error"); 
             }

@@ -1,6 +1,5 @@
 const WebSocket = require('ws');
-
-// import GameState from "../game_state.js";
+const GameState = require('../game_state.js');
 
 const PORT = 8080;
 
@@ -9,12 +8,8 @@ const wss = new WebSocket.Server({ port: PORT }, () => {
     console.log(`WebSocket server started on ws://localhost:${PORT}`);
 });
 
-var player_turn = 0;
 var num_players = 6;
-
-this.player_indices = [0, 0, 0, 0, 0, 0];
-this.player_rolls = [0, 0, 0, 0, 0, 0];
-this.player_money = [0, 0, 0, 0, 0, 0];
+var game_state = new GameState.GameState(num_players);
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -133,6 +128,7 @@ function get_random_city(that) {
 }
 
 // Connection event
+let that = this;
 wss.on('connection', (ws) => {
     console.log('New client connected');
 
@@ -144,13 +140,22 @@ wss.on('connection', (ws) => {
         if (data == "setup") {
             console.log("Data ="+data);
         
-            var send_data = {};
+            let send_data = {};
             send_data.type = "setup";
             send_data.data = {};
             send_data.data.property_names = this.property_names;
             ws.send(JSON.stringify(send_data));
-        }
+        } else if (data == "update") {
+            let send_data = {};
+            send_data.type = "update";
+            send_data.data = {};
+            send_data.data.game_state = new GameState.GameState(6);
+            console.log(send_data);
+            
+            ws.send(JSON.stringify(send_data));
+        } 
         
+        /*
         console.log('Received:', data.toString());
         
         var next_data = {};
@@ -163,6 +168,7 @@ wss.on('connection', (ws) => {
         
         console.log("Data: "+next_data);
         ws.send(JSON.stringify(next_data));
+        */
     });
 
     // Handle close
