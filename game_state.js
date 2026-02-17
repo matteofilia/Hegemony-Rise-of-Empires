@@ -7,6 +7,7 @@ class GameState {
         this.player_num_countries = new Array(num_players);
 
         this.player_turn = 0;
+        this.active_player = 0;
         
         this.player_indices = Array(num_players);
         this.player_rolls = Array(num_players);
