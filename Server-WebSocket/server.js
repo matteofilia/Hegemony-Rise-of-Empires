@@ -134,6 +134,9 @@ function get_random_city(that) {
 
 // Connection event
 let that = this;
+
+let web_sockets = [];
+
 wss.on('connection', (ws) => {
     console.log('New client connected');
 
@@ -173,7 +176,7 @@ wss.on('connection', (ws) => {
             console.log(JSON.stringify(send_data, null, 2));
             
             ws.send(JSON.stringify(send_data));
-        } 
+        }
         
         /*
         console.log('Received:', data.toString());

@@ -226,9 +226,9 @@ class MainScene extends Phaser.Scene {
         this.UI_VERTICAL_ADJUST = 16;
 
         function player_text(that, player) {
-            let money = that.game_state.money[player];
-            let properties = that.game_state.num_properties[player];
-            let countries = that.game_state.num_countries[player];
+            let money = that.game_state.player_money[player];
+            let properties = that.game_state.player_num_properties[player];
+            let countries = that.game_state.player_num_countries[player];
 
             let properties_percentage = properties / that.TOTAL_PROPERTIES;
             let countries_percentage = countries / that.TOTAL_COUNTRIES;
@@ -552,6 +552,14 @@ class MainScene extends Phaser.Scene {
                 game_state.player_indices[5],
                 game_state.random_offset[5]
             );
+
+            // Update status ui
+            ui_text_player_money_1.setText(player_text(that, 0));
+            ui_text_player_money_2.setText(player_text(that, 1));
+            ui_text_player_money_3.setText(player_text(that, 2));
+            ui_text_player_money_4.setText(player_text(that, 3));
+            ui_text_player_money_5.setText(player_text(that, 4));
+            ui_text_player_money_6.setText(player_text(that, 5));
         }
 
         let that = this;
