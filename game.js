@@ -89,62 +89,8 @@ class MainScene extends Phaser.Scene {
             entity.y = coords[1];
         };
 
-        this.PROPERTY_COSTS = [
-            null,
-            400,
-            400,
-            400,
-            400,
-            350,
-            350,
-            null,
-            null,
-            250,
-            250,
-            250,
-            null,
-            500,
-            500,
-            500,
-            null,
-            300,
-            300,
-            null,
-            600,
-            600,
-            600
-        ];
-
-        this.NO_OWNER = -1;
-
         this.TOTAL_PROPERTIES = 17;
         this.TOTAL_COUNTRIES = 23;
-
-        this.properties = [
-            null,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            null,
-            null,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            null,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            null,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            null,
-            this.NO_OWNER,
-            this.NO_OWNER,
-            this.NO_OWNER
-        ];
 
         this.VIEWPORT_WIDTH = 800;
         this.VIEWPORT_HEIGHT = 600;
@@ -164,7 +110,7 @@ class MainScene extends Phaser.Scene {
         this.RESOLUTION = 3;
 
         this.get_property_cost = function (board_index) {
-            return this.PROPERTY_COSTS[board_index];
+            return PROPERTY_COSTS[board_index];
         };
 
         this.keys = this.input.keyboard.addKeys({
