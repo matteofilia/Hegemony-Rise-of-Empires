@@ -15,6 +15,7 @@ class MainScene extends Phaser.Scene {
         this.load.image("dice_6", "dice_6.png");
 
         this.load.html("modal-yes-or-no", "modal-yes-or-no.html");
+        this.load.html("modal-pay-rent", "modal-pay-rent.html");
     }
 
     dice_image(that, roll, x, y, container) {
@@ -442,6 +443,8 @@ class MainScene extends Phaser.Scene {
             country.draw(this);
         }
 
+        this.add.dom(400, 300).createFromCache("modal-pay-rent");
+        
         this.input.on("pointerdown", (pointer) => {
             for (var i = 0; i < this.countries.length; i++) {
                 var country = this.countries[i];

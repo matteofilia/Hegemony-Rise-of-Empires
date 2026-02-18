@@ -104,7 +104,7 @@ class GameState {
     
     update_properties() {
         for (let i = 0; i < this.num_players; i++) {
-            this.player_num_countries[i] = 0;
+            this.player_num_properties[i] = 0;
             
             for (let a = 0; a < 24; a++) {
                 if (this.properties[a] == i) {
@@ -123,6 +123,34 @@ class GameState {
         }
         
         this.update_properties();
+    }
+    
+    // Rent is always HALF of the cost of a property
+    // TODO: factor buildings into rent
+    calculate_rent(property_index) {
+        let rent = 0;
+        
+        if (PROPERTY_COSTS[property_index] != null) {
+            return PROPERTY_COSTS[property_index] / 2;
+        }
+    }
+    
+    check_pay_rent(player, property_index) {
+        if (this.properties[property_index] != null) {
+            let owner = this.properties[property_index];
+            
+            if (owner != this.NO_OWNER) {
+                let rent = this.calculate_rent(property_index);
+                
+                if (this.player_money[player] < rent) {
+                    this.player_money[owner] = this.player_money[player];
+                    this.player_money = 0;
+                } else {
+                    this.player_money[owner] += rent;
+                    this.player_money -= rent;
+                }
+            }
+        }
     }
 }
 
