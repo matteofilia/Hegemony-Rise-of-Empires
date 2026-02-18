@@ -29,8 +29,11 @@ class GameState {
         }
     }
     
-    update_player_position(player) {
-        // TODO
+    update_player_position(player, future_position) {
+        // $500 squares
+        if (future_position == 7 || future_position == 19) {
+            this.player_money[player] += 500;
+        }
     }
 }
 

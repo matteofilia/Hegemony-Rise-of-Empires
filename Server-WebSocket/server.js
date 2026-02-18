@@ -168,7 +168,11 @@ wss.on('connection', (ws) => {
             console.log(`Player ${this.game_state.player_turn+1} rolled ${this.game_state.current_dice_roll_1} and ${this.game_state.current_dice_roll_2}`);
             this.game_state.random_offset[this.game_state.player_turn] = randomInt(-32, 32);
             
-            this.game_state.player_future_indices[this.game_state.player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
+            let player_turn = this.game_state.player_turn;
+            this.game_state.player_future_indices[player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
+            
+            let future_position = this.game_state.player_indices[player_turn]+this.game_state.player_future_indices[player_turn];
+            this.game_state.update_player_position(player_turn, future_position);
             
             let send_data = {};
             send_data.type = "update";
