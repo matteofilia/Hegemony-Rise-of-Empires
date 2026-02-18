@@ -643,10 +643,10 @@ class MainScene extends Phaser.Scene {
 
         for (let i = 0; i < this.game_state.num_players; i++) {
             this.player_cooldown[i] += delta;
-            if (this.player_cooldown[i] >= this.MOVE_DELAY && this.game_state.player_rolls[i] > 0) {
+            if (this.player_cooldown[i] >= this.MOVE_DELAY && this.game_state.player_future_indices[i] > 0) {
                 console.log("Updating player marker position...");
                 this.player_cooldown[i] = 0;
-                this.game_state.player_rolls[i] -= 1;
+                this.game_state.player_future_indices[i] -= 1;
                 this.game_state.player_indices[i] += 1;
 
                 this.convert_board_index_to_x_y(
