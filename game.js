@@ -14,8 +14,7 @@ class MainScene extends Phaser.Scene {
         this.load.image("dice_5", "dice_5.png");
         this.load.image("dice_6", "dice_6.png");
 
-        this.load.html("modal-yes-or-no", "modal-yes-or-no.html");
-        this.load.html("modal-pay-rent", "modal-pay-rent.html");
+        this.load.html("modal-three-buttons", "modal-three-buttons.html");
     }
 
     dice_image(that, roll, x, y, container) {
@@ -35,9 +34,6 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
-        // TODO: figure out why cam2 and cam3 cause html to hide from view
-        this.add.dom(400, 300).createFromCache("modal-yes-or-no");
-
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
@@ -121,7 +117,8 @@ class MainScene extends Phaser.Scene {
             right: "D",
             space: Phaser.Input.Keyboard.KeyCodes.SPACE,
             one: Phaser.Input.Keyboard.KeyCodes.ONE,
-            two: Phaser.Input.Keyboard.KeyCodes.TWO
+            two: Phaser.Input.Keyboard.KeyCodes.TWO,
+            three: Phaser.Input.Keyboard.KeyCodes.THREE,
         });
 
         this.SUBTEXT_SPACING = 20;
@@ -442,8 +439,6 @@ class MainScene extends Phaser.Scene {
             let country = this.countries[c];
             country.draw(this);
         }
-
-        this.add.dom(400, 300).createFromCache("modal-pay-rent");
         
         this.input.on("pointerdown", (pointer) => {
             for (var i = 0; i < this.countries.length; i++) {
@@ -556,6 +551,39 @@ class MainScene extends Phaser.Scene {
         };
 
         ws.send("setup");
+        
+        this.modal = this.add.dom(400, 300).createFromCache("modal-three-buttons").setOrigin(0.5);
+    
+        this.show_modal("You have landed on someone's property", "Pay $500", null, null);
+    }
+    
+    show_modal(message, button_a, button_b, button_c) {
+        this.cam2.setVisible(false);
+        this.cam3.setVisible(false);
+        this.cam4.setVisible(false);
+        
+        $("#prompt").text(message);
+        
+        if (button_a != null) {
+            $("#button-a").text(button_a);
+            $("#button-a").show();
+        } else {
+            $("#button-a").hide();
+        }
+        
+        if (button_b != null) {
+            $("#button-b").text(button_b);
+            $("#button-b").show();
+        } else {
+            $("#button-b").hide();
+        }
+        
+        if (button_c != null) {
+            $("#button-c").text(button_c);
+            $("#button-c").show();
+        } else {
+            $("#button-c").hide();
+        }
     }
 
     update(time, delta) {
@@ -577,6 +605,14 @@ class MainScene extends Phaser.Scene {
                 this.cam3.setVisible(false);
             } else {
                 this.cam3.setVisible(true);
+            }
+        }
+        
+        if (Phaser.Input.Keyboard.JustDown(this.keys.three)) {
+            if (this.cam4.visible) {
+                this.cam4.setVisible(false);
+            } else {
+                this.cam4.setVisible(true);
             }
         }
 
