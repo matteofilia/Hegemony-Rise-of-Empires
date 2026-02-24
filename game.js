@@ -554,13 +554,21 @@ class MainScene extends Phaser.Scene {
         
         this.modal = this.add.dom(400, 300).createFromCache("modal-three-buttons").setOrigin(0.5);
     
-        this.show_modal("You have landed on someone's property", "Pay $500", null, null);
+        this.show_modal("Would you like to buy this property?", "Yes", "No", null);
+    }
+    
+    hide_modal() {
+        this.cam2.setVisible(true);
+        this.cam3.setVisible(true);
+        this.cam4.setVisible(true);
+        this.modal.setVisible(false);
     }
     
     show_modal(message, button_a, button_b, button_c) {
         this.cam2.setVisible(false);
         this.cam3.setVisible(false);
         this.cam4.setVisible(false);
+        this.modal.setVisible(true);
         
         $("#prompt").text(message);
         
@@ -584,6 +592,19 @@ class MainScene extends Phaser.Scene {
         } else {
             $("#button-c").hide();
         }
+        
+        let that = this;
+        $("#button-a").on("click", function () {
+            that.hide_modal();
+        });
+        
+        $("#button-b").on("click", function () {
+            that.hide_modal();
+        });
+        
+        $("#button-c").on("click", function () {
+            that.hide_modal();
+        });
     }
 
     update(time, delta) {
