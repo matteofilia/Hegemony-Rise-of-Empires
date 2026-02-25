@@ -34,16 +34,38 @@ class MainScene extends Phaser.Scene {
     }
 
     create_house(that, x, y, color, rotation) {
+        const width = 20;
+        const height = 25;
+        
         const housePropertyPoints = 
               [0, 0, 
-               0, 15, 
-               10, 25, 
-               20, 15, 
-               20, 0];
+               0, height-10, 
+               width/2, height, 
+               width, height-10, 
+               width, 0];
+        
+        let actual_rotation = rotation % 360;
+        
+        let x_centre = 0;
+        let y_centre = 0; 
+        if (actual_rotation == 90) {
+            x_centre = x + (width / 2);
+            y_centre = y - (height / 2);
+        } else if (actual_rotation == 180) {
+            x_centre = x + (width / 2);
+            y_centre = y + (height / 2);
+        } else if (actual_rotation == 270) {
+            x_centre = x - (width / 2);
+            y_centre = y + (height / 2);
+        } else if (actual_rotation == 0) {
+            x_centre = x - (width / 2);
+            y_centre = y - (height / 2);
+        } 
 
         const housePropertyPolygon = new Phaser.Geom.Polygon(housePropertyPoints);
         const graphics = that.add.graphics({ fillStyle: { color: color } });
         graphics.fillPoints(housePropertyPolygon.points, true);
+        graphics.setPosition(x_centre, y_centre);
         graphics.rotation = Phaser.Math.DegToRad(rotation);
     }
 
@@ -417,8 +439,6 @@ class MainScene extends Phaser.Scene {
         );
         this.ui_3_container.add(this.ui_3_close_text);
 
-        this.create_house(this, 100, 100, green, 90);
-
         this.dice_text(this, this.ui_3_container);
 
         this.board_game_index = 0;
@@ -551,7 +571,10 @@ class MainScene extends Phaser.Scene {
             } else if (parsed_data.type == "setup") {
                 let property_names = parsed_data.data.property_names;
                 load_game_board(that, property_names);
-                this.create_house(this, 100, 100, green, 90);
+                this.create_house(this, 0, 0, green, 90);
+                this.create_house(this, 0, 0, red, 270);
+                this.create_house(this, 0, 0, blue, 180);
+                this.create_house(this, 0, 0, orange, 0);
             } else if (parsed_data.type == "update") {
                 let game_state = parsed_data.data.game_state;
 
