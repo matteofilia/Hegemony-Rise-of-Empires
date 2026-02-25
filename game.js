@@ -36,31 +36,26 @@ class MainScene extends Phaser.Scene {
     create_house(that, x, y, color, rotation) {
         const width = 20;
         const height = 25;
-        
-        const housePropertyPoints = 
-              [0, 0, 
-               0, height-10, 
-               width/2, height, 
-               width, height-10, 
-               width, 0];
-        
+
+        const housePropertyPoints = [0, 0, 0, height - 10, width / 2, height, width, height - 10, width, 0];
+
         let actual_rotation = rotation % 360;
-        
+
         let x_centre = 0;
-        let y_centre = 0; 
+        let y_centre = 0;
         if (actual_rotation == 90) {
-            x_centre = x + (width / 2);
-            y_centre = y - (height / 2);
+            x_centre = x + width / 2;
+            y_centre = y - height / 2;
         } else if (actual_rotation == 180) {
-            x_centre = x + (width / 2);
-            y_centre = y + (height / 2);
+            x_centre = x + width / 2;
+            y_centre = y + height / 2;
         } else if (actual_rotation == 270) {
-            x_centre = x - (width / 2);
-            y_centre = y + (height / 2);
+            x_centre = x - width / 2;
+            y_centre = y + height / 2;
         } else if (actual_rotation == 0) {
-            x_centre = x - (width / 2);
-            y_centre = y - (height / 2);
-        } 
+            x_centre = x - width / 2;
+            y_centre = y - height / 2;
+        }
 
         const housePropertyPolygon = new Phaser.Geom.Polygon(housePropertyPoints);
         const graphics = that.add.graphics({ fillStyle: { color: color } });
