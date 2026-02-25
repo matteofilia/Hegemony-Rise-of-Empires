@@ -33,6 +33,20 @@ class MainScene extends Phaser.Scene {
         ui_3_container_text.setOrigin(0.5);
     }
 
+    create_house(that, x, y, color, rotation) {
+        const housePropertyPoints = 
+              [0, 0, 
+               0, 15, 
+               10, 25, 
+               20, 15, 
+               20, 0];
+
+        const housePropertyPolygon = new Phaser.Geom.Polygon(housePropertyPoints);
+        const graphics = that.add.graphics({ fillStyle: { color: color } });
+        graphics.fillPoints(housePropertyPolygon.points, true);
+        graphics.rotation = Phaser.Math.DegToRad(rotation);
+    }
+
     create() {
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
@@ -276,7 +290,7 @@ class MainScene extends Phaser.Scene {
         this.ui_text_player_turn = this.add
             .text(
                 this.UI_WIDTH / 2,
-                this.UI_HEIGHT - 64,
+                this.UI_HEIGHT - 48,
                 player_turn_text(this, this.game_state.player_turn),
                 text_style_white_large
             )
@@ -402,6 +416,8 @@ class MainScene extends Phaser.Scene {
             this.ui_3_container
         );
         this.ui_3_container.add(this.ui_3_close_text);
+
+        this.create_house(this, 100, 100, green, 90);
 
         this.dice_text(this, this.ui_3_container);
 
@@ -535,6 +551,7 @@ class MainScene extends Phaser.Scene {
             } else if (parsed_data.type == "setup") {
                 let property_names = parsed_data.data.property_names;
                 load_game_board(that, property_names);
+                this.create_house(this, 100, 100, green, 90);
             } else if (parsed_data.type == "update") {
                 let game_state = parsed_data.data.game_state;
 
