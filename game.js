@@ -118,7 +118,7 @@ class MainScene extends Phaser.Scene {
             space: Phaser.Input.Keyboard.KeyCodes.SPACE,
             one: Phaser.Input.Keyboard.KeyCodes.ONE,
             two: Phaser.Input.Keyboard.KeyCodes.TWO,
-            three: Phaser.Input.Keyboard.KeyCodes.THREE,
+            three: Phaser.Input.Keyboard.KeyCodes.THREE
         });
 
         this.SUBTEXT_SPACING = 20;
@@ -276,9 +276,17 @@ class MainScene extends Phaser.Scene {
         this.ui_text_player_turn = this.add
             .text(
                 this.UI_WIDTH / 2,
-                this.UI_HEIGHT - 32,
+                this.UI_HEIGHT - 64,
                 player_turn_text(this, this.game_state.player_turn),
                 text_style_white_large
+            )
+            .setOrigin(0.5);
+        
+        this.ui_1_close_text = this.add.text(
+                this.UI_WIDTH / 2,
+                this.UI_HEIGHT - 16,
+                "Press 1 to close",
+                text_style_white
             )
             .setOrigin(0.5);
 
@@ -296,6 +304,7 @@ class MainScene extends Phaser.Scene {
         this.ui_1_container.add(ui_text_player_money_5);
         this.ui_1_container.add(ui_text_player_money_6);
         this.ui_1_container.add(this.ui_text_player_turn);
+        this.ui_1_container.add(this.ui_1_close_text);
 
         this.cam2 = this.cameras.add(0, 0, this.UI_WIDTH, this.UI_HEIGHT);
         this.cam2.setBackgroundColor(darker_grey);
@@ -350,13 +359,22 @@ class MainScene extends Phaser.Scene {
             return card_container;
         }
 
+        this.ui_2_close_text = this.add.text(
+            this.UI_2_WIDTH / 2,
+            this.UI_2_HEIGHT - 16,
+            "Press 2 to close",
+            text_style_white
+        ).setOrigin(0.5);
+        
         this.ui_2_container = this.add.container(this.UI_2_START_X, this.UI_2_START_Y);
         this.ui_2_container.add(create_card_container(this, this.cards[0], 0));
         this.ui_2_container.add(create_card_container(this, this.cards[1], 1));
         this.ui_2_container.add(create_card_container(this, this.cards[2], 2));
         this.ui_2_container.add(create_card_container(this, this.cards[3], 3));
         this.ui_2_container.add(create_card_container(this, this.cards[5], 4));
-
+        this.ui_2_container.add(this.ui_2_close_text);
+        
+        
         this.cam3 = this.cameras.add(this.VIEWPORT_WIDTH - this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
         this.cam3.setBackgroundColor(darker_grey);
         this.cam3.setZoom(1);
@@ -371,7 +389,14 @@ class MainScene extends Phaser.Scene {
         this.cam4.setBackgroundColor(light_grey);
         this.cam4.setZoom(1);
         this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
-
+        
+        this.ui_3_close_text = this.add.text(
+            this.UI_3_WIDTH / 2,
+            this.UI_3_HEIGHT - 16,
+            "Press 3 to close",
+            text_style_black
+        ).setOrigin(0.5);
+        
         this.ui_3_container = this.add.container(this.UI_3_START_X, this.UI_3_START_Y);
         this.dice_image(
             this,
@@ -387,6 +412,7 @@ class MainScene extends Phaser.Scene {
             this.UI_3_HEIGHT / 2,
             this.ui_3_container
         );
+        this.ui_3_container.add(this.ui_3_close_text);
 
         this.dice_text(this, this.ui_3_container);
 
@@ -439,7 +465,7 @@ class MainScene extends Phaser.Scene {
             let country = this.countries[c];
             country.draw(this);
         }
-        
+
         this.input.on("pointerdown", (pointer) => {
             for (var i = 0; i < this.countries.length; i++) {
                 var country = this.countries[i];
@@ -551,57 +577,57 @@ class MainScene extends Phaser.Scene {
         };
 
         ws.send("setup");
-        
+
         this.modal = this.add.dom(400, 300).createFromCache("modal-three-buttons").setOrigin(0.5);
-    
+
         this.show_modal("Would you like to buy this property?", "Yes", "No", null);
     }
-    
+
     hide_modal() {
         this.cam2.setVisible(true);
         this.cam3.setVisible(true);
         this.cam4.setVisible(true);
         this.modal.setVisible(false);
     }
-    
+
     show_modal(message, button_a, button_b, button_c) {
         this.cam2.setVisible(false);
         this.cam3.setVisible(false);
         this.cam4.setVisible(false);
         this.modal.setVisible(true);
-        
+
         $("#prompt").text(message);
-        
+
         if (button_a != null) {
             $("#button-a").text(button_a);
             $("#button-a").show();
         } else {
             $("#button-a").hide();
         }
-        
+
         if (button_b != null) {
             $("#button-b").text(button_b);
             $("#button-b").show();
         } else {
             $("#button-b").hide();
         }
-        
+
         if (button_c != null) {
             $("#button-c").text(button_c);
             $("#button-c").show();
         } else {
             $("#button-c").hide();
         }
-        
+
         let that = this;
         $("#button-a").on("click", function () {
             that.hide_modal();
         });
-        
+
         $("#button-b").on("click", function () {
             that.hide_modal();
         });
-        
+
         $("#button-c").on("click", function () {
             that.hide_modal();
         });
@@ -628,7 +654,7 @@ class MainScene extends Phaser.Scene {
                 this.cam3.setVisible(true);
             }
         }
-        
+
         if (Phaser.Input.Keyboard.JustDown(this.keys.three)) {
             if (this.cam4.visible) {
                 this.cam4.setVisible(false);
