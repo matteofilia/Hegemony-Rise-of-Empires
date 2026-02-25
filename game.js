@@ -281,13 +281,9 @@ class MainScene extends Phaser.Scene {
                 text_style_white_large
             )
             .setOrigin(0.5);
-        
-        this.ui_1_close_text = this.add.text(
-                this.UI_WIDTH / 2,
-                this.UI_HEIGHT - 16,
-                "Press 1 to close",
-                text_style_white
-            )
+
+        this.ui_1_close_text = this.add
+            .text(this.UI_WIDTH / 2, this.UI_HEIGHT - 16, "Press 1 to close", text_style_white)
             .setOrigin(0.5);
 
         this.ui_1_container = this.add.container(this.UI_START_X, this.UI_START_Y);
@@ -359,13 +355,10 @@ class MainScene extends Phaser.Scene {
             return card_container;
         }
 
-        this.ui_2_close_text = this.add.text(
-            this.UI_2_WIDTH / 2,
-            this.UI_2_HEIGHT - 16,
-            "Press 2 to close",
-            text_style_white
-        ).setOrigin(0.5);
-        
+        this.ui_2_close_text = this.add
+            .text(this.UI_2_WIDTH / 2, this.UI_2_HEIGHT - 16, "Press 2 to close", text_style_white)
+            .setOrigin(0.5);
+
         this.ui_2_container = this.add.container(this.UI_2_START_X, this.UI_2_START_Y);
         this.ui_2_container.add(create_card_container(this, this.cards[0], 0));
         this.ui_2_container.add(create_card_container(this, this.cards[1], 1));
@@ -373,8 +366,7 @@ class MainScene extends Phaser.Scene {
         this.ui_2_container.add(create_card_container(this, this.cards[3], 3));
         this.ui_2_container.add(create_card_container(this, this.cards[5], 4));
         this.ui_2_container.add(this.ui_2_close_text);
-        
-        
+
         this.cam3 = this.cameras.add(this.VIEWPORT_WIDTH - this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);
         this.cam3.setBackgroundColor(darker_grey);
         this.cam3.setZoom(1);
@@ -389,14 +381,11 @@ class MainScene extends Phaser.Scene {
         this.cam4.setBackgroundColor(light_grey);
         this.cam4.setZoom(1);
         this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
-        
-        this.ui_3_close_text = this.add.text(
-            this.UI_3_WIDTH / 2,
-            this.UI_3_HEIGHT - 16,
-            "Press 3 to close",
-            text_style_black
-        ).setOrigin(0.5);
-        
+
+        this.ui_3_close_text = this.add
+            .text(this.UI_3_WIDTH / 2, this.UI_3_HEIGHT - 16, "Press 3 to close", text_style_black)
+            .setOrigin(0.5);
+
         this.ui_3_container = this.add.container(this.UI_3_START_X, this.UI_3_START_Y);
         this.dice_image(
             this,
@@ -553,7 +542,7 @@ class MainScene extends Phaser.Scene {
                 update_game_state(that, game_state);
 
                 // Update dice roll UI
-                this.ui_3_container.removeAll(true);
+                this.ui_3_container.removeAll(false);
                 this.dice_image(
                     this,
                     game_state.current_dice_roll_1,
@@ -569,8 +558,8 @@ class MainScene extends Phaser.Scene {
                     this.UI_3_HEIGHT / 2,
                     this.ui_3_container
                 );
-
                 this.dice_text(this, this.ui_3_container);
+                this.ui_3_container.add(this.ui_3_close_text);
 
                 this.ui_text_player_turn.setText(player_turn_text(that, game_state.player_turn));
             }
