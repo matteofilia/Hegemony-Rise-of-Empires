@@ -542,7 +542,9 @@ class MainScene extends Phaser.Scene {
                 update_game_state(that, game_state);
 
                 // Update dice roll UI
-                this.ui_3_container.removeAll(false);
+                // TODO: tidy this up. maybe add function for dice container (container 3)
+                this.ui_3_container.removeAll(true);
+
                 this.dice_image(
                     this,
                     game_state.current_dice_roll_1,
@@ -559,6 +561,9 @@ class MainScene extends Phaser.Scene {
                     this.ui_3_container
                 );
                 this.dice_text(this, this.ui_3_container);
+                this.ui_3_close_text = this.add
+                    .text(this.UI_3_WIDTH / 2, this.UI_3_HEIGHT - 16, "Press 3 to close", text_style_black)
+                    .setOrigin(0.5);
                 this.ui_3_container.add(this.ui_3_close_text);
 
                 this.ui_text_player_turn.setText(player_turn_text(that, game_state.player_turn));
