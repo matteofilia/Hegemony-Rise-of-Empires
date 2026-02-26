@@ -154,7 +154,10 @@ wss.on('connection', (ws) => {
             send_data.data.property_names = this.property_names;
             ws.send(JSON.stringify(send_data));
         } else if (data == "next turn") {
-            this.game_state.player_indices[this.game_state.player_turn] = this.game_state.player_future_indices[this.game_state.player_turn];
+            let curr_index = this.game_state.player_indices[this.game_state.player_turn];
+            let next_index_add = this.game_state.player_future_indices[this.game_state.player_turn];
+            
+            this.game_state.player_indices[this.game_state.player_turn] = curr_index + next_index_add;
             
             this.game_state.player_future_indices[this.game_state.player_turn] = 0;
             

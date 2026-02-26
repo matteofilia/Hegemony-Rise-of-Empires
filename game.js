@@ -557,14 +557,15 @@ class MainScene extends Phaser.Scene {
                     
                     // Clear Text
                     if (context.ALL_SUBTEXT[i] != null) {
-                        context.ALL_SUBTEXT[i].setText("");
+                        // TODO: add create_house function here
+                        context.ALL_SUBTEXT[i].setText("OWNED");
 
                         // Add House Marker
                         let xy = {x: 0, y: 0};
                         context.convert_board_index_to_x_y(xy, i, 0);
 
                         // TODO: make this better
-                        context.create_house(context, xy.x, xy.y, context.player_colours[player]);
+                        // context.create_house(context, xy.x, xy.y, context.player_colours[player]);
                     }
                 }
             }
