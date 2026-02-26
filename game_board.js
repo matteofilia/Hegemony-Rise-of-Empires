@@ -126,13 +126,16 @@ function load_game_board(that, property_names) {
 
     const subtext2_1 = (that.add
         .text(that.SUBTEXT_SPACING, 150, "$" + that.get_property_cost(11), text_style)
-        .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90));
+        .setResolution(that.RESOLUTION).setOrigin(0.5));
+    subtext2_1.rotation = Phaser.Math.DegToRad(90);
     const subtext2_2 = (that.add
         .text(that.SUBTEXT_SPACING, 250, "$" + that.get_property_cost(10), text_style)
-        .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90));
+        .setResolution(that.RESOLUTION).setOrigin(0.5));
+    subtext2_2.rotation = Phaser.Math.DegToRad(90);
     const subtext2_3 = (that.add
         .text(that.SUBTEXT_SPACING, 350, "$" + that.get_property_cost(9), text_style)
-        .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = Phaser.Math.DegToRad(90));
+        .setResolution(that.RESOLUTION).setOrigin(0.5));
+    subtext2_3.rotation = Phaser.Math.DegToRad(90);
 
     const text2_4 = (that.add.text(87, 450, "???", text_style_black)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
@@ -155,13 +158,16 @@ function load_game_board(that, property_names) {
 
     const subtext3_2 = (that.add
         .text(800 - that.SUBTEXT_SPACING, 250, "$" + that.get_property_cost(20), text_style)
-        .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270));
+        .setResolution(that.RESOLUTION).setOrigin(0.5));
+    subtext3_2.rotation = Phaser.Math.DegToRad(270);
     const subtext3_3 = (that.add
         .text(800 - that.SUBTEXT_SPACING, 350, "$" + that.get_property_cost(21), text_style)
-        .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270));
+        .setResolution(that.RESOLUTION).setOrigin(0.5));
+    subtext3_3.rotation = Phaser.Math.DegToRad(270);
     const subtext3_4 = (that.add
         .text(800 - that.SUBTEXT_SPACING, 450, "$" + that.get_property_cost(22), text_style)
-        .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = Phaser.Math.DegToRad(270));
+        .setResolution(that.RESOLUTION).setOrigin(0.5));
+    subtext3_4.rotation = Phaser.Math.DegToRad(270);
 
     const text3_1 = (that.add.text(713, 150, "???", text_style_black).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
@@ -204,4 +210,6 @@ function load_game_board(that, property_names) {
         subtext3_3,
         subtext3_4
     ];
+    
+    console.log(that.ALL_SUBTEXT);
 }
