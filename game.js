@@ -550,6 +550,22 @@ class MainScene extends Phaser.Scene {
             ui_text_player_money_4.setText(player_text(that, 3));
             ui_text_player_money_5.setText(player_text(that, 4));
             ui_text_player_money_6.setText(player_text(that, 5));
+            
+            for (let i = 0; i < game_state.properties.length; i++) {
+                if (game_state.properties[i] != -1) {
+                    let player = game_state.properties[i];
+                    
+                    // Clear Text
+                    this.ALL_SUBTEXT[i].setText("");
+                    
+                    // Add House Marker
+                    let xy = {x: 0, y: 0};
+                    this.convert_board_index_to_x_y(xy, i, 0);
+                    
+                    // TODO: make this better
+                    this.create_house(xy.x, xy.y, this.player_colours[player]);
+                }
+            }
         }
 
         let that = this;
@@ -566,10 +582,6 @@ class MainScene extends Phaser.Scene {
             } else if (parsed_data.type == "setup") {
                 let property_names = parsed_data.data.property_names;
                 load_game_board(that, property_names);
-                this.create_house(this, 0, 0, green, 90);
-                this.create_house(this, 0, 0, red, 270);
-                this.create_house(this, 0, 0, blue, 180);
-                this.create_house(this, 0, 0, orange, 0);
             } else if (parsed_data.type == "update") {
                 let game_state = parsed_data.data.game_state;
 

@@ -178,30 +178,30 @@ function load_game_board(that, property_names) {
     var text7_1 = (that.add.text(750, 550, "GO", text_style_black_large)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = 
         Phaser.Math.DegToRad(45 + 270));
+    
+    that.ALL_SUBTEXT = [
+        null,
+        subtext1_6,
+        subtext1_5,
+        subtext1_4,
+        subtext1_3,
+        subtext1_2,
+        subtext1_1,
+        null,
+        null,
+        subtext2_3,
+        subtext2_2,
+        subtext2_1,
+        null,
+        subtext0_1,
+        subtext0_2,
+        subtext0_3,
+        null,
+        subtext0_5,
+        subtext0_6,
+        null,
+        subtext3_2,
+        subtext3_3,
+        subtext3_4
+    ];
 }
-
-const ALL_SUBTEXT = [
-    null,
-    subtext1_6,
-    subtext1_5,
-    subtext1_4,
-    subtext1_3,
-    subtext1_2,
-    subtext1_1,
-    null,
-    null,
-    subtext2_3,
-    subtext2_2,
-    subtext2_1,
-    null,
-    subtext0_1,
-    subtext0_2,
-    subtext0_3,
-    null,
-    subtext0_4,
-    subtext0_5,
-    null,
-    subtext3_2,
-    subtext3_3,
-    subtext3_4
-];
