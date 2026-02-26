@@ -102,19 +102,25 @@ class MainScene extends Phaser.Scene {
         this.convert_board_index_to_x_y = function (entity, board_index, random_offset) {
             board_index = board_index % 24;
             var coords = [];
+            var rotation = 0;
 
             if (board_index >= 0 && board_index <= 7) {
                 coords = [750 - board_index * 100 + random_offset, 550];
+                rotation = 180;
             } else if (board_index >= 7 && board_index <= 12) {
                 coords = [50, 550 - (board_index - 7) * 100 + random_offset];
+                rotation = 270;
             } else if (board_index >= 12 && board_index <= 19) {
                 coords = [50 + (board_index - 12) * 100 + random_offset, 50];
+                rotation = 180;
             } else if (board_index >= 19 && board_index <= 24) {
                 coords = [750, 50 + (board_index - 19) * 100 + random_offset];
+                rotation = 90;
             }
 
             entity.x = coords[0];
             entity.y = coords[1];
+            entity.rotation = rotation;
         };
 
         this.TOTAL_PROPERTIES = 17;
@@ -550,22 +556,22 @@ class MainScene extends Phaser.Scene {
             ui_text_player_money_4.setText(player_text(that, 3));
             ui_text_player_money_5.setText(player_text(that, 4));
             ui_text_player_money_6.setText(player_text(that, 5));
-            
+
             for (let i = 0; i < game_state.properties.length; i++) {
                 if (game_state.properties[i] != -1) {
                     let player = game_state.properties[i];
-                    
+
                     // Clear Text
                     if (context.ALL_SUBTEXT[i] != null) {
                         // TODO: add create_house function here
                         context.ALL_SUBTEXT[i].setText("OWNED");
 
                         // Add House Marker
-                        let xy = {x: 0, y: 0};
+                        let xy = { x: 0, y: 0, rotation: 0};
                         context.convert_board_index_to_x_y(xy, i, 0);
 
-                        // TODO: make this better
-                        // context.create_house(context, xy.x, xy.y, context.player_colours[player]);
+                        console.log(xy);
+                        context.create_house(context, xy.x, xy.y, context.player_colours[player], xy.rotation);
                     }
                 }
             }
