@@ -92,8 +92,10 @@ class GameState {
     
     update_player_position(player, future_position) {
         // Position bounds check
-        if (future_position > 23) {
-            future_position -= 24;
+        future_position = future_position % 24;
+        
+        if (future_position == 1 || future_position == 2 || future_position == 3) {
+            console.log("Position called");
         }
         
         // $500 squares
@@ -104,7 +106,7 @@ class GameState {
         }
     }
     
-    update_properties() {
+    update_properties() {        
         for (let i = 0; i < this.num_players; i++) {
             this.player_num_properties[i] = 0;
             

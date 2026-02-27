@@ -570,7 +570,6 @@ class MainScene extends Phaser.Scene {
                         let xy = { x: 0, y: 0, rotation: 0};
                         context.convert_board_index_to_x_y(xy, i, 0);
 
-                        console.log(xy);
                         context.create_house(context, xy.x, xy.y, context.player_colours[player], xy.rotation);
                     }
                 }
@@ -593,6 +592,10 @@ class MainScene extends Phaser.Scene {
                 load_game_board(that, property_names);
             } else if (parsed_data.type == "update") {
                 let game_state = parsed_data.data.game_state;
+                
+                // TODO: remove debug information
+                console.log("Property costs = "+PROPERTY_COSTS);
+
 
                 console.log("[UPDATE] Updating game state... " + game_state);
                 update_game_state(that, game_state);
@@ -726,7 +729,6 @@ class MainScene extends Phaser.Scene {
         for (let i = 0; i < this.game_state.num_players; i++) {
             this.player_cooldown[i] += delta;
             if (this.player_cooldown[i] >= this.MOVE_DELAY && this.game_state.player_future_indices[i] > 0) {
-                console.log("Updating player marker position...");
                 this.player_cooldown[i] = 0;
                 this.game_state.player_future_indices[i] -= 1;
                 this.game_state.player_indices[i] += 1;
