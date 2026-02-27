@@ -206,6 +206,7 @@ function load_game_board(that, property_names) {
         subtext0_5,
         subtext0_6,
         null,
+        null,
         subtext3_2,
         subtext3_3,
         subtext3_4

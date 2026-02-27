@@ -19,6 +19,7 @@ let PROPERTY_COSTS = [
     300,
     300,
     null,
+    null,
     600,
     600,
     600
@@ -81,6 +82,7 @@ class GameState {
             null,
             this.NO_OWNER,
             this.NO_OWNER,
+            null,
             null,
             this.NO_OWNER,
             this.NO_OWNER,
