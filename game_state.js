@@ -91,13 +91,6 @@ class GameState {
     }
     
     update_player_position(player, future_position) {
-        // Position bounds check
-        future_position = future_position % 24;
-        
-        if (future_position == 1 || future_position == 2 || future_position == 3) {
-            console.log("Position called");
-        }
-        
         // $500 squares
         if (future_position == 7 || future_position == 19) {
             this.player_money[player] += 500;

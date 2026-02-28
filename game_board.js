@@ -157,15 +157,15 @@ function load_game_board(that, property_names) {
         Phaser.Math.DegToRad(270));
 
     const subtext3_2 = (that.add
-        .text(800 - that.SUBTEXT_SPACING, 250, "$" + that.get_property_cost(20), text_style)
+        .text(800 - that.SUBTEXT_SPACING, 250, "$" + that.get_property_cost(21), text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5));
     subtext3_2.rotation = Phaser.Math.DegToRad(270);
     const subtext3_3 = (that.add
-        .text(800 - that.SUBTEXT_SPACING, 350, "$" + that.get_property_cost(21), text_style)
+        .text(800 - that.SUBTEXT_SPACING, 350, "$" + that.get_property_cost(22), text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5));
     subtext3_3.rotation = Phaser.Math.DegToRad(270);
     const subtext3_4 = (that.add
-        .text(800 - that.SUBTEXT_SPACING, 450, "$" + that.get_property_cost(22), text_style)
+        .text(800 - that.SUBTEXT_SPACING, 450, "$" + that.get_property_cost(23), text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5));
     subtext3_4.rotation = Phaser.Math.DegToRad(270);
 
