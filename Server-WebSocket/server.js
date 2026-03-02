@@ -178,8 +178,7 @@ wss.on('connection', (ws) => {
             if (future_position >= 24) {
                 this.game_state.update_pass_go(player_turn);
             }
-            
-            future_position = future_position % 24;
+            this.game_state.player_indices[player_turn] = this.game_state.player_indices[player_turn] % 24;
             this.game_state.update_player_position(player_turn, future_position);
             
             let send_data = {};

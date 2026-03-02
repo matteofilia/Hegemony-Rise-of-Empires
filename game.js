@@ -574,6 +574,8 @@ class MainScene extends Phaser.Scene {
                     }
                 }
             }
+            
+            context.text_under.setText(`Rent: \$${game_state.rent_cost}`);
         }
 
         let that = this;
