@@ -42,17 +42,27 @@ class GameState {
         
         this.random_offset = Array(num_players);
         
+        this.player_chance_cards = Array(num_players);
+        
         this.current_dice_roll_1 = 0;
         this.current_dice_roll_2 = 0;
         
         // TODO: make static
         this.NO_OWNER = -1;
         
+        this.MAX_CHANCE_CARDS = 5;
+        
         // Initialize all items to zero
         for (let i = 0; i < num_players; i++) {
             this.player_indices[i] = 0;
             this.player_future_indices[i] = 0;
             this.player_money[i] = 0;
+            
+            // Initialize Chance Cards
+            this.player_chance_cards[i] = Array(this.MAX_CHANCE_CARDS);
+            for (let a = 0; a < this.MAX_CHANCE_CARDS; a++){
+                this.player_chance_cards[i][a] = null;
+            }
             
             // TODO: debug
             this.player_money[i] = 2000;
@@ -94,8 +104,19 @@ class GameState {
         // $500 squares
         if (future_position == 7 || future_position == 19) {
             this.player_money[player] += 500;
+        } else if (future_position == 8 || future_position == 16 || future_position == 20) {
+            this.draw_chance_card(player);
         } else {
             this.buy_property(player, future_position);
+        }
+    }
+    
+    draw_chance_card(player) {
+        for (let i = 0; i < this.MAX_CHANCE_CARDS; i++) {
+            if (this.player_chance_cards[player][i] == null) {
+                this.player_chance_cards[player][i] = "Test Card";
+                return;
+            }
         }
     }
     
