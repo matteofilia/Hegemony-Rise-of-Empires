@@ -47,18 +47,13 @@ class GameState {
         this.current_dice_roll_1 = 0;
         this.current_dice_roll_2 = 0;
         
-        this.INITIAL_RENT = 200;
-        this.RENT_INCREASE_PER_PASS_GO = 20;
-        
-        this.PASS_GO_MONEY = 200;
-        
         this.rent_cost = this.INITIAL_RENT;
         
         // TODO: make static
         this.NO_OWNER = -1;
         
         this.MAX_CHANCE_CARDS = 5;
-        
+                
         // Initialize all items to zero
         for (let i = 0; i < num_players; i++) {
             this.player_indices[i] = 0;
@@ -115,8 +110,10 @@ class GameState {
     
     update_player_position(player, future_position) {
         // $500 squares
-        if (future_position == 7 || future_position == 19) {
-            this.player_money[player] += 500;
+        if (future_position == 7) {
+            this.player_money[player] += this.CORNER_MONEY_B;
+        } else if (future_position == 19) {
+            this.player_money[player] += this.CORNER_MONEY_A;
         } else if (future_position == 8 || future_position == 16 || future_position == 20) {
             this.draw_chance_card(player);
         } 

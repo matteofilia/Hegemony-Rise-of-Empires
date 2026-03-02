@@ -1,4 +1,4 @@
-function load_game_board(that, property_names) {
+function load_game_board(that, property_names) {  
     const square0_1 = that.add.rectangle(50, 50, 100, 100, light_grey);
     const square0_2 = that.add.rectangle(150, 50, 100, 100, dark_grey);
     const square0_3 = that.add.rectangle(250, 50, 100, 100, light_grey);
@@ -172,13 +172,13 @@ function load_game_board(that, property_names) {
     const text3_1 = (that.add.text(713, 150, "???", text_style_black).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
 
-    var text4_1 = (that.add.text(750, 50, "Collect\n$500", text_style_black)
+    var text4_1 = (that.add.text(750, 50, `Collect\n\$${that.CORNER_MONEY_A}`, text_style_black)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(45));
     var text5_1 = (that.add.text(50, 50, "Free\nParking", text_style_black)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(45 - 90));
-    var text6_1 = (that.add.text(50, 550, "Collect\n$500", text_style_black)
+    var text6_1 = (that.add.text(50, 550, `Collect\n\$${that.CORNER_MONEY_B}`, text_style_black)
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(45));
     var text7_1 = (that.add.text(750, 550, "GO", text_style_black_large)

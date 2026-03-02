@@ -15,7 +15,7 @@ Monopoly game board as an outer ring, with a Risk world map in the centre.
 
 ### Resources
 
-Money is the main resource, and can be used to buy Risk units or Monopoly property.
+Money is the main resource, and can be used to buy Risk units or Monopoly property. Rent for all properties also increases each time someone passes "GO".
 
 ### Turn Structure
 

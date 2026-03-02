@@ -1,0 +1,12 @@
+function load_tweakables(context) {
+    // Initial Rent Cost For ALL Properties
+    context.INITIAL_RENT = 200;
+    context.RENT_INCREASE_PER_PASS_GO = 20;
+
+    // Money Gained Each Time Go Is Passed
+    context.PASS_GO_MONEY = 200;
+
+    // Money For Each Corner Piece
+    context.CORNER_MONEY_A = 500;
+    context.CORNER_MONEY_B = 700;
+}

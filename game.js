@@ -65,6 +65,8 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
+        load_tweakables(this);
+        
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
