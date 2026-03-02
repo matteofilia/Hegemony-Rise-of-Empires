@@ -47,6 +47,13 @@ class GameState {
         this.current_dice_roll_1 = 0;
         this.current_dice_roll_2 = 0;
         
+        this.INITIAL_RENT = 200;
+        this.RENT_INCREASE_PER_PASS_GO = 20;
+        
+        this.PASS_GO_MONEY = 200;
+        
+        this.rent_cost = this.INITIAL_RENT;
+        
         // TODO: make static
         this.NO_OWNER = -1;
         
@@ -100,13 +107,20 @@ class GameState {
         ];
     }
     
+    update_pass_go(player) {
+        // Each time go is passed, increase the rent cost
+        this.rent_cost += this.RENT_INCREASE_PER_PASS_GO;
+        this.player_money[player] += this.PASS_GO_MONEY;
+    }
+    
     update_player_position(player, future_position) {
         // $500 squares
         if (future_position == 7 || future_position == 19) {
             this.player_money[player] += 500;
         } else if (future_position == 8 || future_position == 16 || future_position == 20) {
             this.draw_chance_card(player);
-        } else {
+        } 
+        else {
             this.buy_property(player, future_position);
         }
     }
@@ -158,14 +172,12 @@ class GameState {
             let owner = this.properties[property_index];
             
             if (owner != this.NO_OWNER) {
-                let rent = this.calculate_rent(property_index);
-                
-                if (this.player_money[player] < rent) {
+                if (this.player_money[player] < this.rent_cost) {
                     this.player_money[owner] = this.player_money[player];
                     this.player_money = 0;
                 } else {
-                    this.player_money[owner] += rent;
-                    this.player_money -= rent;
+                    this.player_money[owner] += this.rent_cost;
+                    this.player_money -= this.rent_cost;
                 }
             }
         }

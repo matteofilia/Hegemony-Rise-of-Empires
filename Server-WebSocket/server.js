@@ -175,6 +175,10 @@ wss.on('connection', (ws) => {
             this.game_state.player_future_indices[player_turn] = this.game_state.current_dice_roll_1 + this.game_state.current_dice_roll_2;
             
             let future_position = this.game_state.player_indices[player_turn]+this.game_state.player_future_indices[player_turn];
+            if (future_position >= 24) {
+                this.game_state.update_pass_go(player_turn);
+            }
+            
             future_position = future_position % 24;
             this.game_state.update_player_position(player_turn, future_position);
             
