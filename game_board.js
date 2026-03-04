@@ -185,7 +185,7 @@ function load_game_board(that, property_names) {
                    .setResolution(that.RESOLUTION).setOrigin(0.5).rotation = 
         Phaser.Math.DegToRad(45 + 270));
     
-    that.text_under = (that.add.text(400, 650, "Rent: $200", text_style_black_large).setResolution(that.RESOLUTION).setOrigin(0.5));
+    that.text_under = (that.add.text(400, 650, "", text_style_black_large).setResolution(that.RESOLUTION).setOrigin(0.5));
     that.text_over = (that.add.text(400, -50, "Own 51% of Properties and Countries To Win", text_style_black_large).setResolution(that.RESOLUTION).setOrigin(0.5));
 
     

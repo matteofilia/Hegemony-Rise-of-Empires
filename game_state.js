@@ -54,6 +54,11 @@ class GameState {
         
         this.rent_cost = this.INITIAL_RENT;
         
+        this.UNIT_BUY_COST_MIN = context.UNIT_BUY_COST_MIN;
+        this.UNIT_BUY_COST_MAX = context.UNIT_BUY_COST_MAX;
+        
+        this.unit_buy_cost = this.UNIT_BUY_COST_MIN;
+        
         // TODO: make static
         this.NO_OWNER = -1;
                 
@@ -109,6 +114,10 @@ class GameState {
         // Each time go is passed, increase the rent cost
         this.rent_cost += this.RENT_INCREASE_PER_PASS_GO;
         this.player_money[player] += this.PASS_GO_MONEY;
+    }
+    
+    update_unit_cost(buy) {
+        this.unit_buy_cost = buy;
     }
     
     update_player_position(player, future_position) {

@@ -11,6 +11,11 @@ function load_tweakables(context) {
     context.CORNER_MONEY_B = 700;
     
     context.MAX_CHANCE_CARDS = 5;
+    
+    context.UNIT_BUY_COST_MIN = 100;
+    context.UNIT_BUY_COST_MAX = 200;
+    context.UNIT_SELL_COST_MIN = 50;
+    context.UNIT_SELL_COST_MAX = 100;
 }
 
 module.exports = {load_tweakables};
