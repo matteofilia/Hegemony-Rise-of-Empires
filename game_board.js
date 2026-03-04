@@ -146,13 +146,13 @@ function load_game_board(that, property_names) {
     const rect3_3 = that.add.rectangle(713, 350, 25, 100, light_blue);
     const rect3_4 = that.add.rectangle(713, 450, 25, 100, light_blue);
 
-    const text3_2 = (that.add.text(713, 250, property_names[20], text_style)
+    const text3_2 = (that.add.text(713, 250, property_names[21], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
-    const text3_3 = (that.add.text(713, 350, property_names[21], text_style)
+    const text3_3 = (that.add.text(713, 350, property_names[22], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
-    const text3_4 = (that.add.text(713, 450, property_names[22], text_style)
+    const text3_4 = (that.add.text(713, 450, property_names[23], text_style)
         .setResolution(that.RESOLUTION).setOrigin(0.5).rotation =
         Phaser.Math.DegToRad(270));
 
