@@ -9,6 +9,8 @@ function load_tweakables(context) {
     // Money For Each Corner Piece
     context.CORNER_MONEY_A = 500;
     context.CORNER_MONEY_B = 700;
+    
+    context.MAX_CHANCE_CARDS = 5;
 }
 
 module.exports = {load_tweakables};

@@ -164,7 +164,7 @@ class MainScene extends Phaser.Scene {
 
         this.player_colours = [green, orange, pink, red, purple, brown];
 
-        this.game_state = new GameState(6);
+        this.game_state = new GameState(this, 6);
 
         // const risk_map = this.add.image(400, 300, "risk_map");
         // risk_map.setOrigin(0.5);

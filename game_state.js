@@ -26,7 +26,7 @@ let PROPERTY_COSTS = [
 ];
 
 class GameState {
-    constructor(num_players) {
+    constructor(context, num_players) { 
         this.num_players = num_players;
         
         this.player_money = new Array(num_players);
@@ -47,12 +47,15 @@ class GameState {
         this.current_dice_roll_1 = 0;
         this.current_dice_roll_2 = 0;
         
+        this.INITIAL_RENT = context.INITIAL_RENT;
+        this.MAX_CHANCE_CARDS = context.MAX_CHANCE_CARDS;
+        this.RENT_INCREASE_PER_PASS_GO = context.RENT_INCREASE_PER_PASS_GO;
+        this.PASS_GO_MONEY = context.PASS_GO_MONEY;
+        
         this.rent_cost = this.INITIAL_RENT;
         
         // TODO: make static
         this.NO_OWNER = -1;
-        
-        this.MAX_CHANCE_CARDS = 5;
                 
         // Initialize all items to zero
         for (let i = 0; i < num_players; i++) {
@@ -106,8 +109,6 @@ class GameState {
         // Each time go is passed, increase the rent cost
         this.rent_cost += this.RENT_INCREASE_PER_PASS_GO;
         this.player_money[player] += this.PASS_GO_MONEY;
-        
-        console.log("Rent cost ="+this.rent_cost);
     }
     
     update_player_position(player, future_position) {

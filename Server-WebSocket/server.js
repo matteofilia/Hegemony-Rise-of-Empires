@@ -9,10 +9,12 @@ const wss = new WebSocket.Server({ port: PORT }, () => {
     console.log(`WebSocket server started on ws://localhost:${PORT}`);
 });
 
-this.num_players = 6;
-this.game_state = new GameState.GameState(this.num_players);
-
+// This should be done first
 Tweakables.load_tweakables(this);
+console.log("Initial Rent = "+this.INITIAL_RENT);
+
+this.num_players = 6;
+this.game_state = new GameState.GameState(this, this.num_players);
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
