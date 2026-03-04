@@ -11,7 +11,6 @@ const wss = new WebSocket.Server({ port: PORT }, () => {
 
 // This should be done first
 Tweakables.load_tweakables(this);
-console.log("Initial Rent = "+this.INITIAL_RENT);
 
 this.num_players = 6;
 this.game_state = new GameState.GameState(this, this.num_players);

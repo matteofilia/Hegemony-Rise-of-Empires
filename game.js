@@ -598,10 +598,6 @@ class MainScene extends Phaser.Scene {
                 load_game_board(that, property_names);
             } else if (parsed_data.type == "update") {
                 let game_state = parsed_data.data.game_state;
-                
-                // TODO: remove debug information
-                console.log("Property costs = "+PROPERTY_COSTS);
-
 
                 console.log("[UPDATE] Updating game state... " + game_state);
                 update_game_state(that, game_state);
