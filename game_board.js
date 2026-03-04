@@ -215,6 +215,4 @@ function load_game_board(that, property_names) {
         subtext3_3,
         subtext3_4
     ];
-    
-    console.log(that.ALL_SUBTEXT);
 }
