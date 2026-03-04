@@ -166,6 +166,84 @@ class GameState {
         this.update_properties();
     }
     
+    get_winning_players_countries() {
+        // Minimum of 1 country to be "winning"
+        let max_countries = 1;
+        let winning_players = [];
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_countries[i] > max_countries) {
+                max_countries = this.player_num_countries[i];
+            } 
+        }
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_countries[i] == max_countries) {
+                winning_players.push(i);
+            } 
+        }
+        
+        return winning_players;
+    }
+    
+    get_winning_players_properties() {
+        // Minimum of 1 property to be "winning"
+        let max_properties = 1;
+        let winning_players = [];
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_properties[i] > max_properties) {
+                max_properties = this.player_num_properties[i];
+            } 
+        }
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_properties[i] == max_properties) {
+                winning_players.push(i);
+            } 
+        }
+        
+        return winning_players;
+    }
+    
+    get_losing_players_countries() {
+        let min_countries = 100;
+        let losing_players = [];
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_countries[i] < min_countries) {
+                min_countries = this.player_num_countries[i];
+            } 
+        }
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_countries[i] == min_countries) {
+                losing_players.push(i);
+            } 
+        }
+        
+        return losing_players;
+    }
+    
+    get_losing_players_properties() {
+        let min_properties = 100;
+        let losing_players = [];
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_properties[i] < min_properties) {
+                min_properties = this.player_num_properties[i];
+            } 
+        }
+        
+        for (let i = 0; i < this.num_players; i++) {
+            if (this.player_num_properties[i] == min_properties) {
+                losing_players.push(i);
+            } 
+        }
+        
+        return losing_players;
+    }
+    
     // Rent is always HALF of the cost of a property
     // TODO: factor buildings into rent
     calculate_rent(property_index) {

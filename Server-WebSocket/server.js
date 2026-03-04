@@ -15,6 +15,8 @@ Tweakables.load_tweakables(this);
 this.num_players = 6;
 this.game_state = new GameState.GameState(this, this.num_players);
 
+this.connected_players = 0;
+
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -150,6 +152,9 @@ let web_sockets = [];
 wss.on('connection', (ws) => {
     console.log('New client connected');
 
+    // web_sockets.add(ws);
+    // this.connected_players += 1;
+    
     // Send a welcome message
     ws.send(JSON.stringify({ message: 'Test message' }));
 
@@ -171,6 +176,12 @@ wss.on('connection', (ws) => {
                 randomIntBiasedHigh(this.UNIT_BUY_COST_MIN, this.UNIT_BUY_COST_MAX, this.UNIT_FACTOR), 
             );
             this.game_state.player_indices[this.game_state.player_turn] = curr_index + next_index_add;
+            
+            // TODO: remove debugging code
+            console.log("Winning players (properties): "+this.game_state.get_winning_players_properties());
+            console.log("Winning players (countries): "+this.game_state.get_winning_players_countries());
+            console.log("Losing players (properties): "+this.game_state.get_losing_players_properties());
+            console.log("Losing players (countries): "+this.game_state.get_losing_players_countries());
             
             this.game_state.player_future_indices[this.game_state.player_turn] = 0;
             
