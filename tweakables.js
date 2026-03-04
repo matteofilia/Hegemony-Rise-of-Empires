@@ -14,7 +14,7 @@ function load_tweakables(context) {
     
     context.UNIT_BUY_COST_MIN = 20;
     context.UNIT_BUY_COST_MAX = 80;
-    context.UNIT_FACTOR = 8;
+    context.UNIT_FACTOR = 5;
 }
 
 module.exports = {load_tweakables};
