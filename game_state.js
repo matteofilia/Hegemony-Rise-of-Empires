@@ -106,6 +106,8 @@ class GameState {
         // Each time go is passed, increase the rent cost
         this.rent_cost += this.RENT_INCREASE_PER_PASS_GO;
         this.player_money[player] += this.PASS_GO_MONEY;
+        
+        console.log("Rent cost ="+this.rent_cost);
     }
     
     update_player_position(player, future_position) {
@@ -181,4 +183,4 @@ class GameState {
     }
 }
 
-module.exports = {GameState, PROPERTY_COSTS, };
+module.exports = {GameState};

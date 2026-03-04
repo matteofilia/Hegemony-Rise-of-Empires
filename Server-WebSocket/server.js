@@ -1,5 +1,6 @@
 const WebSocket = require('ws');
 const GameState = require('../game_state.js');
+const Tweakables = require('../tweakables.js');
 
 const PORT = 8080;
 
@@ -10,6 +11,8 @@ const wss = new WebSocket.Server({ port: PORT }, () => {
 
 this.num_players = 6;
 this.game_state = new GameState.GameState(this.num_players);
+
+Tweakables.load_tweakables(this);
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -103,6 +106,7 @@ this.property_names = [
     null,
     get_random_city(this),
     get_random_city(this),
+    null,
     null,
     get_random_city(this),
     get_random_city(this),

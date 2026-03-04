@@ -518,6 +518,8 @@ class MainScene extends Phaser.Scene {
         });
 
         function update_game_state(context, game_state) {
+            load_tweakables(context);
+
             context.game_state = game_state;
 
             context.convert_board_index_to_x_y(

@@ -10,3 +10,5 @@ function load_tweakables(context) {
     context.CORNER_MONEY_A = 500;
     context.CORNER_MONEY_B = 700;
 }
+
+module.exports = {load_tweakables};
