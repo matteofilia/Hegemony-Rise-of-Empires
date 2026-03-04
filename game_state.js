@@ -247,6 +247,49 @@ class GameState {
         return losing_players;
     }
     
+    is_winning(player) {
+        if (this.is_losing(player)) {
+            // If player is BOTH winning and losing, then they are losing
+            return false;
+        }
+        
+        let winners_a = this.get_winning_players_countries();
+        let winners_b = this.get_winning_players_properties();
+        
+        for (let x of winners_a) {
+            if (x == player) {
+                return true;
+            }
+        }
+        
+        for (let x of winners_b) {
+            if (x == player) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    is_losing(player) {
+        let losers_a = this.get_losing_players_countries();
+        let losers_b = this.get_losing_players_properties();
+        
+        for (let x of losers_a) {
+            if (x == player) {
+                return true;
+            }
+        }
+        
+        for (let x of losers_b) {
+            if (x == player) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     // Rent is always HALF of the cost of a property
     // TODO: factor buildings into rent
     calculate_rent(property_index) {
