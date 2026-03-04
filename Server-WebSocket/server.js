@@ -168,7 +168,7 @@ wss.on('connection', (ws) => {
             let next_index_add = this.game_state.player_future_indices[this.game_state.player_turn];
             
             this.game_state.update_unit_cost(
-                randomIntBiasedHigh(this.UNIT_BUY_COST_MIN, this.UNIT_BUY_COST_MAX, 7), 
+                randomIntBiasedHigh(this.UNIT_BUY_COST_MIN, this.UNIT_BUY_COST_MAX, this.UNIT_FACTOR), 
             );
             this.game_state.player_indices[this.game_state.player_turn] = curr_index + next_index_add;
             
