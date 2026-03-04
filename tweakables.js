@@ -13,9 +13,8 @@ function load_tweakables(context) {
     context.MAX_CHANCE_CARDS = 5;
     
     context.UNIT_BUY_COST_MIN = 100;
-    context.UNIT_BUY_COST_MAX = 200;
-    context.UNIT_SELL_COST_MIN = 50;
-    context.UNIT_SELL_COST_MAX = 100;
+    context.UNIT_BUY_COST_MAX = 300;
+    context.UNIT_FACTOR = 5;
 }
 
 module.exports = {load_tweakables};

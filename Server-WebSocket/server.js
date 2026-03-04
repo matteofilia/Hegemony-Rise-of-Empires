@@ -19,6 +19,11 @@ function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function randomIntBiasedHigh(min, max, power=3) {
+    const r = 1 - Math.pow(Math.random(), power);
+    return Math.floor(r * (max - min + 1) + min);
+}
+
 this.cities = [
     "Vancover",
     "Ottawa",
@@ -163,7 +168,7 @@ wss.on('connection', (ws) => {
             let next_index_add = this.game_state.player_future_indices[this.game_state.player_turn];
             
             this.game_state.update_unit_cost(
-                randomInt(this.UNIT_BUY_COST_MIN, this.UNIT_BUY_COST_MAX), 
+                randomIntBiasedHigh(this.UNIT_BUY_COST_MIN, this.UNIT_BUY_COST_MAX, 7), 
             );
             this.game_state.player_indices[this.game_state.player_turn] = curr_index + next_index_add;
             
