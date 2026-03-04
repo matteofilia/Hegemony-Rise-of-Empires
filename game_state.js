@@ -57,6 +57,9 @@ class GameState {
         this.UNIT_BUY_COST_MIN = context.UNIT_BUY_COST_MIN;
         this.UNIT_BUY_COST_MAX = context.UNIT_BUY_COST_MAX;
         
+        this.CORNER_MONEY_A = context.CORNER_MONEY_A;
+        this.CORNER_MONEY_B = context.CORNER_MONEY_B;
+        
         this.unit_buy_cost = this.UNIT_BUY_COST_MIN;
         
         // TODO: make static
