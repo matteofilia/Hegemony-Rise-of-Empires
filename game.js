@@ -373,7 +373,8 @@ class MainScene extends Phaser.Scene {
             new Card("War Reparations", "Steal $1200 from the last player that attacked you", Card.GREEN),
             new Card("Arms Race", "All players gain 3 units, except the player with the most territories", Card.YELLOW),
             new Card("Last Stand", "All territories with one unit gain an additional unit", Card.YELLOW),
-            new Card("Ceasefire", "No attacking for the next turn", Card.YELLOW)
+            new Card("Ceasefire", "No attacking for the next turn", Card.YELLOW),
+            new Card("War Reparations", "Sacrifice One Country / Territory", Card.RED)
         ];
 
         this.MAX_CARDS = 5;
@@ -423,7 +424,7 @@ class MainScene extends Phaser.Scene {
         this.ui_2_container.add(create_card_container(this, this.cards[1], 1));
         this.ui_2_container.add(create_card_container(this, this.cards[2], 2));
         this.ui_2_container.add(create_card_container(this, this.cards[3], 3));
-        this.ui_2_container.add(create_card_container(this, this.cards[5], 4));
+        this.ui_2_container.add(create_card_container(this, this.cards[8], 4));
         this.ui_2_container.add(this.ui_2_close_text);
 
         this.cam3 = this.cameras.add(this.VIEWPORT_WIDTH - this.UI_2_WIDTH, 0, this.UI_2_WIDTH, this.UI_2_HEIGHT);

@@ -5,6 +5,7 @@ function load_tweakables(context) {
 
     // Money Gained Each Time Go Is Passed
     context.PASS_GO_MONEY = 200;
+    context.INITIAL_MONEY = 1500;
 
     // Money For Each Corner Piece
     context.CORNER_MONEY_A = 500;

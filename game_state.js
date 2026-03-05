@@ -59,6 +59,8 @@ class GameState {
         
         this.CORNER_MONEY_A = context.CORNER_MONEY_A;
         this.CORNER_MONEY_B = context.CORNER_MONEY_B;
+    
+        this.INITIAL_MONEY = context.INITIAL_MONEY;
         
         this.unit_buy_cost = this.UNIT_BUY_COST_MIN;
         
@@ -78,7 +80,7 @@ class GameState {
             }
             
             // TODO: debug
-            this.player_money[i] = 2000;
+            this.player_money[i] = this.INITIAL_MONEY;
             
             this.player_num_properties[i] = 0;
             this.player_num_countries[i] = 0;
