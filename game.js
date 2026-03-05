@@ -157,7 +157,8 @@ class MainScene extends Phaser.Scene {
             space: Phaser.Input.Keyboard.KeyCodes.SPACE,
             one: Phaser.Input.Keyboard.KeyCodes.ONE,
             two: Phaser.Input.Keyboard.KeyCodes.TWO,
-            three: Phaser.Input.Keyboard.KeyCodes.THREE
+            three: Phaser.Input.Keyboard.KeyCodes.THREE,
+            enter: Phaser.Input.Keyboard.KeyCodes.ENTER
         });
 
         this.SUBTEXT_SPACING = 20;
@@ -202,6 +203,9 @@ class MainScene extends Phaser.Scene {
 
         this.UI_3_START_X = 8000;
         this.UI_3_START_Y = 8000;
+        
+        this.UI_4_START_X = 12000;
+        this.UI_4_START_Y = 12000;
 
         this.UI_MONEY_SPACING = 84;
         this.UI_INDICATOR_SPACING = 48;
@@ -311,6 +315,9 @@ class MainScene extends Phaser.Scene {
 
         this.UI_3_WIDTH = 250;
         this.UI_3_HEIGHT = 150;
+        
+        this.UI_4_WIDTH = 250;
+        this.UI_4_HEIGHT = 300;
 
         this.ui_text_player_turn = this.add
             .text(
@@ -420,7 +427,42 @@ class MainScene extends Phaser.Scene {
         this.cam4.setBackgroundColor(light_grey);
         this.cam4.setZoom(1);
         this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
-
+        
+        this.cam5 = this.cameras.add(
+            this.VIEWPORT_WIDTH / 2 - this.UI_4_WIDTH / 2,
+            this.VIEWPORT_HEIGHT / 2 - this.UI_4_HEIGHT / 2,
+            this.UI_4_WIDTH,
+            this.UI_4_HEIGHT
+        );
+        this.cam5.setZoom(1);
+        this.cam5.setScroll(this.UI_4_START_X, this.UI_4_START_Y);
+        this.cam5.setBackgroundColor(slightly_lighter_grey);
+        
+        this.ui_4_container = this.add.container(this.UI_4_START_X, this.UI_4_START_Y);
+        
+        this.ui_4_text = this.add.text(
+            128,
+            128,
+            "You Are Player 1",
+            text_style_white
+        ).setOrigin(0.5);
+        this.ui_4_text_under = this.add.text(
+            128,
+            128+128,
+            "Press [Enter] to close",
+            text_style_black
+        ).setOrigin(0.5);
+        this.ui_4_player_marker = this.add.circle(
+            128,
+            128,
+            64+32,
+            this.player_colours[4]
+        ).setOrigin(0.5);
+        
+        this.ui_4_container.add(this.ui_4_player_marker);
+        this.ui_4_container.add(this.ui_4_text);
+        this.ui_4_container.add(this.ui_4_text_under);
+        
         this.ui_3_close_text = this.add
             .text(this.UI_3_WIDTH / 2, this.UI_3_HEIGHT - 16, "Press 3 to close", text_style_black)
             .setOrigin(0.5);
@@ -715,6 +757,14 @@ class MainScene extends Phaser.Scene {
                 this.cam4.setVisible(false);
             } else {
                 this.cam4.setVisible(true);
+            }
+        }
+        
+        if (Phaser.Input.Keyboard.JustDown(this.keys.enter)) {
+            if (this.cam5.visible) {
+                this.cam5.setVisible(false);
+            } else {
+                this.cam5.setVisible(true);
             }
         }
 
