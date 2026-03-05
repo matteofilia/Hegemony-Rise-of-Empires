@@ -7,6 +7,7 @@ var purple = 0xbd0bd3;
 var black = 0x000000;
 var pink = 0xff6dc6;
 var orange = 0xffa529;
+var yellow = 0xf6ff29;
 
 var water_colour = 0x14a3fd;
 var land_colour = 0x1cff63;

@@ -354,21 +354,26 @@ class MainScene extends Phaser.Scene {
         this.cam2.setScroll(this.UI_START_X, this.UI_START_Y);
 
         class Card {
-            constructor(name, effect_description) {
+            constructor(name, effect_description, color) {
                 this.name = name;
                 this.effect_description = effect_description;
+                this.color = color;
             }
         }
+        
+        Card.RED = 0;
+        Card.YELLOW = 1;
+        Card.GREEN = 2;
 
         this.cards = [
-            new Card("Tax Return", "Gain $500"),
-            new Card("Reinforcements", "Gain 5 units that can be added to any territory"),
-            new Card("Blitzkrieg", "Gain a random territory from a player of your choosing"),
-            new Card("Sacrifice", "Sacrifice your weakest territory but gain $1000"),
-            new Card("War Reparations", "Steal $1200 from the last player that attacked you"),
-            new Card("Arms Race", "All players gain 3 units, except the player with the most territories"),
-            new Card("Last Stand", "All territories with one unit gain an additional unit"),
-            new Card("Ceasefire", "No attacking for the next turn")
+            new Card("Tax Return", "Gain $500", Card.YELLOW),
+            new Card("Reinforcements", "Gain 5 units that can be added to any territory", Card.YELLOW),
+            new Card("Blitzkrieg", "Gain a random territory from a player of your choosing", Card.GREEN),
+            new Card("Sacrifice", "Sacrifice your weakest territory but gain $1000", Card.GREEN),
+            new Card("War Reparations", "Steal $1200 from the last player that attacked you", Card.GREEN),
+            new Card("Arms Race", "All players gain 3 units, except the player with the most territories", Card.YELLOW),
+            new Card("Last Stand", "All territories with one unit gain an additional unit", Card.YELLOW),
+            new Card("Ceasefire", "No attacking for the next turn", Card.YELLOW)
         ];
 
         this.MAX_CARDS = 5;
@@ -384,6 +389,14 @@ class MainScene extends Phaser.Scene {
             );
             var bg = that.add.rectangle(0, 0, that.CARD_WIDTH, that.CARD_HEIGHT, white);
             bg.setOrigin(0);
+            
+            if (card.color == Card.RED) {
+                bg.setFillStyle(red);
+            } else if (card.color == Card.YELLOW) {
+                bg.setFillStyle(yellow);
+            } else if (card.color == Card.GREEN) {
+                bg.setFillStyle(green);
+            }
 
             card_container.add(bg);
             card_container.add(
@@ -626,7 +639,6 @@ class MainScene extends Phaser.Scene {
                 
                 this.ui_4_text.setText(`You are Player ${player+1}`);
                 this.ui_4_player_marker.setFillStyle(this.player_colours[player]);
-                alert("Welcome, player "+player);
                 
                 load_game_board(that, property_names);
             } else if (parsed_data.type == "update") {
