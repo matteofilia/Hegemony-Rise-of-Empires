@@ -152,8 +152,8 @@ let web_sockets = [];
 wss.on('connection', (ws) => {
     console.log('New client connected');
 
-    // web_sockets.add(ws);
-    // this.connected_players += 1;
+    web_sockets.push(ws);
+    this.connected_players += 1;
     
     // Send a welcome message
     ws.send(JSON.stringify({ message: 'Test message' }));
@@ -167,6 +167,7 @@ wss.on('connection', (ws) => {
             send_data.type = "setup";
             send_data.data = {};
             send_data.data.property_names = this.property_names;
+            send_data.data.player = this.connected_players-1;
             ws.send(JSON.stringify(send_data));
         } else if (data == "next turn") {
             let curr_index = this.game_state.player_indices[this.game_state.player_turn];

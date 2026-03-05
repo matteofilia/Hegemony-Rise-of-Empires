@@ -66,7 +66,7 @@ class MainScene extends Phaser.Scene {
 
     create() {
         load_tweakables(this);
-        
+
         this.cam = this.cameras.main;
         this.zoomDirection = 1;
         this.cam.setZoom(1);
@@ -203,7 +203,7 @@ class MainScene extends Phaser.Scene {
 
         this.UI_3_START_X = 8000;
         this.UI_3_START_Y = 8000;
-        
+
         this.UI_4_START_X = 12000;
         this.UI_4_START_Y = 12000;
 
@@ -315,7 +315,7 @@ class MainScene extends Phaser.Scene {
 
         this.UI_3_WIDTH = 250;
         this.UI_3_HEIGHT = 150;
-        
+
         this.UI_4_WIDTH = 250;
         this.UI_4_HEIGHT = 300;
 
@@ -427,7 +427,7 @@ class MainScene extends Phaser.Scene {
         this.cam4.setBackgroundColor(light_grey);
         this.cam4.setZoom(1);
         this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
-        
+
         this.cam5 = this.cameras.add(
             this.VIEWPORT_WIDTH / 2 - this.UI_4_WIDTH / 2,
             this.VIEWPORT_HEIGHT / 2 - this.UI_4_HEIGHT / 2,
@@ -437,32 +437,17 @@ class MainScene extends Phaser.Scene {
         this.cam5.setZoom(1);
         this.cam5.setScroll(this.UI_4_START_X, this.UI_4_START_Y);
         this.cam5.setBackgroundColor(slightly_lighter_grey);
-        
+
         this.ui_4_container = this.add.container(this.UI_4_START_X, this.UI_4_START_Y);
-        
-        this.ui_4_text = this.add.text(
-            128,
-            128,
-            "You Are Player 1",
-            text_style_white
-        ).setOrigin(0.5);
-        this.ui_4_text_under = this.add.text(
-            128,
-            128+128,
-            "Press [Enter] to close",
-            text_style_black
-        ).setOrigin(0.5);
-        this.ui_4_player_marker = this.add.circle(
-            128,
-            128,
-            64+32,
-            this.player_colours[4]
-        ).setOrigin(0.5);
-        
+
+        this.ui_4_text = this.add.text(128, 128, "You Are Player 1", text_style_white).setOrigin(0.5);
+        this.ui_4_text_under = this.add.text(128, 128 + 128, "Press [Enter] to close", text_style_black).setOrigin(0.5);
+        this.ui_4_player_marker = this.add.circle(128, 128, 64 + 32, this.player_colours[4]).setOrigin(0.5);
+
         this.ui_4_container.add(this.ui_4_player_marker);
         this.ui_4_container.add(this.ui_4_text);
         this.ui_4_container.add(this.ui_4_text_under);
-        
+
         this.ui_3_close_text = this.add
             .text(this.UI_3_WIDTH / 2, this.UI_3_HEIGHT - 16, "Press 3 to close", text_style_black)
             .setOrigin(0.5);
@@ -613,14 +598,14 @@ class MainScene extends Phaser.Scene {
                         context.ALL_SUBTEXT[i].setText("OWNED");
 
                         // Add House Marker
-                        let xy = { x: 0, y: 0, rotation: 0};
+                        let xy = { x: 0, y: 0, rotation: 0 };
                         context.convert_board_index_to_x_y(xy, i, 0);
 
                         context.create_house(context, xy.x, xy.y, context.player_colours[player], xy.rotation);
                     }
                 }
             }
-            
+
             context.text_under.setText(`Rent: \$${game_state.rent_cost} Army Cost: \$${game_state.unit_buy_cost}`);
         }
 
@@ -637,6 +622,12 @@ class MainScene extends Phaser.Scene {
                 update_game_state(that, parsed_data.game_state);
             } else if (parsed_data.type == "setup") {
                 let property_names = parsed_data.data.property_names;
+                let player = parsed_data.data.player;
+                
+                this.ui_4_text.setText(`You are Player ${player+1}`);
+                this.ui_4_player_marker.setFillStyle(this.player_colours[player]);
+                alert("Welcome, player "+player);
+                
                 load_game_board(that, property_names);
             } else if (parsed_data.type == "update") {
                 let game_state = parsed_data.data.game_state;
@@ -759,7 +750,7 @@ class MainScene extends Phaser.Scene {
                 this.cam4.setVisible(true);
             }
         }
-        
+
         if (Phaser.Input.Keyboard.JustDown(this.keys.enter)) {
             if (this.cam5.visible) {
                 this.cam5.setVisible(false);
