@@ -67,6 +67,8 @@ class MainScene extends Phaser.Scene {
     create_cam4() {
         this.UI_3_START_X = 8000;
         this.UI_3_START_Y = 8000;
+        this.UI_3_WIDTH = 250;
+        this.UI_3_HEIGHT = 150;
         
         this.cam4 = this.cameras.add(
             this.VIEWPORT_WIDTH / 2 - this.UI_3_WIDTH / 2,
@@ -105,6 +107,8 @@ class MainScene extends Phaser.Scene {
     create_cam5() {
         this.UI_4_START_X = 12000;
         this.UI_4_START_Y = 12000;
+        this.UI_4_WIDTH = 250;
+        this.UI_4_HEIGHT = 300;
         
         this.cam5 = this.cameras.add(
             this.VIEWPORT_WIDTH / 2 - this.UI_4_WIDTH / 2,
@@ -370,12 +374,6 @@ class MainScene extends Phaser.Scene {
 
         this.UI_2_WIDTH = 280;
         this.UI_2_HEIGHT = 600;
-
-        this.UI_3_WIDTH = 250;
-        this.UI_3_HEIGHT = 150;
-
-        this.UI_4_WIDTH = 250;
-        this.UI_4_HEIGHT = 300;
 
         this.ui_text_player_turn = this.add
             .text(
