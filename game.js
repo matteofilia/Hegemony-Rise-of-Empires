@@ -63,6 +63,70 @@ class MainScene extends Phaser.Scene {
         graphics.setPosition(x_centre, y_centre);
         graphics.rotation = Phaser.Math.DegToRad(rotation);
     }
+    
+    create_cam4() {
+        this.UI_3_START_X = 8000;
+        this.UI_3_START_Y = 8000;
+        
+        this.cam4 = this.cameras.add(
+            this.VIEWPORT_WIDTH / 2 - this.UI_3_WIDTH / 2,
+            this.VIEWPORT_HEIGHT / 2 - this.UI_3_HEIGHT / 2,
+            this.UI_3_WIDTH,
+            this.UI_3_HEIGHT
+        );
+        this.cam4.setBackgroundColor(light_grey);
+        this.cam4.setZoom(1);
+        this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
+
+        this.ui_3_close_text = this.add
+            .text(this.UI_3_WIDTH / 2, this.UI_3_HEIGHT - 16, "Press 3 to close", text_style_black)
+            .setOrigin(0.5);
+
+        this.ui_3_container = this.add.container(this.UI_3_START_X, this.UI_3_START_Y);
+        this.dice_image(
+            this,
+            Phaser.Math.Between(1, 6),
+            this.UI_3_WIDTH / 2 - 48,
+            this.UI_3_HEIGHT / 2,
+            this.ui_3_container
+        );
+        this.dice_image(
+            this,
+            Phaser.Math.Between(1, 6),
+            this.UI_3_WIDTH / 2 + 48,
+            this.UI_3_HEIGHT / 2,
+            this.ui_3_container
+        );
+        this.ui_3_container.add(this.ui_3_close_text);
+
+        this.dice_text(this, this.ui_3_container);
+    }
+    
+    create_cam5() {
+        this.UI_4_START_X = 12000;
+        this.UI_4_START_Y = 12000;
+        
+        this.cam5 = this.cameras.add(
+            this.VIEWPORT_WIDTH / 2 - this.UI_4_WIDTH / 2,
+            this.VIEWPORT_HEIGHT / 2 - this.UI_4_HEIGHT / 2,
+            this.UI_4_WIDTH,
+            this.UI_4_HEIGHT
+        );
+        
+        this.cam5.setZoom(1);
+        this.cam5.setScroll(this.UI_4_START_X, this.UI_4_START_Y);
+        this.cam5.setBackgroundColor(slightly_lighter_grey);
+
+        this.ui_4_container = this.add.container(this.UI_4_START_X, this.UI_4_START_Y);
+
+        this.ui_4_text = this.add.text(128, 128, "You Are Player 1", text_style_white).setOrigin(0.5);
+        this.ui_4_text_under = this.add.text(128, 128 + 128, "Press [Enter] to close", text_style_black).setOrigin(0.5);
+        this.ui_4_player_marker = this.add.circle(128, 128, 64 + 32, this.player_colours[4]).setOrigin(0.5);
+
+        this.ui_4_container.add(this.ui_4_player_marker);
+        this.ui_4_container.add(this.ui_4_text);
+        this.ui_4_container.add(this.ui_4_text_under);
+    }
 
     create() {
         load_tweakables(this);
@@ -200,12 +264,6 @@ class MainScene extends Phaser.Scene {
 
         this.UI_2_START_X = 6000;
         this.UI_2_START_Y = 6000;
-
-        this.UI_3_START_X = 8000;
-        this.UI_3_START_Y = 8000;
-
-        this.UI_4_START_X = 12000;
-        this.UI_4_START_Y = 12000;
 
         this.UI_MONEY_SPACING = 84;
         this.UI_INDICATOR_SPACING = 48;
@@ -432,58 +490,10 @@ class MainScene extends Phaser.Scene {
         this.cam3.setZoom(1);
         this.cam3.setScroll(this.UI_2_START_X, this.UI_2_START_Y);
 
-        this.cam4 = this.cameras.add(
-            this.VIEWPORT_WIDTH / 2 - this.UI_3_WIDTH / 2,
-            this.VIEWPORT_HEIGHT / 2 - this.UI_3_HEIGHT / 2,
-            this.UI_3_WIDTH,
-            this.UI_3_HEIGHT
-        );
-        this.cam4.setBackgroundColor(light_grey);
-        this.cam4.setZoom(1);
-        this.cam4.setScroll(this.UI_3_START_X, this.UI_3_START_Y);
-
-        this.cam5 = this.cameras.add(
-            this.VIEWPORT_WIDTH / 2 - this.UI_4_WIDTH / 2,
-            this.VIEWPORT_HEIGHT / 2 - this.UI_4_HEIGHT / 2,
-            this.UI_4_WIDTH,
-            this.UI_4_HEIGHT
-        );
-        this.cam5.setZoom(1);
-        this.cam5.setScroll(this.UI_4_START_X, this.UI_4_START_Y);
-        this.cam5.setBackgroundColor(slightly_lighter_grey);
-
-        this.ui_4_container = this.add.container(this.UI_4_START_X, this.UI_4_START_Y);
-
-        this.ui_4_text = this.add.text(128, 128, "You Are Player 1", text_style_white).setOrigin(0.5);
-        this.ui_4_text_under = this.add.text(128, 128 + 128, "Press [Enter] to close", text_style_black).setOrigin(0.5);
-        this.ui_4_player_marker = this.add.circle(128, 128, 64 + 32, this.player_colours[4]).setOrigin(0.5);
-
-        this.ui_4_container.add(this.ui_4_player_marker);
-        this.ui_4_container.add(this.ui_4_text);
-        this.ui_4_container.add(this.ui_4_text_under);
-
-        this.ui_3_close_text = this.add
-            .text(this.UI_3_WIDTH / 2, this.UI_3_HEIGHT - 16, "Press 3 to close", text_style_black)
-            .setOrigin(0.5);
-
-        this.ui_3_container = this.add.container(this.UI_3_START_X, this.UI_3_START_Y);
-        this.dice_image(
-            this,
-            Phaser.Math.Between(1, 6),
-            this.UI_3_WIDTH / 2 - 48,
-            this.UI_3_HEIGHT / 2,
-            this.ui_3_container
-        );
-        this.dice_image(
-            this,
-            Phaser.Math.Between(1, 6),
-            this.UI_3_WIDTH / 2 + 48,
-            this.UI_3_HEIGHT / 2,
-            this.ui_3_container
-        );
-        this.ui_3_container.add(this.ui_3_close_text);
-
-        this.dice_text(this, this.ui_3_container);
+        this.create_cam4();
+        
+        // Add "You are Player X UI"
+        this.create_cam5();
 
         this.convert_board_index_to_x_y(this.player_marker_1, 1, 0);
         this.convert_board_index_to_x_y(this.player_marker_2, 3, 0);
@@ -564,7 +574,7 @@ class MainScene extends Phaser.Scene {
                 game_state.player_indices[0],
                 game_state.random_offset[0]
             );
-            context.convert_board_index_to_x_y(
+            context.convert_board_index_to_x_y(    
                 context.player_marker_2,
                 game_state.player_indices[1],
                 game_state.random_offset[1]
