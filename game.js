@@ -731,8 +731,8 @@ class MainScene extends Phaser.Scene {
             that.hide_modal();
         });
     }
-
-    update(time, delta) {
+    
+    check_ui_key_updates() {
         if (Phaser.Input.Keyboard.JustDown(this.keys.one)) {
             if (this.ui_1_container.visible) {
                 this.ui_1_container.setVisible(false);
@@ -776,7 +776,9 @@ class MainScene extends Phaser.Scene {
                 console.log("WebSocket error");
             }
         }
-
+    } 
+    
+    update_player_markers(time, delta) {
         for (let i = 0; i < this.game_state.num_players; i++) {
             this.player_cooldown[i] += delta;
             if (this.player_cooldown[i] >= this.MOVE_DELAY && this.game_state.player_future_indices[i] > 0) {
@@ -791,6 +793,14 @@ class MainScene extends Phaser.Scene {
                 );
             }
         }
+    }
+
+    update(time, delta) {
+        // Check for UI key updates
+        this.check_ui_key_updates();
+        
+        // Update player markers
+        this.update_player_markers(time, delta);
     }
 }
 
