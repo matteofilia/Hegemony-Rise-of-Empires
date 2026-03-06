@@ -485,8 +485,6 @@ class MainScene extends Phaser.Scene {
 
         this.dice_text(this, this.ui_3_container);
 
-        this.board_game_index = 0;
-
         this.convert_board_index_to_x_y(this.player_marker_1, 1, 0);
         this.convert_board_index_to_x_y(this.player_marker_2, 3, 0);
 
@@ -735,9 +733,6 @@ class MainScene extends Phaser.Scene {
     }
 
     update(time, delta) {
-        if (Phaser.Input.Keyboard.JustDown(this.keys.up)) this.board_game_index += 1;
-        if (Phaser.Input.Keyboard.JustDown(this.keys.down)) this.board_game_index -= 1;
-
         if (Phaser.Input.Keyboard.JustDown(this.keys.one)) {
             if (this.ui_1_container.visible) {
                 this.ui_1_container.setVisible(false);
@@ -803,7 +798,7 @@ const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    backgroundColor: "#e3e3e3",
+    backgroundColor: "#f7f7f7",
     mode: Phaser.Scale.FIT,
     scene: MainScene,
     dom: {
