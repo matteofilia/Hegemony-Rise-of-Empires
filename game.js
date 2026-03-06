@@ -131,6 +131,27 @@ class MainScene extends Phaser.Scene {
         this.ui_4_container.add(this.ui_4_text);
         this.ui_4_container.add(this.ui_4_text_under);
     }
+    
+    add_player_markers() {
+        this.player_marker_1 = this.add
+            .circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[0])
+            .setDepth(13);
+        this.player_marker_2 = this.add
+            .circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[1])
+            .setDepth(13);
+        this.player_marker_3 = this.add
+            .circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colours[2])
+            .setDepth(13);
+        this.player_marker_4 = this.add
+            .circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3])
+            .setDepth(13);
+        this.player_marker_5 = this.add
+            .circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4])
+            .setDepth(13);
+        this.player_marker_6 = this.add
+            .circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5])
+            .setDepth(13);
+    }
 
     create() {
         load_tweakables(this);
@@ -239,29 +260,7 @@ class MainScene extends Phaser.Scene {
         // risk_map.setOrigin(0.5);
 
         // Player Markers
-        this.player_marker_1 = this.add
-            .circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[0])
-            .setDepth(13);
-        this.player_marker_2 = this.add
-            .circle(750, 150 + Phaser.Math.Between(-20, 20), 16, this.player_colours[1])
-            .setDepth(13);
-        this.player_marker_3 = this.add
-            .circle(50, 350 + Phaser.Math.Between(-20, 20), 16, this.player_colours[2])
-            .setDepth(13);
-        this.player_marker_4 = this.add
-            .circle(50, 450 + Phaser.Math.Between(-20, 20), 16, this.player_colours[3])
-            .setDepth(13);
-        this.player_marker_5 = this.add
-            .circle(150 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[4])
-            .setDepth(13);
-        this.player_marker_6 = this.add
-            .circle(450 + Phaser.Math.Between(-20, 20), 50, 16, this.player_colours[5])
-            .setDepth(13);
-
-        // Initialize Game
-        this.game_state.money = [500, 200, 0, 700, 750, 0];
-        this.game_state.num_properties = [0, 4, 0, 3, 1, 0];
-        this.game_state.num_countries = [5, 0, 7, 3, 1, 0];
+        this.add_player_markers();
 
         this.UI_START_X = 3000;
         this.UI_START_Y = 3000;
