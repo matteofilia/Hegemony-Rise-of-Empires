@@ -153,6 +153,19 @@ class MainScene extends Phaser.Scene {
             .setDepth(13);
     }
 
+    player_text(player) {
+        let money = this.game_state.player_money[player];
+        let properties = this.game_state.player_num_properties[player];
+        let countries = this.game_state.player_num_countries[player];
+
+        let properties_percentage = properties / this.TOTAL_PROPERTIES;
+        let countries_percentage = countries / this.TOTAL_COUNTRIES;
+
+        let text = `Player ${player + 1}\nMoney: \$${money}\nProperties: ${properties} (${(properties_percentage * 100).toFixed(1)}%)\nCountries: ${countries} (${(countries_percentage * 100).toFixed(1)}%)`;
+
+        return text;
+    }
+    
     create() {
         load_tweakables(this);
 
@@ -253,12 +266,9 @@ class MainScene extends Phaser.Scene {
         this.SUBTEXT_SPACING = 20;
 
         this.player_colours = [green, orange, pink, red, purple, brown];
-
         this.game_state = new GameState(this, 6);
 
-        // const risk_map = this.add.image(400, 300, "risk_map");
-        // risk_map.setOrigin(0.5);
-
+        
         // Player Markers
         this.add_player_markers();
 
@@ -273,18 +283,6 @@ class MainScene extends Phaser.Scene {
         this.UI_INDICATOR_SIZE = 16;
         this.UI_VERTICAL_ADJUST = 16;
 
-        function player_text(that, player) {
-            let money = that.game_state.player_money[player];
-            let properties = that.game_state.player_num_properties[player];
-            let countries = that.game_state.player_num_countries[player];
-
-            let properties_percentage = properties / that.TOTAL_PROPERTIES;
-            let countries_percentage = countries / that.TOTAL_COUNTRIES;
-
-            let text = `Player ${player + 1}\nMoney: \$${money}\nProperties: ${properties} (${(properties_percentage * 100).toFixed(1)}%)\nCountries: ${countries} (${(countries_percentage * 100).toFixed(1)}%)`;
-
-            return text;
-        }
 
         function player_turn_text(that, player) {
             if (that.game_state.active_player == that.game_state.player_turn) {
@@ -297,37 +295,37 @@ class MainScene extends Phaser.Scene {
         const ui_text_player_money_1 = this.add.text(
             this.UI_INDICATOR_SPACING,
             this.UI_MONEY_SPACING * 0 + this.UI_VERTICAL_ADJUST,
-            player_text(this, 0),
+            this.player_text(0),
             text_style_white
         );
         const ui_text_player_money_2 = this.add.text(
             this.UI_INDICATOR_SPACING,
             this.UI_MONEY_SPACING * 1 + this.UI_VERTICAL_ADJUST,
-            player_text(this, 1),
+            this.player_text(1),
             text_style_white
         );
         const ui_text_player_money_3 = this.add.text(
             this.UI_INDICATOR_SPACING,
             this.UI_MONEY_SPACING * 2 + this.UI_VERTICAL_ADJUST,
-            player_text(this, 2),
+            this.player_text(2),
             text_style_white
         );
         const ui_text_player_money_4 = this.add.text(
             this.UI_INDICATOR_SPACING,
             this.UI_MONEY_SPACING * 3 + this.UI_VERTICAL_ADJUST,
-            player_text(this, 3),
+            this.player_text(3),
             text_style_white
         );
         const ui_text_player_money_5 = this.add.text(
             this.UI_INDICATOR_SPACING,
             this.UI_MONEY_SPACING * 4 + this.UI_VERTICAL_ADJUST,
-            player_text(this, 4),
+            this.player_text(4),
             text_style_white
         );
         const ui_text_player_money_6 = this.add.text(
             this.UI_INDICATOR_SPACING,
             this.UI_MONEY_SPACING * 5 + this.UI_VERTICAL_ADJUST,
-            player_text(this, 5),
+            this.player_text(5),
             text_style_white
         );
 
@@ -691,6 +689,7 @@ class MainScene extends Phaser.Scene {
         this.cam2.setVisible(true);
         this.cam3.setVisible(true);
         this.cam4.setVisible(true);
+        this.cam5.setVisible(true);
         this.modal.setVisible(false);
     }
 
@@ -698,6 +697,7 @@ class MainScene extends Phaser.Scene {
         this.cam2.setVisible(false);
         this.cam3.setVisible(false);
         this.cam4.setVisible(false);
+        this.cam5.setVisible(false);
         this.modal.setVisible(true);
 
         $("#prompt").text(message);
