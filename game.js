@@ -519,6 +519,8 @@ class MainScene extends Phaser.Scene {
         add_country(northwest_territories);
         add_country(west_us);
         add_country(east_us);
+        add_country(south_america);
+        add_country(europe);
 
         // TODO: remove debug information
         alberta.owner = 1;

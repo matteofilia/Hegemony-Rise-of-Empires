@@ -138,3 +138,17 @@ var east_us = new Country("East US", [
     [99, 176],
     [100, 166]
 ]);
+
+var south_america = new Country("South America", [
+    [100, 200],
+    [100, 280],
+    [100+50, 280],
+    [100+50, 200],
+]);
+
+var europe = new Country("Europe", [
+    [147+100, 101],
+    [147+100, 101+50],
+    [147+200, 101+50],
+    [147+200, 101],
+]);
