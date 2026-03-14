@@ -118,6 +118,13 @@ var east_us = new Country("East US", [
     [180, 167]
 ]);
 
+var mexico = new Country("Mexico", [
+    [80, 167+50],
+    [80, 167],
+    [140, 167],
+    [140, 167+50]
+]);
+
 var south_america = new Country("South America", [
     [100, 200],
     [100, 280],

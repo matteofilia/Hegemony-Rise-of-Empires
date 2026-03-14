@@ -166,6 +166,10 @@ class MainScene extends Phaser.Scene {
         return text;
     }
     
+    add_country(country) {
+        this.countries.push(country);
+    }
+    
     create() {
         load_tweakables(this);
 
@@ -506,23 +510,21 @@ class MainScene extends Phaser.Scene {
         this.countries = [];
 
         let context = this;
-        function add_country(country) {
-            context.countries.push(country);
-        }
 
         this.selected_country = ontario;
 
-        add_country(alberta);
-        add_country(greenland);
-        add_country(ontario);
-        add_country(quebec);
-        add_country(northwest_territories);
-        add_country(west_us);
-        add_country(east_us);
-        add_country(south_america);
-        add_country(europe);
-        add_country(asia);
-        add_country(australia);
+        this.add_country(alberta);
+        this.add_country(greenland);
+        this.add_country(ontario);
+        this.add_country(quebec);
+        this.add_country(northwest_territories);
+        this.add_country(west_us);
+        this.add_country(east_us);
+        this.add_country(south_america);
+        this.add_country(europe);
+        this.add_country(asia);
+        this.add_country(australia);
+        this.add_country(mexico);
 
         // TODO: remove debug information
         alberta.owner = 1;
